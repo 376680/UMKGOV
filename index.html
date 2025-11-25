@@ -156,39 +156,53 @@
     <a href="#main-content" class="skip-link">跳至主要内容</a>
 
     <!-- Header/Navigation -->
-    <header class="bg-primary text-white">
+    <header class="bg-white border-b border-gray-200">
         <div class="container mx-auto px-4 py-3">
-            <div class="flex flex-col md:flex-row items-center justify-between">
-                <!-- Logo -->
-                <div class="flex items-center mb-4 md:mb-0">
-                    <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/7450962cd4c8446aaa3184597962eb88~tplv-a9rns2rl98-image.image?rcl=202511242203297AB2C113CB8AEC03646D&amp;rk3s=8e244e95&amp;rrcfp=f06b921b&amp;x-expires=1766585032&amp;x-signature=PZzDuG9ugUgWakKr9i7DL2Yz3ys%3D" alt="小鼠王国标志" class="h-12 mr-3">
-                    <div>
-                        <h1 class="text-xl font-bold">UMK·GOV</h1>
-                        <p class="text-sm">政府服务与信息</p>
-                    </div>
-                </div>
-                
-                <!-- 搜索框 -->
-                <form class="search-form w-full md:w-2/5 flex" action="#" method="get">
-                    <label for="search" class="sr-only">搜索</label>
-                    <input type="search" id="search" name="q" placeholder="搜索小鼠王国服务" required="">
-                    <button type="submit" aria-label="搜索">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </form>
+            <div class="flex items-center">
+                <a href="#" class="flex items-center">
+                    <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/7450962cd4c8446aaa3184597962eb88~tplv-a9rns2rl98-image.image?rcl=202511242203297AB2C113CB8AEC03646D&amp;rk3s=8e244e95&amp;rrcfp=f06b921b&amp;x-expires=1766585032&amp;x-signature=PZzDuG9ugUgWakKr9i7DL2Yz3ys%3D" alt="小鼠王国标志" class="h-8 mr-3">
+                    <span class="text-xl font-bold text-text-primary">小鼠王国政府</span>
+                </a>
+                <nav class="ml-auto hidden md:flex space-x-6 text-sm">
+                    <a href="#" class="text-text-secondary hover:text-primary">部门与政策</a>
+                    <a href="#" class="text-text-secondary hover:text-primary">新闻</a>
+                    <a href="#" class="text-text-secondary hover:text-primary">指南与法规</a>
+                    <a href="#" class="text-text-secondary hover:text-primary">研究与统计</a>
+                    <a href="#" class="text-text-secondary hover:text-primary">政策文件与咨询</a>
+                    <a href="#" class="text-text-secondary hover:text-primary">透明度</a>
+                </nav>
+                <button class="ml-4 md:hidden text-text-primary">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
             </div>
         </div>
     </header>
 
     <!-- Main Content -->
     <main id="main-content" class="container mx-auto px-4 py-8">
-        <!-- 英雄区域 -->
+        <!-- 搜索区域 -->
+        <section class="bg-primary text-white py-12 mb-12">
+            <div class="container mx-auto px-4">
+                <h1 class="text-3xl md:text-4xl font-bold mb-6">查找小鼠王国服务和信息的最佳平台</h1>
+                <p class="text-xl mb-8">为小鼠王国公民提供政府服务、福利、许可证等信息查询。</p>
+                
+                <!-- 搜索框 -->
+                <form class="search-form max-w-3xl" action="#" method="get">
+                    <label for="search" class="sr-only">搜索</label>
+                    <div class="flex">
+                        <input type="search" id="search" name="q" placeholder="搜索政府服务" required="" class="bg-white text-text-primary border-2 border-text-primary px-4 py-3 w-full">
+                        <button type="submit" aria-label="搜索" class="bg-text-primary text-white px-6 py-3">
+                            <i class="fa fa-search mr-2"></i> 搜索
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        
+        <!-- 热门服务区域 -->
         <section class="mb-12">
-            <h1 class="text-3xl md:text-4xl font-bold mb-6">查找鼠国政府服务和信息的最佳平台</h1>
-            <p class="text-xl text-text-secondary mb-8">为小鼠王国公民提供政府服务、福利、许可证等信息查询。</p>
-            
-            <!-- 快速链接 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+            <h2 class="text-2xl font-bold mb-6">热门服务</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <a href="#" class="service-link text-lg flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50" onclick="showPersonalIdentityServices()">
                     <i class="fa fa-id-card-o mr-3 text-primary text-2xl"></i>
                     <span>个人身份</span>

@@ -1,34 +1,35 @@
-<html lang="zh-CN"><head>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>小鼠王国 - 政府服务</title>
-    <!-- Tailwind CSS v3 -->
+    <title>小鼠王国 - 政府服务与信息</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    
-    
+    <!-- 统一的 Tailwind 配置 -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#1d70b8',
-                        'primary-dark': '#003078',
-                        secondary: '#f3f2f1',
-                        'text-primary': '#0b0c0c',
-                        'text-secondary': '#505a5f',
-                        'text-tertiary': '#707679',
-                        error: '#d4351c',
-                        success: '#00703c',
-                        warning: '#ffdd00',
-                        'focus-color': '#ffdd00'
+                        'gov-blue': '#1d70b8',
+                        'gov-blue-dark': '#003078',
+                        'gov-text': '#0b0c0c',
+                        'gov-text-secondary': '#505a5f',
+                        'gov-background': '#ffffff',
+                        'gov-background-secondary': '#f3f2f1',
+                        'gov-error': '#d4351c',
+                        'gov-success': '#00703c',
+                        'gov-warning': '#ffdd00',
+                        'gov-focus': '#ffdd00'
                     },
                     fontFamily: {
-                        sans: ['Arial', 'sans-serif'],
+                        sans: ['Arial', 'sans-serif']
                     },
-                    spacing: {
-                        '18': '4.5rem',
+                    boxShadow: {
+                        'gov-focus': '0 -2px #ffdd00, 0 4px #0b0c0c'
                     }
                 }
             }
@@ -36,597 +37,439 @@
     </script>
     <style type="text/tailwindcss">
         @layer utilities {
-            .focus-visible {
-                outline: 3px solid theme('colors.focus-color');
-                outline-offset: 0;
+            .gov-container {
+                max-width: 960px;
+                margin: 0 auto;
+                padding: 0 15px;
             }
-            .text-balance {
-                text-wrap: balance;
+            .gov-link {
+                color: theme('colors.gov-blue');
+                text-decoration: underline;
+                text-underline-offset: 0.1em;
+                font-weight: 400;
             }
-        }
-        
-        /* Custom styles */
-        body {
-            font-family: Arial, sans-serif;
-            color: theme('colors.text-primary');
-            line-height: 1.5;
-        }
-        
-        .service-card:hover {
-            background-color: #f9f9f9;
-        }
-        
-        .service-link {
-            color: theme('colors.primary');
-            text-decoration: underline;
-            text-underline-offset: 0.1em;
-        }
-        
-        .service-link:hover {
-            color: theme('colors.primary-dark');
-        }
-        
-        .service-link:focus {
-            outline: 3px solid theme('colors.focus-color');
-            outline-offset: 0;
-            color: theme('colors.text-primary');
-            background-color: theme('colors.focus-color');
-            box-shadow: 0 -2px theme('colors.focus-color'), 0 4px theme('colors.text-primary');
-            text-decoration: none;
-        }
-        
-        .btn-primary {
-            background-color: theme('colors.primary');
-            color: white;
-            padding: 0.75rem 1rem;
-            font-size: 1rem;
-            font-weight: 400;
-            border: none;
-            cursor: pointer;
-            text-align: center;
-            display: inline-block;
-            text-decoration: none;
-            height: 48px;
-            box-sizing: border-box;
-        }
-        
-        .btn-primary:hover {
-            background-color: theme('colors.primary-dark');
-        }
-        
-        .btn-primary:focus {
-            outline: 3px solid theme('colors.focus-color');
-            outline-offset: 0;
-        }
-        
-        /* Search styles */
-        .search-form input[type="search"] {
-            border: 2px solid #0b0c0c;
-            padding: 0.5rem;
-            font-size: 1rem;
-            width: 100%;
-            box-sizing: border-box;
-            height: 48px;
-        }
-        
-        .search-form input[type="search"]:focus {
-            outline: 3px solid theme('colors.focus-color');
-            outline-offset: 0;
-            border-color: theme('colors.focus-color');
-        }
-        
-        .search-form button {
-            background-color: theme('colors.primary');
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            font-size: 1rem;
-            cursor: pointer;
-            height: 48px;
-            box-sizing: border-box;
-        }
-        
-        .search-form button:hover {
-            background-color: theme('colors.primary-dark');
-        }
-        
-        .search-form button:focus {
-            outline: 3px solid theme('colors.focus-color');
-            outline-offset: 0;
-        }
-        
-        /* Skip link */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: theme('colors.primary');
-            color: white;
-            padding: 8px;
-            z-index: 100;
-        }
-        
-        .skip-link:focus {
-            top: 0;
+            .gov-link:hover {
+                color: theme('colors.gov-blue-dark');
+                text-decoration-thickness: 3px;
+            }
+            .gov-link:focus {
+                color: theme('colors.gov-text');
+                background-color: theme('colors.gov-focus');
+                outline: 3px solid transparent;
+                box-shadow: 0 -2px theme('colors.gov-focus'), 0 4px theme('colors.gov-text');
+                text-decoration: none;
+            }
+            .gov-button {
+                display: inline-block;
+                font-family: Arial, sans-serif;
+                font-size: 19px;
+                font-weight: 400;
+                line-height: 1.3157894737;
+                padding: 8px 15px;
+                margin: 0;
+                border: 2px solid transparent;
+                border-radius: 0;
+                color: white;
+                background-color: theme('colors.gov-blue');
+                cursor: pointer;
+                text-align: center;
+                text-decoration: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                min-height: 48px;
+                box-sizing: border-box;
+            }
+            .gov-button:hover {
+                background-color: theme('colors.gov-blue-dark');
+                color: white;
+                text-decoration: none;
+            }
+            .gov-button:focus {
+                outline: 3px solid transparent;
+                color: theme('colors.gov-text');
+                background-color: theme('colors.gov-focus');
+                box-shadow: 0 -2px theme('colors.gov-focus'), 0 4px theme('colors.gov-text');
+                text-decoration: none;
+            }
+            .gov-card {
+                border-bottom: 1px solid #bfc1c3;
+                padding: 20px 0;
+            }
+            .gov-card:last-child {
+                border-bottom: none;
+            }
+            .gov-search-input {
+                border: 2px solid #0b0c0c;
+                padding: 5px 10px;
+                font-size: 19px;
+                width: 100%;
+                box-sizing: border-box;
+                min-height: 48px;
+                border-radius: 0;
+            }
+            .gov-search-input:focus {
+                outline: 3px solid transparent;
+                color: #0b0c0c;
+                background-color: theme('colors.gov-focus');
+                box-shadow: 0 -2px theme('colors.gov-focus'), 0 4px #0b0c0c;
+            }
+            .gov-form-label {
+                display: block;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+            .gov-form-input {
+                border: 2px solid #0b0c0c;
+                padding: 5px 10px;
+                font-size: 19px;
+                width: 100%;
+                box-sizing: border-box;
+                min-height: 48px;
+                margin-bottom: 20px;
+            }
+            .gov-form-input:focus {
+                outline: 3px solid transparent;
+                color: #0b0c0c;
+                background-color: theme('colors.gov-focus');
+                box-shadow: 0 -2px theme('colors.gov-focus'), 0 4px #0b0c0c;
+            }
+            .gov-error-message {
+                color: theme('colors.gov-error');
+                font-weight: bold;
+                margin-bottom: 20px;
+            }
+            .gov-success-message {
+                color: theme('colors.gov-success');
+                font-weight: bold;
+                margin-bottom: 20px;
+            }
+            .gov-warning-message {
+                background-color: theme('colors.gov-warning');
+                padding: 15px;
+                margin-bottom: 20px;
+            }
         }
     </style>
 </head>
-<body class="bg-white">
-    <!-- 无障碍跳转链接 -->
-    <a href="#main-content" class="skip-link">跳至主要内容</a>
-
-    <!-- Header/Navigation -->
-    <header class="bg-white border-b border-gray-200">
-        <div class="container mx-auto px-4 py-3">
+<body class="bg-gov-background text-gov-text font-sans">
+    <!-- 顶部导航栏 -->
+    <header class="bg-[#f3f2f1] border-b border-gray-300">
+        <div class="gov-container py-3">
             <div class="flex items-center">
-                <a href="#" class="flex items-center">
-                    <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/7450962cd4c8446aaa3184597962eb88~tplv-a9rns2rl98-image.image?rcl=202511242203297AB2C113CB8AEC03646D&amp;rk3s=8e244e95&amp;rrcfp=f06b921b&amp;x-expires=1766585032&amp;x-signature=PZzDuG9ugUgWakKr9i7DL2Yz3ys%3D" alt="小鼠王国标志" class="h-8 mr-3">
-                    <span class="text-xl font-bold text-text-primary">小鼠王国政府</span>
+                <a href="#" class="flex items-center" onclick="showHomePage(event)">
+                    <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/026e6132fe9b46e8af996b4db516cdee~tplv-a9rns2rl98-image.image?rcl=20251126222601E94E8A3608395904DE76&rk3s=8e244e95&rrcfp=f06b921b&x-expires=1766759178&x-signature=RxxMk%2Fa7%2Fbj4Jalz22xFu7MJyho%3D" alt="小鼠王国政府标志" class="h-8 mr-2">
+                    <span class="text-gov-text font-bold">小鼠王国政府</span>
                 </a>
-                <nav class="ml-auto hidden md:flex space-x-6 text-sm">
-                    <a href="#" class="text-text-secondary hover:text-primary">部门与政策</a>
-                    <a href="#" class="text-text-secondary hover:text-primary">新闻</a>
-                    <a href="#" class="text-text-secondary hover:text-primary">指南与法规</a>
-                    <a href="#" class="text-text-secondary hover:text-primary">研究与统计</a>
-                    <a href="#" class="text-text-secondary hover:text-primary">政策文件与咨询</a>
-                    <a href="#" class="text-text-secondary hover:text-primary">透明度</a>
-                </nav>
-                <button class="ml-4 md:hidden text-text-primary">
-                    <i class="fa fa-bars text-xl"></i>
-                </button>
             </div>
         </div>
     </header>
+    
+    <!-- 蓝色搜索区域 -->
+    <section class="bg-gov-blue text-white py-10">
+        <div class="gov-container">
+            <h1 class="text-3xl font-bold mb-6">小鼠王国政府服务与信息</h1>
+            <p class="text-xl mb-6">欢迎访问小鼠王国政府网站，这里提供各种小鼠王国的政务服务与信息。</p>
+            <form id="search-form" class="relative max-w-2xl">
+                <div class="flex">
+                    <input type="search" id="search-input" class="gov-search-input bg-white text-gov-text" placeholder="搜索小鼠王国政府服务...">
+                    <button type="submit" class="gov-button ml-2 min-w-[100px] bg-white text-gov-blue hover:bg-gray-100">搜索</button>
+                </div>
+            </form>
+        </div>
+    </section>
 
-    <!-- Main Content -->
-    <main id="main-content" class="container mx-auto px-4 py-8">
-        <!-- 搜索区域 -->
-        <section class="bg-primary text-white py-12 mb-12">
-            <div class="container mx-auto px-4">
-                <h1 class="text-3xl md:text-4xl font-bold mb-6">查找小鼠王国服务和信息的最佳平台</h1>
-                <p class="text-xl mb-8">为小鼠王国公民提供政府服务、福利、许可证等信息查询。</p>
-                
-                <!-- 搜索框 -->
-                <form class="search-form max-w-3xl" action="#" method="get">
-                    <label for="search" class="sr-only">搜索</label>
-                    <div class="flex">
-                        <input type="search" id="search" name="q" placeholder="搜索政府服务" required="" class="bg-white text-text-primary border-2 border-text-primary px-4 py-3 w-full">
-                        <button type="submit" aria-label="搜索" class="bg-text-primary text-white px-6 py-3">
-                            <i class="fa fa-search mr-2"></i> 搜索
-                        </button>
-                    </div>
-                </form>
+    <!-- 主要内容区 -->
+    <main class="gov-container py-8">
+        <!-- 欢迎信息 -->
+        <div class="mb-10 py-8">
+            <div id="welcome-message" class="gov-success-message hidden">
+                <i class="fa fa-check-circle mr-2"></i>欢迎回来！您的上次访问是在今天。
             </div>
-        </section>
-        
-        <!-- 热门服务区域 -->
-        <section class="mb-12">
-            <h2 class="text-2xl font-bold mb-6">热门服务</h2>
+        </div>
+
+        <!-- 热门服务 -->
+        <div class="mb-10">
+            <h2 class="text-2xl font-bold mb-6">小鼠王国热门服务</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <a href="#" class="service-link text-lg flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50" onclick="showPersonalIdentityServices()">
-                    <i class="fa fa-id-card-o mr-3 text-primary text-2xl"></i>
-                    <span>个人身份</span>
-                </a>
-                <a href="#" class="service-link text-lg flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50" onclick="showHousingCommunityServices()">
-                    <i class="fa fa-home mr-3 text-primary text-2xl"></i>
-                    <span>住房与社区</span>
-                </a>
-                <a href="#" class="service-link text-lg flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50" onclick="showEducationLearningServices()">
-                    <i class="fa fa-graduation-cap mr-3 text-primary text-2xl"></i>
-                    <span>教育与学习</span>
-                </a>
-            </div>
-        </section>
-
-        <!-- 热门服务区域 -->
-        <section class="mb-12">
-            <h2 class="text-2xl font-bold mb-6">鼠国政府热门服务</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- 服务卡片 1 -->
-                <div class="service-card p-6 border border-gray-200 rounded-lg">
-                    <div class="flex items-start mb-4">
-                        <div class="bg-secondary p-3 rounded-full mr-4">
-                            <i class="fa fa-user-circle text-primary text-xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-semibold mb-2">小鼠税务局账户</h3>
-                            <p class="text-text-secondary mb-4">登录或创建您的小鼠税务局账户，管理税务事务。</p>
-                            <a href="#" class="service-link" onclick="showServiceDetails('tax-account')">登录或设置</a>
-                        </div>
-                    </div>
+                <!-- 热门服务卡片 -->
+                <div>
+                    <a href="#" class="gov-link text-xl font-bold block py-2 border-b border-gray-200" onclick="showServiceDetails('mouse-id')">小鼠身份证办理</a>
                 </div>
-                
-                <!-- 服务卡片 2 -->
-                <div class="service-card p-6 border border-gray-200 rounded-lg">
-                    <div class="flex items-start mb-4">
-                        <div class="bg-secondary p-3 rounded-full mr-4">
-                            <i class="fa fa-id-card text-primary text-xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-semibold mb-2">电子签证</h3>
-                            <p class="text-text-secondary mb-4">访问和使用您的在线移民身份，查看签证状态。</p>
-                            <a href="#" class="service-link" onclick="showServiceDetails('e-visa')">访问电子签证</a>
-                        </div>
-                    </div>
+                <div>
+                    <a href="#" class="gov-link text-xl font-bold block py-2 border-b border-gray-200" onclick="showServiceDetails('mouse-passport')">小鼠护照申请</a>
                 </div>
-                
-                <!-- 服务卡片 3 -->
-                <div class="service-card p-6 border border-gray-200 rounded-lg">
-                    <div class="flex items-start mb-4">
-                        <div class="bg-secondary p-3 rounded-full mr-4">
-                            <i class="fa fa-credit-card text-primary text-xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-semibold mb-2">卢yu鼠案件专案组</h3>
-                            <p class="text-text-secondary mb-4">对于卢yu鼠系列案件的调查</p>
-                            <a href="#" class="service-link" onclick="showServiceDetails('universal-credit')">查看详情</a>
-                        </div>
-                    </div>
+                <div>
+                    <a href="#" class="gov-link text-xl font-bold block py-2 border-b border-gray-200" onclick="showServiceDetails('mouse-tax')">小鼠税务申报</a>
                 </div>
-                
-                <!-- 服务卡片 4 -->
-                <div class="service-card p-6 border border-gray-200 rounded-lg">
-                    <div class="flex items-start mb-4">
-                        <div class="bg-secondary p-3 rounded-full mr-4">
-                            <i class="fa fa-home text-primary text-xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-semibold mb-2">个人税务账户</h3>
-                            <p class="text-text-secondary mb-4">登录或创建您的个人税务账户，管理个人税务事务。</p>
-                            <a href="#" class="service-link" onclick="showServiceDetails('personal-tax')">登录或设置</a>
-                        </div>
-                    </div>
+                <div>
+                    <a href="#" class="gov-link text-xl font-bold block py-2 border-b border-gray-200" onclick="showServiceDetails('mouse-health')">小鼠健康服务</a>
                 </div>
-                
-                <!-- 服务卡片 5 -->
-                <div class="service-card p-6 border border-gray-200 rounded-lg">
-                    <div class="flex items-start mb-4">
-                        <div class="bg-secondary p-3 rounded-full mr-4">
-                            <i class="fa fa-child text-primary text-xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-semibold mb-2">育儿账户</h3>
-                            <p class="text-text-secondary mb-4">登录您的育儿账户，管理育儿福利和支持服务。</p>
-                            <a href="#" class="service-link" onclick="showServiceDetails('childcare')">登录账户</a>
-                        </div>
-                    </div>
+                <div>
+                    <a href="#" class="gov-link text-xl font-bold block py-2 border-b border-gray-200" onclick="showServiceDetails('mouse-education')">小鼠教育服务</a>
                 </div>
-                
-                <!-- 服务卡片 6 -->
-                <div class="service-card p-6 border border-gray-200 rounded-lg">
-                    <div class="flex items-start mb-4">
-                        <div class="bg-secondary p-3 rounded-full mr-4">
-                            <i class="fa fa-clock-o text-primary text-xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-semibold mb-2">查看国家养老金预测</h3>
-                            <p class="text-text-secondary mb-4">获取您的国家养老金预测，了解您将获得多少养老金。</p>
-                            <a href="#" class="service-link" onclick="showServiceDetails('state-pension')">查看预测</a>
-                        </div>
-                    </div>
+                <div>
+                    <a href="#" class="gov-link text-xl font-bold block py-2 border-b border-gray-200" onclick="showServiceDetails('mouse-housing')">小鼠住房服务</a>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- 服务与信息分类 -->
-        <section class="mb-12">
-            <h2 class="text-2xl font-bold mb-6">服务与信息</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 卢yu鼠案件专案组 -->
+        <div class="mb-10 bg-gov-background-secondary p-6">
+            <div class="flex items-center mb-4">
+                <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/8cddceaacd3d4789a5e36957c84e10ba~tplv-a9rns2rl98-image.image?rcl=20251126222601E94E8A3608395904DE76&rk3s=8e244e95&rrcfp=f06b921b&x-expires=1766759191&x-signature=HKPdrEW0kOk1cuXy%2FuBxQj82P5A%3D" alt="卢yu鼠案件专案组" class="h-16 mr-4">
+                <h2 class="text-2xl font-bold">卢yu鼠案件专案组</h2>
+            </div>
+            <p class="mb-4">卢yu鼠用黑板擦擦掉了数百只小鼠，有的被它残忍改成它自以为好看的样子。专案组负责调查此案并提供受害者救助。</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <h3 class="text-xl font-bold mb-2">案件最新进展</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>专案组已确认卢yu鼠身份并展开追捕</li>
+                        <li>已救助237只受害小鼠，其中189只已恢复原貌</li>
+                        <li>设立小鼠受害者救助热线：123-456-7890</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">受害者救助</h3>
+                    <p class="mb-4">如果您或您认识的小鼠是卢yu鼠案件的受害者，请立即联系我们：</p>
+                    <button class="gov-button" onclick="showVictimForm()">
+                        <i class="fa fa-life-ring mr-2"></i>申请救助
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 服务与信息和特色服务 -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+            <!-- 服务与信息 -->
+            <div class="md:col-span-2">
+                <h2 class="text-2xl font-bold mb-6">小鼠王国服务与信息</h2>
+                
                 <!-- 福利 -->
-                <div class="service-category">
-                    <h3 class="text-xl font-semibold mb-3">
-                        <a href="#" class="service-link flex items-center" onclick="showCategoryDetails('benefits')">
-                            <i class="fa fa-heart mr-2"></i>
-                            福利
-                        </a>
-                    </h3>
-                    <ul class="pl-6 space-y-2">
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('benefits-eligibility')">资格条件</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('benefits-appeals')">申诉</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('tax-credits')">税收抵免</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('universal-credit')">卢yu鼠案件专案组</a></li>
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold mb-4">福利</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="#" class="gov-link text-lg" onclick="showServiceCategory('benefits')">小鼠福利金、养老金和其他社会福利</a>
+                        </li>
+                        <li>
+                            <a href="#" class="gov-link text-lg">小鼠家庭补贴和儿童福利</a>
+                        </li>
+                        <li>
+                            <a href="#" class="gov-link text-lg">小鼠残疾补助和护理服务</a>
+                        </li>
                     </ul>
                 </div>
                 
-                <!-- 出生、死亡、婚姻与护理 -->
-                <div class="service-category">
-                    <h3 class="text-xl font-semibold mb-3">
-                        <a href="#" class="service-link flex items-center" onclick="showCategoryDetails('births-deaths')">
-                            <i class="fa fa-life-ring mr-2"></i>
-                            出生、死亡、婚姻与护理
-                        </a>
-                    </h3>
-                    <ul class="pl-6 space-y-2">
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('parenting')">育儿</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('civil-partnerships')">民事伴侣关系</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('divorce')">离婚</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('lasting-power')">持久授权书</a></li>
+                <!-- 出生、死亡、婚姻和护理 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold mb-4">出生、死亡、婚姻和护理</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="#" class="gov-link text-lg">小鼠出生登记</a>
+                        </li>
+                        <li>
+                            <a href="#" class="gov-link text-lg">小鼠死亡登记</a>
+                        </li>
+                        <li>
+                            <a href="#" class="gov-link text-lg">小鼠婚姻登记</a>
+                        </li>
+                        <li>
+                            <a href="#" class="gov-link text-lg">小鼠护理服务</a>
+                        </li>
                     </ul>
                 </div>
                 
-                <!-- 商业与自雇 -->
-                <div class="service-category">
-                    <h3 class="text-xl font-semibold mb-3">
-                        <a href="#" class="service-link flex items-center" onclick="showCategoryDetails('business')">
-                            <i class="fa fa-briefcase mr-2"></i>
-                            商业与自雇
-                        </a>
-                    </h3>
-                    <ul class="pl-6 space-y-2">
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('business-tools')">商业工具</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('business-guidance')">指导</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('self-employed')">自雇</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('business-tax')">商业税务</a></li>
+                <!-- 企业和自雇人士 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold mb-4">企业和自雇人士</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="#" class="gov-link text-lg" onclick="showServiceCategory('employment')">小鼠就业机会和职业培训</a>
+                        </li>
+                        <li>
+                            <a href="#" class="gov-link text-lg">小鼠创业支持和企业发展</a>
+                        </li>
+                        <li>
+                            <a href="#" class="gov-link text-lg">小鼠商业税收和法规</a>
+                        </li>
                     </ul>
                 </div>
                 
-                <!-- 育儿与养育 -->
-                <div class="service-category">
-                    <h3 class="text-xl font-semibold mb-3">
-                        <a href="#" class="service-link flex items-center" onclick="showCategoryDetails('childcare')">
-                            <i class="fa fa-child mr-2"></i>
-                            育儿与养育
-                        </a>
-                    </h3>
-                    <ul class="pl-6 space-y-2">
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('giving-birth')">分娩</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('fostering')">寄养</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('adopting')">收养</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('child-benefits')">儿童福利</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('childcare-services')">托儿服务</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('schools')">学校</a></li>
+                <!-- 儿童和育儿 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold mb-4">儿童和育儿</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="#" class="gov-link text-lg">小鼠儿童福利和服务</a>
+                        </li>
+                        <li>
+                            <a href="#" class="gov-link text-lg" onclick="showServiceCategory('education')">小鼠学校和教育</a>
+                        </li>
+                        <li>
+                            <a href="#" class="gov-link text-lg">小鼠育儿支持和服务</a>
+                        </li>
                     </ul>
                 </div>
                 
-                <!-- 公民身份与居住 -->
-                <div class="service-category">
-                    <h3 class="text-xl font-semibold mb-3">
-                        <a href="#" class="service-link flex items-center" onclick="showCategoryDetails('citizenship')">
-                            <i class="fa fa-flag mr-2"></i>
-                            公民身份与居住
-                        </a>
-                    </h3>
-                    <ul class="pl-6 space-y-2">
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('voting')">投票</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('community')">社区参与</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('life-in-uk')">在小鼠王国生活</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('international-projects')">国际项目</a></li>
+                <!-- 公民和法律 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold mb-4">公民和法律</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="#" class="gov-link text-lg" onclick="showServiceDetails('mouse-id')">小鼠身份证办理</a>
+                        </li>
+                        <li>
+                            <a href="#" class="gov-link text-lg" onclick="showServiceDetails('mouse-passport')">小鼠护照申请</a>
+                        </li>
+                        <li>
+                            <a href="#" class="gov-link text-lg" onclick="showServiceCategory('crime')">小鼠安全和法律</a>
+                        </li>
                     </ul>
-                </div>
-                
-                <!-- 犯罪、司法与法律 -->
-                <div class="service-category">
-                    <h3 class="text-xl font-semibold mb-3">
-                        <a href="#" class="service-link flex items-center" onclick="showCategoryDetails('crime-justice')">
-                            <i class="fa fa-gavel mr-2"></i>
-                            犯罪、司法与法律
-                        </a>
-                    </h3>
-                    <ul class="pl-6 space-y-2">
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('legal-processes')">法律程序</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('courts')">法院</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('police')">警察</a></li>
-                    </ul>
-                </div>
-                
-                <!-- 残障人士 -->
-                <div class="service-category">
-                    <h3 class="text-xl font-semibold mb-3">
-                        <a href="#" class="service-link flex items-center" onclick="showCategoryDetails('disabled-people')">
-                            <i class="fa fa-wheelchair mr-2"></i>
-                            残障人士
-                        </a>
-                    </h3>
-                    <ul class="pl-6 space-y-2">
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('carers')">照顾者</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('disability-rights')">权利</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('disability-benefits')">福利</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('equality-act')">平等法案</a></li>
-                    </ul>
-                </div>
-                
-                <!-- 驾驶与交通 -->
-                <div class="service-category">
-                    <h3 class="text-xl font-semibold mb-3">
-                        <a href="#" class="service-link flex items-center" onclick="showCategoryDetails('driving-transport')">
-                            <i class="fa fa-car mr-2"></i>
-                            驾驶与交通
-                        </a>
-                    </h3>
-                    <ul class="pl-6 space-y-2">
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('vehicle-tax')">车辆税</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('mot')">车辆年检</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('driving-licences')">驾驶执照</a></li>
-                    </ul>
-                </div>
-                
-                <!-- 教育与学习 -->
-                <div class="service-category">
-                    <h3 class="text-xl font-semibold mb-3">
-                        <a href="#" class="service-link flex items-center" onclick="showCategoryDetails('education')">
-                            <i class="fa fa-graduation-cap mr-2"></i>
-                            教育与学习
-                        </a>
-                    </h3>
-                    <ul class="pl-6 space-y-2">
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('student-loans')">学生贷款</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('admissions')">入学</a></li>
-                        <li><a href="#" class="service-link" onclick="showServiceDetails('apprenticeships')">学徒制</a></li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- 特色服务区域 -->
-        <section class="mb-12 bg-secondary p-8 rounded-lg">
-            <h2 class="text-2xl font-bold mb-6">特色服务</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- 找工作 -->
-                <div class="bg-white p-6 rounded-lg shadow-sm">
-                    <h3 class="text-xl font-semibold mb-3">找工作</h3>
-                    <p class="text-text-secondary mb-4">搜索并申请小鼠王国的工作。</p>
-                    <a href="#" class="btn-primary" onclick="showServiceDetails('find-job')">立即搜索</a>
-                </div>
-                
-                <!-- 国家保险 -->
-                <div class="bg-white p-6 rounded-lg shadow-sm">
-                    <h3 class="text-xl font-semibold mb-3">国家保险</h3>
-                    <p class="text-text-secondary mb-4">查看您的记录，了解是否可以添加更多供款。</p>
-                    <a href="#" class="btn-primary" onclick="showServiceDetails('national-insurance')">查看记录</a>
-                </div>
-                
-                <!-- 生活成本支持 -->
-                <div class="bg-white p-6 rounded-lg shadow-sm">
-                    <h3 class="text-xl font-semibold mb-3">生活成本支持</h3>
-                    <p class="text-text-secondary mb-4">了解小鼠王国政府如何帮助您应对生活成本问题。</p>
-                    <a href="#" class="btn-primary" onclick="showServiceDetails('cost-of-living')">获取支持</a>
                 </div>
             </div>
             
-            <!-- 小鼠王国政府应用 -->
-            <div class="mt-8 bg-white p-6 rounded-lg shadow-sm">
-                <div class="flex flex-col md:flex-row items-center">
-                    <div class="md:w-2/3 mb-4 md:mb-0 md:pr-6">
-                        <h3 class="text-xl font-semibold mb-3">获取小鼠王国政府应用</h3>
-                        <p class="text-text-secondary mb-4">您的政府服务和信息，随时随地获取。</p>
-                        <div class="flex space-x-4">
-                            <a href="#" class="btn-primary flex items-center" onclick="showAppDownload('ios')">
-                                <i class="fa fa-apple mr-2"></i> App Store
-                            </a>
-                            <a href="#" class="btn-primary flex items-center" onclick="showAppDownload('android')">
-                                <i class="fa fa-android mr-2"></i> Google Play
-                            </a>
-                        </div>
-                    </div>
-                    <div class="md:w-1/3 flex justify-center">
-                        <div class="bg-gray-200 rounded-3xl p-4 w-40 h-80 flex items-center justify-center">
-                            <i class="fa fa-mobile text-6xl text-primary"></i>
-                        </div>
-                    </div>
+            <!-- 特色服务 -->
+            <div>
+                <h2 class="text-2xl font-bold mb-6">特色服务</h2>
+                
+                <!-- 小鼠健康服务 -->
+                <div class="bg-gov-background-secondary p-5 mb-5">
+                    <h3 class="text-xl font-bold mb-3">小鼠健康服务</h3>
+                    <p class="mb-4">获取小鼠王国医疗保健服务和健康信息</p>
+                    <a href="#" class="gov-link text-lg font-bold" onclick="showServiceDetails('mouse-health')">了解更多</a>
+                </div>
+                
+                <!-- 小鼠税务申报 -->
+                <div class="bg-gov-background-secondary p-5 mb-5">
+                    <h3 class="text-xl font-bold mb-3">小鼠税务申报</h3>
+                    <p class="mb-4">在线申报小鼠王国个人所得税</p>
+                    <a href="#" class="gov-link text-lg font-bold" onclick="showServiceDetails('mouse-tax')">立即申报</a>
+                </div>
+                
+                <!-- 小鼠住房服务 -->
+                <div class="bg-gov-background-secondary p-5">
+                    <h3 class="text-xl font-bold mb-3">小鼠住房服务</h3>
+                    <p class="mb-4">申请小鼠王国公共住房或住房补贴</p>
+                    <a href="#" class="gov-link text-lg font-bold" onclick="showServiceDetails('mouse-housing')">申请住房</a>
                 </div>
             </div>
-        </section>
+        </div>
+
+        <!-- 新闻与公告 -->
+        <div class="mb-10">
+            <h2 class="text-2xl font-bold mb-6">小鼠王国新闻与公告</h2>
+            <div class="gov-warning-message">
+                <i class="fa fa-exclamation-circle mr-2"></i>
+                <strong>重要公告：</strong>小鼠王国将于下月1日起实施新的健康检查制度，请所有小鼠居民提前做好准备。
+            </div>
+            <div class="mt-8">
+                <div class="border-b border-gray-200 pb-6 mb-6">
+                    <h3 class="text-xl font-bold">小鼠王国举办第五届小鼠技能大赛</h3>
+                    <p class="text-sm text-gov-text-secondary mb-2">2025年11月20日</p>
+                    <p>小鼠王国将于下月举办第五届小鼠技能大赛，欢迎各年龄段小鼠报名参加，展示自己的特殊技能。</p>
+                    <a href="#" class="gov-link" onclick="showNewsDetails('skills-competition')">阅读更多</a>
+                </div>
+                <div class="border-b border-gray-200 pb-6">
+                    <h3 class="text-xl font-bold">小鼠王国与邻国签署贸易合作协议</h3>
+                    <p class="text-sm text-gov-text-secondary mb-2">2025年11月15日</p>
+                    <p>小鼠王国与邻国签署新的贸易合作协议，将促进双方经济发展，提高小鼠居民生活水平。</p>
+                    <a href="#" class="gov-link" onclick="showNewsDetails('trade-agreement')">阅读更多</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 服务详情区域 -->
+        <div id="service-details" class="hidden mb-10 bg-gov-background-secondary p-6">
+            <h2 id="service-title" class="text-2xl font-bold mb-4"></h2>
+            <div id="service-content"></div>
+            <div class="mt-6">
+                <button class="gov-button" onclick="hideServiceDetails()">返回</button>
+            </div>
+        </div>
+
+        <!-- 受害者救助表单 -->
+        <div id="victim-form" class="hidden mb-10 bg-gov-background-secondary p-6">
+            <h2 class="text-2xl font-bold mb-4">小鼠受害者救助申请表</h2>
+            <form id="victim-assistance-form">
+                <div class="mb-4">
+                    <label for="victim-name" class="gov-form-label">姓名</label>
+                    <input type="text" id="victim-name" class="gov-form-input" required>
+                </div>
+                <div class="mb-4">
+                    <label for="victim-age" class="gov-form-label">年龄</label>
+                    <input type="number" id="victim-age" class="gov-form-input" required>
+                </div>
+                <div class="mb-4">
+                    <label for="victim-contact" class="gov-form-label">联系方式</label>
+                    <input type="text" id="victim-contact" class="gov-form-input" required>
+                </div>
+                <div class="mb-4">
+                    <label for="victim-description" class="gov-form-label">受害情况描述</label>
+                    <textarea id="victim-description" class="gov-form-input" rows="4" required></textarea>
+                </div>
+                <div class="mb-4">
+                    <label for="victim-evidence" class="gov-form-label">证据上传</label>
+                    <input type="file" id="victim-evidence" class="gov-form-input">
+                </div>
+                <div class="flex justify-between">
+                    <button type="button" class="gov-button bg-gov-text-secondary" onclick="hideVictimForm()">取消</button>
+                    <button type="submit" class="gov-button">提交申请</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- 搜索结果区域 -->
+        <div id="search-results" class="hidden mb-10">
+            <h2 class="text-2xl font-bold mb-4">搜索结果</h2>
+            <p id="search-query" class="mb-4"></p>
+            <div id="search-results-list"></div>
+            <div class="mt-6">
+                <button class="gov-button" onclick="hideSearchResults()">返回</button>
+            </div>
+        </div>
     </main>
-    
-    <!-- 服务详情模态框 -->
-    <div id="service-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
-        <div class="bg-white rounded-lg w-full max-w-3xl max-h-[90vh] overflow-y-auto">
-            <div class="p-6">
-                <div class="flex justify-between items-start mb-6">
-                    <h2 id="modal-title" class="text-2xl font-bold">卢yu鼠案件专案组</h2>
-                    <button onclick="closeModal()" class="text-text-secondary hover:text-text-primary focus:outline-none">
-                        <i class="fa fa-times text-xl"></i>
-                    </button>
-                </div>
-                <div id="modal-content"></div>
-                <div class="mt-8 pt-6 border-t border-gray-200">
-                    <h3 class="text-lg font-semibold mb-4">相关服务</h3>
-                    <ul id="modal-related" class="space-y-2"></ul>
-                </div>
-                <div class="mt-8 flex justify-end">
-                    <button onclick="closeModal()" class="btn-primary">关闭</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- 应用下载模态框 -->
-    <div id="app-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
-        <div class="bg-white rounded-lg w-full max-w-md">
-            <div class="p-6">
-                <div class="flex justify-between items-start mb-6">
-                    <h2 id="app-modal-title" class="text-2xl font-bold"></h2>
-                    <button onclick="closeAppModal()" class="text-text-secondary hover:text-text-primary focus:outline-none">
-                        <i class="fa fa-times text-xl"></i>
-                    </button>
-                </div>
-                <div id="app-modal-content" class="text-center"></div>
-                <div class="mt-8 flex justify-end">
-                    <button onclick="closeAppModal()" class="btn-primary">关闭</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- 页面反馈 -->
-    <div class="container mx-auto px-4 py-8">
-        <div class="bg-secondary p-6 rounded-lg">
-            <h2 class="text-xl font-bold mb-4">此页面是否有用？</h2>
-            <div class="flex space-x-4 mb-6">
-                <button onclick="submitFeedback('yes')" class="btn-primary">是</button>
-                <button onclick="submitFeedback('no')" class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400">否</button>
-            </div>
-            <div id="feedback-form" class="hidden">
-                <p class="mb-4">请告诉我们如何改进此页面</p>
-                <textarea id="feedback-text" class="w-full border border-gray-300 p-3 mb-4" rows="4"></textarea>
-                <div class="flex justify-end">
-                    <button onclick="submitFeedbackDetails()" class="btn-primary">提交反馈</button>
-                </div>
-            </div>
-            <div id="feedback-thanks" class="hidden">
-                <p class="text-success font-semibold">感谢您的反馈！</p>
-            </div>
-        </div>
-    </div>
 
     <!-- 页脚 -->
-    <footer class="bg-gray-100 text-text-secondary py-8">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <footer class="bg-gov-background-secondary py-8">
+        <div class="gov-container">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
-                    <h3 class="text-lg font-semibold mb-4">服务</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="hover:text-primary">福利</a></li>
-                        <li><a href="#" class="hover:text-primary">出生、死亡、婚姻、护理</a></li>
-                        <li><a href="#" class="hover:text-primary">商业与自雇</a></li>
-                        <li><a href="#" class="hover:text-primary">育儿与养育</a></li>
-                        <li><a href="#" class="hover:text-primary">公民身份与居住</a></li>
+                    <h3 class="text-lg font-bold mb-4">关于小鼠王国政府</h3>
+                    <ul>
+                        <li><a href="#" class="gov-link" onclick="showAboutSection('government')">小鼠王国政府机构</a></li>
+                        <li><a href="#" class="gov-link" onclick="showAboutSection('ministers')">小鼠王国大臣</a></li>
+                        <li><a href="#" class="gov-link" onclick="showAboutSection('policies')">小鼠王国政策</a></li>
                     </ul>
                 </div>
-                
                 <div>
-                    <h3 class="text-lg font-semibold mb-4">部门与政策</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="hover:text-primary">政府如何运作</a></li>
-                        <li><a href="#" class="hover:text-primary">部门</a></li>
-                        <li><a href="#" class="hover:text-primary">全球服务</a></li>
-                        <li><a href="#" class="hover:text-primary">服务</a></li>
-                        <li><a href="#" class="hover:text-primary">指导与法规</a></li>
+                    <h3 class="text-lg font-bold mb-4">服务与信息</h3>
+                    <ul>
+                        <li><a href="#" class="gov-link" onclick="showServiceCategory('benefits')">小鼠福利</a></li>
+                        <li><a href="#" class="gov-link" onclick="showServiceCategory('education')">小鼠教育</a></li>
+                        <li><a href="#" class="gov-link" onclick="showServiceCategory('health')">小鼠健康</a></li>
+                        <li><a href="#" class="gov-link" onclick="showServiceCategory('housing')">小鼠住房</a></li>
                     </ul>
                 </div>
-                
                 <div>
-                    <h3 class="text-lg font-semibold mb-4">支持链接</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="hover:text-primary">帮助</a></li>
-                        <li><a href="#" class="hover:text-primary">隐私</a></li>
-                        <li><a href="#" class="hover:text-primary">Cookie</a></li>
-                        <li><a href="#" class="hover:text-primary">无障碍声明</a></li>
-                        <li><a href="#" class="hover:text-primary">联系我们</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">政府活动</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="hover:text-primary">新闻</a></li>
-                        <li><a href="#" class="hover:text-primary">指导与法规</a></li>
-                        <li><a href="#" class="hover:text-primary">研究与统计</a></li>
-                        <li><a href="#" class="hover:text-primary">政策文件与咨询</a></li>
-                        <li><a href="#" class="hover:text-primary">透明度</a></li>
+                    <h3 class="text-lg font-bold mb-4">法律与监管</h3>
+                    <ul>
+                        <li><a href="#" class="gov-link" onclick="showLegalSection('laws')">小鼠王国法律</a></li>
+                        <li><a href="#" class="gov-link" onclick="showLegalSection('regulations')">小鼠王国法规</a></li>
+                        <li><a href="#" class="gov-link" onclick="showLegalSection('reports')">小鼠王国报告</a></li>
                     </ul>
                 </div>
             </div>
-            
-            <div class="mt-8 pt-6 border-t border-gray-200">
+            <div class="mt-8 pt-8 border-t border-gov-text-secondary">
                 <div class="flex flex-col md:flex-row justify-between items-center">
                     <div class="mb-4 md:mb-0">
-                        <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/7450962cd4c8446aaa3184597962eb88~tplv-a9rns2rl98-image.image?rcl=202511242203297AB2C113CB8AEC03646D&amp;rk3s=8e244e95&amp;rrcfp=f06b921b&amp;x-expires=1766585032&amp;x-signature=PZzDuG9ugUgWakKr9i7DL2Yz3ys%3D" alt="小鼠王国标志" class="h-8">
+                        <p class="text-sm text-gov-text-secondary">© 2025 小鼠王国政府</p>
                     </div>
-                    <div class="text-sm">
-                        <p>除非另有说明，所有内容均根据 <a href="#" class="hover:text-primary">开放政府许可证 v3.0</a> 提供</p>
-                        <p class="mt-1">All content is available under the Open Government Licence v3.0, except where otherwise stated</p>
-                        <p class="mt-2">© 褚梨公司版权所有</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="gov-link text-sm" onclick="showPrivacyPolicy()">隐私政策</a>
+                        <a href="#" class="gov-link text-sm" onclick="showTermsOfService()">使用条款</a>
+                        <a href="#" class="gov-link text-sm" onclick="showAccessibilityStatement()">无障碍声明</a>
                     </div>
                 </div>
             </div>
@@ -635,2328 +478,773 @@
 
     <!-- JavaScript -->
     <script>
-        // 服务数据
+        // 模拟数据
         const serviceData = {
-            'tax-account': {
-                title: '小鼠税务局账户',
+            'mouse-id': {
+                title: '小鼠身份证办理',
                 content: `
-                    <p class="mb-4">小鼠税务局账户是管理您税务事务的安全方式。通过此账户，您可以：</p>
-                    <ul class="list-disc pl-6 mb-4 space-y-2">
-                        <li>查看您的税务记录</li>
-                        <li>提交纳税申报表</li>
-                        <li>管理您的税务支付</li>
-                        <li>更新您的个人信息</li>
-                        <li>查看您的税务信用和退款</li>
+                    <p class="mb-4">小鼠身份证是小鼠王国居民的重要身份证明文件，用于证明持有人的身份和国籍。</p>
+                    <h3 class="text-xl font-bold mb-2">申请条件</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>小鼠王国出生的小鼠居民</li>
+                        <li>已获得小鼠王国永久居留权的外国小鼠</li>
+                        <li>年满6个月的小鼠</li>
                     </ul>
-                    <h3 class="text-xl font-semibold mb-3">如何登录</h3>
-                    <p class="mb-4">您需要使用小鼠王国政府网关（Mouse Kingdom Government Gateway）账户登录。如果您还没有账户，可以免费注册。</p>
-                    <div class="bg-secondary p-4 rounded-lg mb-4">
-                        <h4 class="font-semibold mb-2">需要帮助？</h4>
-                        <p>如果您在登录或使用账户时遇到问题，请联系小鼠税务局客户服务中心：</p>
-                        <p class="mt-2">电话：0800-123-4567</p>
-                        <p>电子邮件：taxhelp@mousekingdom.gov.mk</p>
-                    </div>
-                    <div class="mt-6">
-                        <button class="btn-primary mr-4" onclick="simulateLogin('tax')">登录</button>
-                        <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400" onclick="showRegistrationForm('tax')">注册</button>
-                    </div>
-                `,
-                related: [
-                    { title: '个人税务账户', id: 'personal-tax' },
-                    { title: '卢yu鼠案件专案组', id: 'luyu-case' },
-                    { title: '税收抵免', id: 'tax-credits' }
-                ]
-            },
-            'e-visa': {
-                title: '电子签证',
-                content: `
-                    <p class="mb-4">电子签证是小鼠王国政府提供的在线移民身份服务。通过此服务，您可以：</p>
-                    <ul class="list-disc pl-6 mb-4 space-y-2">
-                        <li>查看您的移民状态</li>
-                        <li>查看您的签证有效期</li>
-                        <li>查看您的工作和学习权利</li>
-                        <li>更新您的联系信息</li>
-                        <li>申请延长您的签证</li>
+                    <h3 class="text-xl font-bold mb-2">申请材料</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>小鼠出生证明或居留许可</li>
+                        <li>父母或监护人身份证明（适用于未成年小鼠）</li>
+                        <li>近期免冠照片（2寸，蓝色背景）</li>
                     </ul>
-                    <h3 class="text-xl font-semibold mb-3">如何使用电子签证</h3>
-                    <p class="mb-4">您需要使用申请签证时创建的账户登录。如果您忘记了登录详情，可以使用"忘记密码"功能重置。</p>
-                    <div class="bg-secondary p-4 rounded-lg mb-4">
-                        <h4 class="font-semibold mb-2">重要信息</h4>
-                        <p>您的电子签证是您在小鼠王国合法居留的证明。请确保您的签证在有效期内，并遵守所有签证条件。</p>
-                    </div>
-                    <div class="mt-6">
-                        <button class="btn-primary" onclick="simulateLogin('visa')">访问电子签证</button>
-                    </div>
-                `,
-                related: [
-                    { title: '签证与移民', id: 'visas-immigration' },
-                    { title: '护照申请', id: 'passport-application' },
-                    { title: '公民身份', id: 'citizenship' }
-                ]
-            },
-            'universal-credit': {
-                title: '卢yu鼠案件专案组',
-                content: `
-                    <p class="mb-4">卢yu鼠案件专案组是小鼠王国政府成立的特别调查机构，负责调查卢yu鼠系列案件。专案组的主要职责包括：</p>
-                    <ul class="list-disc pl-6 mb-4 space-y-2">
-                        <li>收集和分析案件证据</li>
-                        <li>调查案件相关人员</li>
-                        <li>协调各部门合作</li>
-                        <li>发布案件进展公告</li>
-                        <li>接受公众举报和线索</li>
-                    </ul>
-                    <h3 class="text-xl font-semibold mb-3">案件背景</h3>
-                    <p class="mb-4">卢yu鼠案件涉及多起小鼠王国公民财产损失和安全威胁事件。案件最早于2023年被发现，目前已造成超过100只小鼠的财产损失。</p>
-                    <div class="bg-secondary p-4 rounded-lg mb-4">
-                        <h4 class="font-semibold mb-2">举报线索</h4>
-                        <p>如果您有任何与卢yu鼠案件相关的线索或信息，请通过以下方式联系专案组：</p>
-                        <p class="mt-2">举报热线：0800-999-8888</p>
-                        <p>电子邮件：luyucase@mousekingdom.gov.mk</p>
-                        <p class="mt-2">举报网站：<a href="#" class="service-link">www.mousekingdom.gov.mk/luyureport</a></p>
-                    </div>
-                    <div class="mt-6">
-                        <button class="btn-primary mr-4" onclick="showCaseUpdates()">查看案件进展</button>
-                        <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400" onclick="submitTip()">提交线索</button>
-                    </div>
-                `,
-                related: [
-                    { title: '犯罪、司法与法律', id: 'crime-justice' },
-                    { title: '警察', id: 'police' },
-                    { title: '法律程序', id: 'legal-processes' }
-                ]
-            },
-            'personal-tax': {
-                title: '个人税务账户',
-                content: `
-                    <p class="mb-4">个人税务账户是管理您个人税务事务的安全方式。通过此账户，您可以：</p>
-                    <ul class="list-disc pl-6 mb-4 space-y-2">
-                        <li>查看您的税务代码</li>
-                        <li>查看您的国家保险记录</li>
-                        <li>管理您的学生贷款还款</li>
-                        <li>查看您的养老金预测</li>
-                        <li>更新您的个人信息</li>
-                    </ul>
-                    <h3 class="text-xl font-semibold mb-3">如何登录或设置</h3>
-                    <p class="mb-4">您需要使用小鼠王国政府网关（Mouse Kingdom Government Gateway）账户登录。如果您还没有账户，可以免费注册。</p>
-                    <div class="bg-secondary p-4 rounded-lg mb-4">
-                        <h4 class="font-semibold mb-2">需要帮助？</h4>
-                        <p>如果您在登录或使用账户时遇到问题，请联系小鼠税务局客户服务中心：</p>
-                        <p class="mt-2">电话：0800-123-4567</p>
-                        <p>电子邮件：taxhelp@mousekingdom.gov.mk</p>
-                    </div>
-                    <div class="mt-6">
-                        <button class="btn-primary mr-4" onclick="simulateLogin('personal-tax')">登录</button>
-                        <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400" onclick="showRegistrationForm('personal-tax')">注册</button>
-                    </div>
-                `,
-                related: [
-                    { title: '小鼠税务局账户', id: 'tax-account' },
-                    { title: '国家养老金', id: 'state-pension' },
-                    { title: '学生贷款', id: 'student-loans' }
-                ]
-            },
-            'childcare': {
-                title: '育儿账户',
-                content: `
-                    <p class="mb-4">育儿账户是管理您育儿福利和支持服务的方式。通过此账户，您可以：</p>
-                    <ul class="list-disc pl-6 mb-4 space-y-2">
-                        <li>查看您的育儿补贴</li>
-                        <li>管理您的育儿费用</li>
-                        <li>更新您的育儿安排</li>
-                        <li>查看您的育儿服务提供商</li>
-                        <li>申请额外的育儿支持</li>
-                    </ul>
-                    <h3 class="text-xl font-semibold mb-3">如何登录</h3>
-                    <p class="mb-4">您需要使用小鼠王国政府网关（Mouse Kingdom Government Gateway）账户登录。如果您还没有账户，可以免费注册。</p>
-                    <div class="bg-secondary p-4 rounded-lg mb-4">
-                        <h4 class="font-semibold mb-2">需要帮助？</h4>
-                        <p>如果您在登录或使用账户时遇到问题，请联系育儿服务中心：</p>
-                        <p class="mt-2">电话：0800-456-7890</p>
-                        <p>电子邮件：childcare@mousekingdom.gov.mk</p>
-                    </div>
-                    <div class="mt-6">
-                        <button class="btn-primary" onclick="simulateLogin('childcare')">登录账户</button>
-                    </div>
-                `,
-                related: [
-                    { title: '育儿与养育', id: 'childcare-category' },
-                    { title: '儿童福利', id: 'child-benefits' },
-                    { title: '托儿服务', id: 'childcare-services' }
-                ]
-            },
-            'state-pension': {
-                title: '查看国家养老金预测',
-                content: `
-                    <p class="mb-4">通过查看您的国家养老金预测，您可以了解：</p>
-                    <ul class="list-disc pl-6 mb-4 space-y-2">
-                        <li>您将获得多少国家养老金</li>
-                        <li>您何时可以开始领取国家养老金</li>
-                        <li>您是否有资格获得全额国家养老金</li>
-                        <li>如何增加您的国家养老金</li>
-                    </ul>
-                    <h3 class="text-xl font-semibold mb-3">如何查看您的预测</h3>
-                    <p class="mb-4">您需要使用小鼠王国政府网关（Mouse Kingdom Government Gateway）账户登录。如果您还没有账户，可以免费注册。</p>
-                    <div class="bg-secondary p-4 rounded-lg mb-4">
-                        <h4 class="font-semibold mb-2">重要信息</h4>
-                        <p>您的国家养老金预测基于您目前的国家保险供款记录。如果您的情况发生变化，您的预测也可能会变化。</p>
-                    </div>
-                    <div class="mt-6">
-                        <button class="btn-primary" onclick="showPensionForecast()">查看预测</button>
-                    </div>
-                `,
-                related: [
-                    { title: '个人税务账户', id: 'personal-tax' },
-                    { title: '国家保险', id: 'national-insurance' },
-                    { title: '养老金计算器', id: 'pension-calculator' }
-                ]
-            },
-            'find-job': {
-                title: '找工作',
-                content: `
-                    <p class="mb-4">小鼠王国政府的找工作服务可以帮助您：</p>
-                    <ul class="list-disc pl-6 mb-4 space-y-2">
-                        <li>搜索小鼠王国的工作</li>
-                        <li>创建和上传您的简历</li>
-                        <li>设置工作提醒</li>
-                        <li>申请工作</li>
-                        <li>获取职业建议和指导</li>
-                    </ul>
-                    <h3 class="text-xl font-semibold mb-3">如何使用找工作服务</h3>
-                    <p class="mb-4">您可以无需注册即可搜索工作，但要申请工作或使用其他功能，您需要创建一个账户。</p>
-                    <div class="bg-secondary p-4 rounded-lg mb-4">
-                        <h4 class="font-semibold mb-2">需要帮助？</h4>
-                        <p>如果您在使用找工作服务时遇到问题，请联系就业服务中心：</p>
-                        <p class="mt-2">电话：0800-234-5678</p>
-                        <p>电子邮件：jobsearch@mousekingdom.gov.mk</p>
-                    </div>
-                    <div class="mt-6">
-                        <div class="mb-4">
-                            <label for="job-search" class="block mb-2">搜索工作</label>
-                            <div class="flex">
-                                <input type="text" id="job-search" class="border border-gray-300 p-2 flex-grow" placeholder="职位、关键词或公司名称">
-                                <button class="btn-primary ml-2" onclick="searchJobs()">搜索</button>
-                            </div>
-                        </div>
-                        <div class="flex space-x-4">
-                            <button class="btn-primary" onclick="showJobSearchResults()">浏览所有工作</button>
-                            <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400" onclick="showRegistrationForm('job')">创建账户</button>
-                        </div>
-                    </div>
-                `,
-                related: [
-                    { title: '工作、就业与养老金', id: 'working-jobs' },
-                    { title: '职业培训', id: 'training' },
-                    { title: '失业福利', id: 'unemployment-benefits' }
-                ]
-            },
-            'national-insurance': {
-                title: '国家保险',
-                content: `
-                    <p class="mb-4">国家保险是小鼠王国的社会保障体系，它可以帮助您：</p>
-                    <ul class="list-disc pl-6 mb-4 space-y-2">
-                        <li>获得国家养老金</li>
-                        <li>获得某些福利</li>
-                        <li>获得病假工资</li>
-                        <li>获得产假工资</li>
-                    </ul>
-                    <h3 class="text-xl font-semibold mb-3">查看您的国家保险记录</h3>
-                    <p class="mb-4">您可以查看您的国家保险记录，了解：</p>
-                    <ul class="list-disc pl-6 mb-4 space-y-2">
-                        <li>您的国家保险号码</li>
-                        <li>您已缴纳的国家保险供款年数</li>
-                        <li>您是否有任何供款缺口</li>
-                        <li>如何添加更多供款</li>
-                    </ul>
-                    <div class="bg-secondary p-4 rounded-lg mb-4">
-                        <h4 class="font-semibold mb-2">需要帮助？</h4>
-                        <p>如果您在查看或理解您的国家保险记录时遇到问题，请联系国家保险服务中心：</p>
-                        <p class="mt-2">电话：0800-345-6789</p>
-                        <p>电子邮件：nihelp@mousekingdom.gov.mk</p>
-                    </div>
-                    <div class="mt-6">
-                        <button class="btn-primary" onclick="showNIRecord()">查看记录</button>
-                    </div>
-                `,
-                related: [
-                    { title: '个人税务账户', id: 'personal-tax' },
-                    { title: '国家养老金', id: 'state-pension' },
-                    { title: '国家保险计算器', id: 'ni-calculator' }
-                ]
-            },
-            'cost-of-living': {
-                title: '生活成本支持',
-                content: `
-                    <p class="mb-4">小鼠王国政府提供多种支持，帮助您应对生活成本上涨：</p>
-                    <ul class="list-disc pl-6 mb-4 space-y-2">
-                        <li>能源账单支持</li>
-                        <li>生活成本支付</li>
-                        <li>食品和基本必需品支持</li>
-                        <li>住房成本支持</li>
-                        <li>交通成本支持</li>
-                    </ul>
-                    <h3 class="text-xl font-semibold mb-3">您可能有资格获得的支持</h3>
-                    <p class="mb-4">根据您的情况，您可能有资格获得以下一项或多项支持：</p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">能源账单支持</h4>
-                            <p>高达£400的能源账单折扣，分6个月支付。</p>
-                        </div>
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">生活成本支付</h4>
-                            <p>高达£650的一次性支付，分两期。</p>
-                        </div>
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">冬季燃料支付</h4>
-                            <p>针对65岁以上人士的额外支持。</p>
-                        </div>
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">住房支持</h4>
-                            <p>帮助支付租金或抵押贷款利息。</p>
-                        </div>
-                    </div>
-                    <div class="mt-6">
-                        <button class="btn-primary" onclick="showCostOfLivingSupportChecker()">查看您有资格获得的支持</button>
-                    </div>
-                `,
-                related: [
-                    { title: '卢yu鼠案件专案组', id: 'luyu-case' },
-                    { title: '住房福利', id: 'housing-benefit' },
-                    { title: '能源支持', id: 'energy-support' }
-                ]
-            },
-            'passport-application': {
-                title: '护照申请',
-                content: `
-                    <p class="mb-4">小鼠王国护照是您在国际旅行时的官方身份证明。您可以申请新护照、更新现有护照或更换丢失或被盗的护照。</p>
-                    
-                    <h3 class="text-xl font-semibold mb-3">申请护照的类型</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">成人护照</h4>
-                            <p>适用于16岁及以上的小鼠王国公民，有效期为10年。</p>
-                        </div>
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">儿童护照</h4>
-                            <p>适用于16岁以下的小鼠王国公民，有效期为5年。</p>
-                        </div>
-                    </div>
-                    
-                    <h3 class="text-xl font-semibold mb-3">申请流程</h3>
-                    <ol class="list-decimal pl-6 mb-6 space-y-2">
+                    <h3 class="text-xl font-bold mb-2">申请流程</h3>
+                    <ol class="list-decimal pl-5 mb-4">
                         <li>在线填写申请表</li>
-                        <li>上传符合要求的照片</li>
-                        <li>支付申请费用</li>
-                        <li>提供身份和公民身份证明</li>
-                        <li>等待处理（通常需要3-4周）</li>
-                        <li>领取您的护照（可选择邮寄或亲自领取）</li>
+                        <li>预约办理时间</li>
+                        <li>前往小鼠王国公民服务中心提交材料</li>
+                        <li>采集生物特征（指纹和照片）</li>
+                        <li>等待制证（通常需要10个工作日）</li>
+                        <li>领取小鼠身份证</li>
                     </ol>
-                    
-                    <h3 class="text-xl font-semibold mb-3">所需文件</h3>
-                    <ul class="list-disc pl-6 mb-6 space-y-2">
-                        <li>出生证明或收养证明</li>
-                        <li>现有护照（如适用）</li>
-                        <li>两张相同的护照照片</li>
-                        <li>居住证明</li>
-                        <li>父母或监护人同意书（如申请人未满16岁）</li>
-                    </ul>
-                    
-                    <div class="bg-secondary p-4 rounded-lg mb-6">
-                        <h4 class="font-semibold mb-2">费用</h4>
-                        <p>成人护照：£75.50</p>
-                        <p>儿童护照：£49</p>
-                    </div>
-                    
                     <div class="mt-6">
-                        <button class="btn-primary" onclick="startPassportApplication()">开始申请</button>
+                        <button class="gov-button" onclick="startOnlineApplication('mouse-id')">
+                            <i class="fa fa-file-text-o mr-2"></i>开始在线申请
+                        </button>
                     </div>
-                `,
-                related: [
-                    { title: '公民身份', id: 'citizenship' },
-                    { title: '签证与移民', id: 'visas-immigration' },
-                    { title: '国际旅行', id: 'international-travel' }
-                ]
+                `
             },
-            'identity-card': {
-                title: '身份证',
+            'mouse-passport': {
+                title: '小鼠护照申请',
                 content: `
-                    <p class="mb-4">小鼠王国身份证是一种官方身份证明文件，可用于证明您的身份和国籍。它在小鼠王国内部使用，不能替代护照用于国际旅行。</p>
-                    
-                    <h3 class="text-xl font-semibold mb-3">申请身份证的条件</h3>
-                    <p class="mb-4">您可以申请小鼠王国身份证，如果您：</p>
-                    <ul class="list-disc pl-6 mb-6 space-y-2">
-                        <li>是小鼠王国公民</li>
-                        <li>年满16岁</li>
-                        <li>在小鼠王国居住</li>
+                    <p class="mb-4">小鼠护照是小鼠王国公民出入境的重要证件，也是国际旅行的身份证明。</p>
+                    <h3 class="text-xl font-bold mb-2">申请条件</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>小鼠王国公民</li>
+                        <li>持有有效小鼠身份证</li>
                     </ul>
-                    
-                    <h3 class="text-xl font-semibold mb-3">申请流程</h3>
-                    <ol class="list-decimal pl-6 mb-6 space-y-2">
-                        <li>在线填写申请表</li>
-                        <li>上传符合要求的照片</li>
-                        <li>预约并前往当地身份服务中心</li>
-                        <li>提供身份和公民身份证明</li>
-                        <li>支付申请费用</li>
-                        <li>等待处理（通常需要2周）</li>
-                        <li>领取您的身份证</li>
+                    <h3 class="text-xl font-bold mb-2">申请材料</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>有效小鼠身份证</li>
+                        <li>近期免冠照片（2寸，白色背景）</li>
+                        <li>填写完整的护照申请表</li>
+                        <li>旧护照（如适用）</li>
+                    </ul>
+                    <h3 class="text-xl font-bold mb-2">申请流程</h3>
+                    <ol class="list-decimal pl-5 mb-4">
+                        <li>在线填写护照申请表</li>
+                        <li>预约办理时间</li>
+                        <li>前往小鼠王国护照中心提交材料</li>
+                        <li>采集生物特征（指纹和照片）</li>
+                        <li>缴纳护照费用</li>
+                        <li>等待制证（通常需要15个工作日）</li>
+                        <li>领取小鼠护照</li>
                     </ol>
-                    
-                    <h3 class="text-xl font-semibold mb-3">所需文件</h3>
-                    <ul class="list-disc pl-6 mb-6 space-y-2">
-                        <li>出生证明或收养证明</li>
-                        <li>护照或其他官方身份证明</li>
-                        <li>两张相同的身份证照片</li>
-                        <li>居住证明</li>
-                    </ul>
-                    
-                    <div class="bg-secondary p-4 rounded-lg mb-6">
-                        <h4 class="font-semibold mb-2">费用</h4>
-                        <p>首次申请：£30</p>
-                        <p>更换：£30</p>
-                        <p>更新：£20</p>
-                    </div>
-                    
                     <div class="mt-6">
-                        <button class="btn-primary" onclick="startIdentityCardApplication()">开始申请</button>
+                        <button class="gov-button" onclick="startOnlineApplication('mouse-passport')">
+                            <i class="fa fa-file-text-o mr-2"></i>开始在线申请
+                        </button>
                     </div>
-                `,
-                related: [
-                    { title: '公民身份', id: 'citizenship' },
-                    { title: '护照申请', id: 'passport-application' },
-                    { title: '国民保险', id: 'national-insurance' }
-                ]
+                `
             },
-            'citizenship': {
-                title: '公民身份',
+            'mouse-tax': {
+                title: '小鼠税务申报',
                 content: `
-                    <p class="mb-4">小鼠王国公民身份授予您在小鼠王国生活和工作的权利，并允许您使用小鼠王国护照旅行。</p>
-                    
-                    <h3 class="text-xl font-semibold mb-3">申请公民身份的途径</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">入籍</h4>
-                            <p>如果您在小鼠王国合法居住满一定年限，可以申请入籍成为小鼠王国公民。</p>
-                        </div>
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">出生地原则</h4>
-                            <p>如果您在小鼠王国出生，您可能自动获得小鼠王国公民身份。</p>
-                        </div>
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">父母或祖父母</h4>
-                            <p>如果您的父母或祖父母是小鼠王国公民，您可能有资格申请公民身份。</p>
-                        </div>
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">婚姻或民事伴侣关系</h4>
-                            <p>如果您与小鼠王国公民结婚或建立民事伴侣关系，您可能有资格申请公民身份。</p>
-                        </div>
-                    </div>
-                    
-                    <h3 class="text-xl font-semibold mb-3">入籍要求</h3>
-                    <p class="mb-4">要通过入籍申请小鼠王国公民身份，您通常需要：</p>
-                    <ul class="list-disc pl-6 mb-6 space-y-2">
-                        <li>在小鼠王国合法居住满5年</li>
-                        <li>在过去12个月中，离境时间不超过90天</li>
-                        <li>通过小鼠王国生活测试</li>
-                        <li>证明您的英语语言能力</li>
-                        <li>表现出良好的品行</li>
+                    <p class="mb-4">小鼠王国个人所得税是根据小鼠居民的收入征收的一种税收，所有有收入的小鼠居民都需要按规定申报和缴纳。</p>
+                    <h3 class="text-xl font-bold mb-2">申报时间</h3>
+                    <p class="mb-4">小鼠王国税务年度为每年4月6日至次年4月5日，税务申报需在每年6月30日前完成。</p>
+                    <h3 class="text-xl font-bold mb-2">申报方式</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>在线申报：通过小鼠王国税务网站进行电子申报</li>
+                        <li>纸质申报：填写纸质申报表并邮寄至小鼠王国税务局</li>
+                        <li>电话申报：通过税务热线进行申报（仅适用于简单税务情况）</li>
                     </ul>
-                    
-                    <div class="bg-secondary p-4 rounded-lg mb-6">
-                        <h4 class="font-semibold mb-2">费用</h4>
-                        <p>成人入籍申请：£1,330</p>
-                        <p>儿童入籍申请：£1,012</p>
-                    </div>
-                    
+                    <h3 class="text-xl font-bold mb-2">所需材料</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>小鼠身份证号码</li>
+                        <li>收入证明（如工资单、银行对账单等）</li>
+                        <li>支出凭证（如慈善捐款、医疗费用等可抵扣项目）</li>
+                        <li>上一年度税务申报表（如适用）</li>
+                    </ul>
                     <div class="mt-6">
-                        <button class="btn-primary" onclick="checkCitizenshipEligibility()">检查资格</button>
+                        <button class="gov-button" onclick="startTaxFiling()">
+                            <i class="fa fa-file-text-o mr-2"></i>开始税务申报
+                        </button>
                     </div>
-                `,
-                related: [
-                    { title: '护照申请', id: 'passport-application' },
-                    { title: '身份证', id: 'identity-card' },
-                    { title: '签证与移民', id: 'visas-immigration' }
-                ]
+                `
             },
-            'housing-benefit': {
-                title: '住房福利',
+            'mouse-health': {
+                title: '小鼠健康服务',
                 content: `
-                    <p class="mb-4">住房福利是小鼠王国政府提供的一项福利，旨在帮助低收入家庭支付部分或全部租金。</p>
-                    
-                    <h3 class="text-xl font-semibold mb-3">资格条件</h3>
-                    <p class="mb-4">您可能有资格获得住房福利，如果您：</p>
-                    <ul class="list-disc pl-6 mb-6 space-y-2">
-                        <li>是小鼠王国居民</li>
-                        <li>支付租金</li>
-                        <li>收入较低或正在领取某些福利</li>
-                        <li>拥有的 savings 不超过一定金额（通常为£16,000）</li>
+                    <p class="mb-4">小鼠王国提供全面的医疗保健服务，包括预防保健、疾病治疗和康复服务。</p>
+                    <h3 class="text-xl font-bold mb-2">医疗服务体系</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>小鼠王国国家医疗服务体系（NHS）</li>
+                        <li>私人医疗服务</li>
+                        <li>专科医疗服务</li>
                     </ul>
-                    
-                    <h3 class="text-xl font-semibold mb-3">您可以获得多少福利</h3>
-                    <p class="mb-4">您可以获得的住房福利金额取决于：</p>
-                    <ul class="list-disc pl-6 mb-6 space-y-2">
-                        <li>您的收入和 savings</li>
-                        <li>您的家庭情况（例如，您是否有伴侣或孩子）</li>
-                        <li>您租住的房产类型和大小</li>
-                        <li>您所在地区的住房费用</li>
+                    <h3 class="text-xl font-bold mb-2">常见健康服务</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>小鼠健康检查</li>
+                        <li>疫苗接种</li>
+                        <li>疾病诊断与治疗</li>
+                        <li>心理健康服务</li>
+                        <li>康复服务</li>
                     </ul>
-                    
-                    <h3 class="text-xl font-semibold mb-3">申请流程</h3>
-                    <ol class="list-decimal pl-6 mb-6 space-y-2">
-                        <li>向您当地的小鼠王国议会申请</li>
-                        <li>提供必要的文件和信息</li>
-                        <li>等待评估（通常需要2-4周）</li>
-                        <li>收到决定通知</li>
+                    <h3 class="text-xl font-bold mb-2">如何获取医疗服务</h3>
+                    <ol class="list-decimal pl-5 mb-4">
+                        <li>注册小鼠家庭医生</li>
+                        <li>预约就诊</li>
+                        <li>如需专科治疗，由家庭医生转诊</li>
+                        <li>紧急情况可直接前往小鼠急救中心</li>
                     </ol>
-                    
-                    <div class="bg-secondary p-4 rounded-lg mb-6">
-                        <h4 class="font-semibold mb-2">需要的信息</h4>
-                        <ul class="list-disc pl-6 space-y-2">
-                            <li>您的国民保险号码</li>
-                            <li>您的收入证明（工资单、银行对账单等）</li>
-                            <li>您的租金协议</li>
-                            <li>您的 savings 和投资详情</li>
-                            <li>您的家庭情况信息</li>
-                        </ul>
-                    </div>
-                    
                     <div class="mt-6">
-                        <button class="btn-primary" onclick="applyForHousingBenefit()">申请住房福利</button>
+                        <button class="gov-button" onclick="findFamilyDoctor()">
+                            <i class="fa fa-search mr-2"></i>查找家庭医生
+                        </button>
                     </div>
-                `,
-                related: [
-                    { title: '卢yu鼠案件专案组', id: 'luyu-case' },
-                    { title: '生活成本支持', id: 'cost-of-living' },
-                    { title: '社会住房', id: 'social-housing' }
-                ]
+                `
             },
-            'social-housing': {
-                title: '社会住房',
+            'mouse-education': {
+                title: '小鼠教育服务',
                 content: `
-                    <p class="mb-4">社会住房是由当地议会或住房协会提供的保障性住房，通常以低于市场的价格出租给有需要的家庭和个人。</p>
-                    
-                    <h3 class="text-xl font-semibold mb-3">资格条件</h3>
-                    <p class="mb-4">您可能有资格申请社会住房，如果您：</p>
-                    <ul class="list-disc pl-6 mb-6 space-y-2">
-                        <li>是小鼠王国居民</li>
-                        <li>有住房需求（例如，目前住房条件差、过度拥挤或不安全）</li>
-                        <li>收入较低</li>
-                        <li>没有足够的 savings 购买自己的住房</li>
+                    <p class="mb-4">小鼠王国提供从幼儿园到高等教育的完整教育体系，确保每个小鼠都能获得优质教育。</p>
+                    <h3 class="text-xl font-bold mb-2">教育体系</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>小鼠幼儿园（3-5岁）</li>
+                        <li>小鼠小学（5-11岁）</li>
+                        <li>小鼠中学（11-16岁）</li>
+                        <li>小鼠大学（18岁以上）</li>
                     </ul>
-                    
-                    <h3 class="text-xl font-semibold mb-3">申请流程</h3>
-                    <ol class="list-decimal pl-6 mb-6 space-y-2">
-                        <li>向您当地的小鼠王国议会申请加入住房登记册</li>
-                        <li>提供必要的文件和信息</li>
-                        <li>等待评估您的需求和优先顺序</li>
-                        <li>收到您在等候名单上的位置通知</li>
-                        <li>当有合适的住房时，您会收到邀请申请</li>
-                        <li>参加看房并提交申请</li>
-                        <li>等待分配决定</li>
+                    <h3 class="text-xl font-bold mb-2">教育资源</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>小鼠学校目录</li>
+                        <li>小鼠教育标准</li>
+                        <li>小鼠学习资源</li>
+                        <li>小鼠奖学金信息</li>
+                    </ul>
+                    <h3 class="text-xl font-bold mb-2">学校申请</h3>
+                    <ol class="list-decimal pl-5 mb-4">
+                        <li>查询当地学校</li>
+                        <li>了解学校招生政策</li>
+                        <li>提交入学申请</li>
+                        <li>参加学校面试（如需要）</li>
+                        <li>接收入学通知</li>
                     </ol>
-                    
-                    <div class="bg-secondary p-4 rounded-lg mb-6">
-                        <h4 class="font-semibold mb-2">需要的信息</h4>
-                        <ul class="list-disc pl-6 space-y-2">
-                            <li>您的国民保险号码</li>
-                            <li>您的收入证明</li>
-                            <li>您当前的住房情况</li>
-                            <li>您的家庭情况信息</li>
-                            <li>任何特殊需求或健康问题</li>
-                        </ul>
-                    </div>
-                    
                     <div class="mt-6">
-                        <button class="btn-primary" onclick="applyForSocialHousing()">申请社会住房</button>
+                        <button class="gov-button" onclick="searchSchools()">
+                            <i class="fa fa-search mr-2"></i>搜索学校
+                        </button>
                     </div>
-                `,
-                related: [
-                    { title: '住房福利', id: 'housing-benefit' },
-                    { title: '卢yu鼠案件专案组', id: 'luyu-case' },
-                    { title: '生活成本支持', id: 'cost-of-living' }
-                ]
+                `
             },
-            'community': {
-                title: '社区参与',
+            'mouse-housing': {
+                title: '小鼠住房服务',
                 content: `
-                    <p class="mb-4">社区参与是小鼠王国民主制度的重要组成部分，它让您有机会参与影响您所在社区的决策和活动。</p>
-                    
-                    <h3 class="text-xl font-semibold mb-3">参与方式</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">地方议会</h4>
-                            <p>参加地方议会会议，了解并参与当地决策。</p>
-                        </div>
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">社区团体</h4>
-                            <p>加入当地社区团体，参与志愿活动和社区项目。</p>
-                        </div>
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">咨询和调查</h4>
-                            <p>参与当地政府和组织的咨询和调查，分享您的观点。</p>
-                        </div>
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">公共会议</h4>
-                            <p>参加公共会议和活动，了解当地问题并表达您的意见。</p>
-                        </div>
-                    </div>
-                    
-                    <h3 class="text-xl font-semibold mb-3">社区项目</h3>
-                    <p class="mb-4">小鼠王国政府支持多种社区项目，包括：</p>
-                    <ul class="list-disc pl-6 mb-6 space-y-2">
-                        <li>社区发展计划</li>
-                        <li>环境改善项目</li>
-                        <li>青年活动和设施</li>
-                        <li>老年人支持服务</li>
-                        <li>文化和体育活动</li>
+                    <p class="mb-4">小鼠王国提供多种住房选择，包括公共住房、私人租赁和自有住房。</p>
+                    <h3 class="text-xl font-bold mb-2">住房类型</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>小鼠王国公共住房</li>
+                        <li>私人租赁住房</li>
+                        <li>自有住房</li>
+                        <li>特殊需求住房（老年小鼠、残疾小鼠等）</li>
                     </ul>
-                    
-                    <div class="bg-secondary p-4 rounded-lg mb-6">
-                        <h4 class="font-semibold mb-2">寻找当地机会</h4>
-                        <p>您可以通过以下方式找到当地的社区参与机会：</p>
-                        <ul class="list-disc pl-6 space-y-2">
-                            <li>访问您当地议会的网站</li>
-                            <li>联系当地社区中心</li>
-                            <li>查看当地志愿者组织</li>
-                            <li>关注社交媒体上的当地群组</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="mt-6">
-                        <button class="btn-primary" onclick="findCommunityOpportunities()">寻找当地机会</button>
-                    </div>
-                `,
-                related: [
-                    { title: '公民身份与居住', id: 'citizenship' },
-                    { title: '投票', id: 'voting' },
-                    { title: '邻里纠纷', id: 'neighbor-disputes' }
-                ]
-            },
-            'neighbor-disputes': {
-                title: '邻里纠纷',
-                content: `
-                    <p class="mb-4">邻里纠纷是日常生活中常见的问题，小鼠王国政府提供多种服务和建议，帮助您和平解决与邻居的分歧。</p>
-                    
-                    <h3 class="text-xl font-semibold mb-3">常见的邻里纠纷类型</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">噪音问题</h4>
-                            <p>包括大声音乐、宠物噪音、装修噪音等。</p>
-                        </div>
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">边界和围栏</h4>
-                            <p>关于财产边界、围栏维护和树木问题的分歧。</p>
-                        </div>
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">停车纠纷</h4>
-                            <p>关于停车位、车辆停放和阻塞通道的问题。</p>
-                        </div>
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2"> antisocial行为</h4>
-                            <p>包括骚扰、威胁、破坏行为和垃圾倾倒等。</p>
-                        </div>
-                    </div>
-                    
-                    <h3 class="text-xl font-semibold mb-3">解决纠纷的步骤</h3>
-                    <ol class="list-decimal pl-6 mb-6 space-y-2">
-                        <li>尝试直接与邻居沟通，友好解决问题</li>
-                        <li>如果直接沟通无效，可以尝试调解</li>
-                        <li>联系当地议会或住房协会寻求帮助</li>
-                        <li>作为最后的手段，可以考虑法律行动</li>
+                    <h3 class="text-xl font-bold mb-2">住房申请</h3>
+                    <ol class="list-decimal pl-5 mb-4">
+                        <li>确定住房需求</li>
+                        <li>了解申请条件</li>
+                        <li>准备申请材料</li>
+                        <li>提交申请</li>
+                        <li>等待审批</li>
+                        <li>看房并签订合同</li>
                     </ol>
-                    
-                    <h3 class="text-xl font-semibold mb-3">获取帮助</h3>
-                    <p class="mb-4">您可以通过以下方式获取帮助解决邻里纠纷：</p>
-                    <ul class="list-disc pl-6 mb-6 space-y-2">
-                        <li>联系当地议会的 antisocial行为团队</li>
-                        <li>寻求专业调解服务</li>
-                        <li>咨询公民咨询局（Citizens Advice）</li>
-                        <li>联系警方处理严重问题</li>
+                    <h3 class="text-xl font-bold mb-2">住房福利</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>小鼠住房补贴</li>
+                        <li>小鼠购房贷款</li>
+                        <li>小鼠房屋修缮补助</li>
                     </ul>
-                    
                     <div class="mt-6">
-                        <button class="btn-primary" onclick="getHelpWithDispute()">获取帮助</button>
+                        <button class="gov-button" onclick="applyForHousing()">
+                            <i class="fa fa-home mr-2"></i>申请住房
+                        </button>
                     </div>
-                `,
-                related: [
-                    { title: '社区参与', id: 'community' },
-                    { title: '犯罪、司法与法律', id: 'crime-justice' },
-                    { title: '住房与社区', id: 'housing-community' }
-                ]
-            },
-            'school-admissions': {
-                title: '学校申请',
-                content: `
-                    <p class="mb-4">小鼠王国的学校申请流程确保每个孩子都能获得适合的教育。了解如何为您的孩子申请小学或中学。</p>
-                    
-                    <h3 class="text-xl font-semibold mb-3">申请时间</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">小学申请</h4>
-                            <p>申请开放时间：9月</p>
-                            <p>申请截止时间：1月15日</p>
-                            <p>结果通知时间：4月16日</p>
-                        </div>
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">中学申请</h4>
-                            <p>申请开放时间：9月</p>
-                            <p>申请截止时间：10月31日</p>
-                            <p>结果通知时间：3月1日</p>
-                        </div>
-                    </div>
-                    
-                    <h3 class="text-xl font-semibold mb-3">申请流程</h3>
-                    <ol class="list-decimal pl-6 mb-6 space-y-2">
-                        <li>研究当地学校，考虑Ofsted评级、成绩和设施</li>
-                        <li>参观学校开放日</li>
-                        <li>通过当地议会的在线系统提交申请</li>
-                        <li>列出您偏好的学校（通常最多3-6所）</li>
-                        <li>等待结果通知</li>
-                        <li>如果需要，提出上诉</li>
-                    </ol>
-                    
-                    <h3 class="text-xl font-semibold mb-3">学校录取标准</h3>
-                    <p class="mb-4">学校使用一系列标准来决定录取，包括：</p>
-                    <ul class="list-disc pl-6 mb-6 space-y-2">
-                        <li>与学校的距离</li>
-                        <li>是否有 siblings 在该校就读</li>
-                        <li>宗教信仰（适用于宗教学校）</li>
-                        <li>特殊教育需求</li>
-                        <li>是否符合特定的入学标准</li>
-                    </ul>
-                    
-                    <div class="mt-6">
-                        <button class="btn-primary" onclick="applyForSchool()">开始申请</button>
-                    </div>
-                `,
-                related: [
-                    { title: '育儿与养育', id: 'childcare' },
-                    { title: '教育与学习', id: 'education' },
-                    { title: '儿童福利', id: 'child-benefits' }
-                ]
-            },
-            'student-loans': {
-                title: '学生贷款',
-                content: `
-                    <p class="mb-4">小鼠王国政府提供学生贷款，帮助学生支付高等教育的学费和生活费用。</p>
-                    
-                    <h3 class="text-xl font-semibold mb-3">贷款类型</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">学费贷款</h4>
-                            <p>帮助支付您的学费，直接支付给您的大学或学院。</p>
-                        </div>
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">维护贷款</h4>
-                            <p>帮助支付生活费用，如住宿、食物和书籍。</p>
-                        </div>
-                    </div>
-                    
-                    <h3 class="text-xl font-semibold mb-3">资格条件</h3>
-                    <p class="mb-4">您可能有资格获得学生贷款，如果您：</p>
-                    <ul class="list-disc pl-6 mb-6 space-y-2">
-                        <li>是小鼠王国公民或有定居身份</li>
-                        <li>在小鼠王国的认可高等教育机构学习</li>
-                        <li>攻读第一个本科学位或其他符合条件的课程</li>
-                        <li>满足居住要求</li>
-                    </ul>
-                    
-                    <h3 class="text-xl font-semibold mb-3">申请流程</h3>
-                    <ol class="list-decimal pl-6 mb-6 space-y-2">
-                        <li>在线申请学生贷款</li>
-                        <li>提供必要的个人和课程信息</li>
-                        <li>提供财务信息（如适用）</li>
-                        <li>等待申请批准</li>
-                        <li>签署贷款协议</li>
-                        <li>贷款资金将按学期支付</li>
-                    </ol>
-                    
-                    <h3 class="text-xl font-semibold mb-3">还款</h3>
-                    <p class="mb-4">您需要在以下情况下开始偿还学生贷款：</p>
-                    <ul class="list-disc pl-6 mb-6 space-y-2">
-                        <li>您已经完成或离开课程</li>
-                        <li>您的年收入超过£27,295（2023-24学年）</li>
-                    </ul>
-                    <p class="mb-4">还款金额为您收入超过阈值部分的9%。如果您的收入低于阈值，您不需要还款。</p>
-                    
-                    <div class="mt-6">
-                        <button class="btn-primary" onclick="applyForStudentLoan()">申请学生贷款</button>
-                    </div>
-                `,
-                related: [
-                    { title: '教育与学习', id: 'education' },
-                    { title: '成人教育', id: 'adult-education' },
-                    { title: '找工作', id: 'find-job' }
-                ]
-            },
-            'apprenticeships': {
-                title: '学徒制',
-                content: `
-                    <p class="mb-4">小鼠王国的学徒制是一种结合工作和学习的职业培训方式，让您在获得实际工作经验的同时学习新技能。</p>
-                    
-                    <h3 class="text-xl font-semibold mb-3">学徒制类型</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2"> intermediate 学徒制</h4>
-                            <p>相当于5级学历，通常需要1-2年完成。</p>
-                        </div>
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2"> advanced 学徒制</h4>
-                            <p>相当于6级学历，通常需要2年完成。</p>
-                        </div>
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2"> higher 学徒制</h4>
-                            <p>相当于7-8级学历，等同于 foundation degree 或 bachelor's degree。</p>
-                        </div>
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2"> degree 学徒制</h4>
-                            <p>相当于9-10级学历，等同于 bachelor's degree 或 master's degree。</p>
-                        </div>
-                    </div>
-                    
-                    <h3 class="text-xl font-semibold mb-3">学徒制的好处</h3>
-                    <ul class="list-disc pl-6 mb-6 space-y-2">
-                        <li>获得有价值的工作经验</li>
-                        <li>学习实用技能</li>
-                        <li>获得行业认可的资格</li>
-                        <li>赚取工资（至少达到学徒最低工资）</li>
-                        <li>大多数培训费用由政府和雇主支付</li>
-                    </ul>
-                    
-                    <h3 class="text-xl font-semibold mb-3">申请流程</h3>
-                    <ol class="list-decimal pl-6 mb-6 space-y-2">
-                        <li>搜索学徒制机会</li>
-                        <li>准备您的申请和CV</li>
-                        <li>申请感兴趣的学徒制职位</li>
-                        <li>参加面试</li>
-                        <li>如果成功，与雇主签订学徒制协议</li>
-                        <li>开始您的学徒制</li>
-                    </ol>
-                    
-                    <div class="mt-6">
-                        <button class="btn-primary" onclick="searchApprenticeships()">搜索学徒制机会</button>
-                    </div>
-                `,
-                related: [
-                    { title: '教育与学习', id: 'education' },
-                    { title: '找工作', id: 'find-job' },
-                    { title: '成人教育', id: 'adult-education' }
-                ]
-            },
-            'adult-education': {
-                title: '成人教育',
-                content: `
-                    <p class="mb-4">小鼠王国提供多种成人教育和技能培训机会，帮助您发展新技能、提升就业前景或追求个人兴趣。</p>
-                    
-                    <h3 class="text-xl font-semibold mb-3">课程类型</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">基础技能</h4>
-                            <p>包括识字、算术和英语语言课程。</p>
-                        </div>
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">职业资格</h4>
-                            <p>为特定行业或职业提供的培训和资格。</p>
-                        </div>
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">高等教育</h4>
-                            <p>包括大学课程、foundation degrees 和 HNC/HND。</p>
-                        </div>
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">兴趣课程</h4>
-                            <p>为个人兴趣和爱好提供的课程，如艺术、音乐和语言。</p>
-                        </div>
-                    </div>
-                    
-                    <h3 class="text-xl font-semibold mb-3">资金支持</h3>
-                    <p class="mb-4">您可能有资格获得资金支持来支付成人教育课程的费用，包括：</p>
-                    <ul class="list-disc pl-6 mb-6 space-y-2">
-                        <li>Advanced Learner Loans</li>
-                        <li>资助名额</li>
-                        <li>就业和技能资助</li>
-                        <li>工会学习基金</li>
-                    </ul>
-                    
-                    <h3 class="text-xl font-semibold mb-3">学习方式</h3>
-                    <p class="mb-4">成人教育课程提供多种学习方式，包括：</p>
-                    <ul class="list-disc pl-6 mb-6 space-y-2">
-                        <li>全日制学习</li>
-                        <li>兼职学习</li>
-                        <li>在线和远程学习</li>
-                        <li>工作场所学习</li>
-                        <li>晚间和周末课程</li>
-                    </ul>
-                    
-                    <div class="mt-6">
-                        <button class="btn-primary" onclick="searchAdultEducationCourses()">搜索成人教育课程</button>
-                    </div>
-                `,
-                related: [
-                    { title: '教育与学习', id: 'education' },
-                    { title: '学徒制', id: 'apprenticeships' },
-                    { title: '找工作', id: 'find-job' }
-                ]
+                `
             }
         };
-        
-        // 分类数据
-        const categoryData = {
+
+        const serviceCategories = {
             'benefits': {
-                title: '福利',
-                description: '了解您可能有资格获得的福利，包括申请流程和资格标准。'
-            },
-            'births-deaths': {
-                title: '出生、死亡、婚姻与护理',
-                description: '关于出生登记、死亡登记、婚姻和民事伴侣关系以及长期护理的信息和服务。'
-            },
-            'business': {
-                title: '商业与自雇',
-                description: '为企业主和自雇人士提供的工具、指导和支持。'
-            },
-            'childcare': {
-                title: '育儿与养育',
-                description: '关于分娩、寄养、收养、儿童福利、托儿服务和学校的信息。'
-            },
-            'citizenship': {
-                title: '公民身份与居住',
-                description: '关于投票、社区参与、在小鼠王国生活和国际项目的信息。'
-            },
-            'crime-justice': {
-                title: '犯罪、司法与法律',
-                description: '关于法律程序、法院和警察的信息。'
-            },
-            'disabled-people': {
-                title: '残障人士',
-                description: '关于照顾者、权利、福利和平等法案的信息和支持。'
-            },
-            'driving-transport': {
-                title: '驾驶与交通',
-                description: '关于车辆税、车辆年检和驾驶执照的信息和服务。'
+                title: '小鼠福利',
+                content: `
+                    <p class="mb-4">小鼠王国提供多种福利，帮助小鼠居民应对生活中的各种情况。</p>
+                    <h3 class="text-xl font-bold mb-2">主要福利项目</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>小鼠养老金</li>
+                        <li>小鼠失业救济</li>
+                        <li>小鼠家庭补贴</li>
+                        <li>小鼠残疾补助</li>
+                        <li>小鼠住房补贴</li>
+                    </ul>
+                    <h3 class="text-xl font-bold mb-2">福利申请</h3>
+                    <p class="mb-4">您可以通过以下方式申请小鼠王国福利：</p>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>在线申请：通过小鼠王国福利网站</li>
+                        <li>电话申请：拨打小鼠福利热线</li>
+                        <li>线下申请：前往当地福利办公室</li>
+                    </ul>
+                    <div class="mt-6">
+                        <button class="gov-button" onclick="checkBenefitEligibility()">
+                            <i class="fa fa-check-circle mr-2"></i>检查福利资格
+                        </button>
+                    </div>
+                `
             },
             'education': {
-                title: '教育与学习',
-                description: '关于学生贷款、入学和学徒制的信息。'
+                title: '小鼠教育',
+                content: `
+                    <p class="mb-4">小鼠王国提供从幼儿园到高等教育的完整教育体系，确保每个小鼠都能获得优质教育。</p>
+                    <h3 class="text-xl font-bold mb-2">教育阶段</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>小鼠幼儿园（3-5岁）</li>
+                        <li>小鼠小学（5-11岁）</li>
+                        <li>小鼠中学（11-16岁）</li>
+                        <li>小鼠大学（18岁以上）</li>
+                    </ul>
+                    <h3 class="text-xl font-bold mb-2">教育资源</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>小鼠学校目录</li>
+                        <li>小鼠教育标准</li>
+                        <li>小鼠学习资源</li>
+                        <li>小鼠奖学金信息</li>
+                    </ul>
+                    <div class="mt-6">
+                        <button class="gov-button" onclick="searchSchools()">
+                            <i class="fa fa-search mr-2"></i>搜索学校
+                        </button>
+                    </div>
+                `
+            },
+            'health': {
+                title: '小鼠健康',
+                content: `
+                    <p class="mb-4">小鼠王国提供全面的医疗保健服务，包括预防保健、疾病治疗和康复服务。</p>
+                    <h3 class="text-xl font-bold mb-2">医疗服务</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>小鼠家庭医生服务</li>
+                        <li>小鼠医院服务</li>
+                        <li>小鼠专科医疗服务</li>
+                        <li>小鼠心理健康服务</li>
+                    </ul>
+                    <h3 class="text-xl font-bold mb-2">健康资源</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>小鼠健康指南</li>
+                        <li>小鼠疫苗接种计划</li>
+                        <li>小鼠健康检查</li>
+                    </ul>
+                    <div class="mt-6">
+                        <button class="gov-button" onclick="findFamilyDoctor()">
+                            <i class="fa fa-search mr-2"></i>查找家庭医生
+                        </button>
+                    </div>
+                `
+            },
+            'housing': {
+                title: '小鼠住房',
+                content: `
+                    <p class="mb-4">小鼠王国提供多种住房选择，包括公共住房、私人租赁和自有住房。</p>
+                    <h3 class="text-xl font-bold mb-2">住房类型</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>小鼠王国公共住房</li>
+                        <li>私人租赁住房</li>
+                        <li>自有住房</li>
+                        <li>特殊需求住房</li>
+                    </ul>
+                    <h3 class="text-xl font-bold mb-2">住房服务</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>小鼠住房申请</li>
+                        <li>小鼠住房补贴</li>
+                        <li>小鼠房屋修缮</li>
+                    </ul>
+                    <div class="mt-6">
+                        <button class="gov-button" onclick="applyForHousing()">
+                            <i class="fa fa-home mr-2"></i>申请住房
+                        </button>
+                    </div>
+                `
+            },
+            'tax': {
+                title: '小鼠税务',
+                content: `
+                    <p class="mb-4">小鼠王国税务系统包括个人所得税、增值税和企业税等。</p>
+                    <h3 class="text-xl font-bold mb-2">主要税种</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>小鼠个人所得税</li>
+                        <li>小鼠增值税</li>
+                        <li>小鼠企业税</li>
+                        <li>小鼠房产税</li>
+                    </ul>
+                    <h3 class="text-xl font-bold mb-2">税务服务</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>小鼠税务申报</li>
+                        <li>小鼠税务查询</li>
+                        <li>小鼠税务咨询</li>
+                    </ul>
+                    <div class="mt-6">
+                        <button class="gov-button" onclick="startTaxFiling()">
+                            <i class="fa fa-file-text-o mr-2"></i>开始税务申报
+                        </button>
+                    </div>
+                `
+            },
+            'travel': {
+                title: '小鼠旅行',
+                content: `
+                    <p class="mb-4">小鼠王国提供多种旅行相关服务，包括护照申请、签证办理和旅行建议。</p>
+                    <h3 class="text-xl font-bold mb-2">旅行证件</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>小鼠护照申请</li>
+                        <li>小鼠签证办理</li>
+                        <li>小鼠旅行保险</li>
+                    </ul>
+                    <h3 class="text-xl font-bold mb-2">旅行信息</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>小鼠王国边境信息</li>
+                        <li>国际旅行建议</li>
+                        <li>小鼠旅行健康指南</li>
+                    </ul>
+                    <div class="mt-6">
+                        <button class="gov-button" onclick="applyForPassport()">
+                            <i class="fa fa-passport mr-2"></i>申请护照
+                        </button>
+                    </div>
+                `
+            },
+            'employment': {
+                title: '小鼠就业',
+                content: `
+                    <p class="mb-4">小鼠王国提供多种就业服务，帮助小鼠居民找到合适的工作。</p>
+                    <h3 class="text-xl font-bold mb-2">就业服务</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>小鼠工作搜索</li>
+                        <li>小鼠职业培训</li>
+                        <li>小鼠就业咨询</li>
+                        <li>小鼠创业支持</li>
+                    </ul>
+                    <h3 class="text-xl font-bold mb-2">工作权益</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>小鼠工作时间</li>
+                        <li>小鼠工资标准</li>
+                        <li>小鼠工作环境</li>
+                        <li>小鼠职业安全</li>
+                    </ul>
+                    <div class="mt-6">
+                        <button class="gov-button" onclick="searchJobs()">
+                            <i class="fa fa-search mr-2"></i>搜索工作
+                        </button>
+                    </div>
+                `
+            },
+            'crime': {
+                title: '小鼠安全',
+                content: `
+                    <p class="mb-4">小鼠王国致力于维护国家安全和小鼠居民的安全。</p>
+                    <h3 class="text-xl font-bold mb-2">安全服务</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>小鼠警察服务</li>
+                        <li>小鼠消防服务</li>
+                        <li>小鼠急救服务</li>
+                        <li>小鼠边境安全</li>
+                    </ul>
+                    <h3 class="text-xl font-bold mb-2">安全资源</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>小鼠犯罪预防</li>
+                        <li>小鼠安全指南</li>
+                        <li>小鼠紧急情况处理</li>
+                    </ul>
+                    <div class="mt-6">
+                        <button class="gov-button" onclick="reportCrime()">
+                            <i class="fa fa-exclamation-triangle mr-2"></i>报告犯罪
+                        </button>
+                    </div>
+                `
             }
         };
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            
-            // Search functionality
-            const searchForm = document.querySelector('.search-form');
-            const searchInput = document.getElementById('search');
-            
-            searchForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const searchTerm = searchInput.value.trim();
-                
-                if (searchTerm) {
-                    // 模拟搜索结果
-                    alert(`搜索结果: 找到 ${Math.floor(Math.random() * 20) + 1} 个与 "${searchTerm}" 相关的结果`);
-                    // 清空搜索输入框
-                    searchInput.value = '';
-                } else {
-                    alert('请输入搜索关键词');
+
+        const newsData = {
+            'skills-competition': {
+                title: '小鼠王国举办第五届小鼠技能大赛',
+                content: `
+                    <p class="mb-4">小鼠王国将于下月举办第五届小鼠技能大赛，欢迎各年龄段小鼠报名参加，展示自己的特殊技能。</p>
+                    <h3 class="text-xl font-bold mb-2">比赛信息</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>比赛时间：2025年12月15日-12月20日</li>
+                        <li>比赛地点：小鼠王国国家体育馆</li>
+                        <li>参赛对象：所有小鼠王国居民</li>
+                        <li>比赛类别：
+                            <ul class="list-disc pl-5 mt-2">
+                                <li>小鼠技能类（如爬墙、挖洞、搬运等）</li>
+                                <li>小鼠才艺类（如唱歌、跳舞、表演等）</li>
+                                <li>小鼠智力类（如解谜、记忆、计算等）</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <h3 class="text-xl font-bold mb-2">报名方式</h3>
+                    <p class="mb-4">有意参加的小鼠可通过以下方式报名：</p>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>在线报名：访问小鼠王国文化体育网站</li>
+                        <li>线下报名：前往当地文化中心</li>
+                        <li>电话报名：拨打小鼠王国文化体育热线</li>
+                    </ul>
+                    <h3 class="text-xl font-bold mb-2">奖项设置</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>各类别金奖：奖金1000小鼠币，奖杯一座</li>
+                        <li>各类别银奖：奖金500小鼠币，奖牌一枚</li>
+                        <li>各类别铜奖：奖金300小鼠币，证书一份</li>
+                        <li>最佳人气奖：奖金200小鼠币，证书一份</li>
+                    </ul>
+                    <div class="mt-6">
+                        <button class="gov-button" onclick="registerForCompetition()">
+                            <i class="fa fa-pencil mr-2"></i>立即报名
+                        </button>
+                    </div>
+                `
+            },
+            'trade-agreement': {
+                title: '小鼠王国与邻国签署贸易合作协议',
+                content: `
+                    <p class="mb-4">小鼠王国与邻国签署新的贸易合作协议，将促进双方经济发展，提高小鼠居民生活水平。</p>
+                    <h3 class="text-xl font-bold mb-2">协议内容</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>降低双方贸易关税，促进商品流通</li>
+                        <li>加强科技合作，共同研发新技术</li>
+                        <li>扩大旅游合作，促进人员往来</li>
+                        <li>建立经济合作区，吸引投资</li>
+                    </ul>
+                    <h3 class="text-xl font-bold mb-2">协议影响</h3>
+                    <p class="mb-4">新的贸易合作协议将对小鼠王国产生以下影响：</p>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>降低进口商品价格，提高小鼠居民购买力</li>
+                        <li>增加出口机会，促进小鼠王国企业发展</li>
+                        <li>创造更多就业机会，降低失业率</li>
+                        <li>促进技术创新，提高小鼠王国科技水平</li>
+                    </ul>
+                    <h3 class="text-xl font-bold mb-2">实施时间</h3>
+                    <p class="mb-4">该贸易合作协议将于2026年1月1日正式生效，有效期为5年。</p>
+                    <div class="mt-6">
+                        <button class="gov-button" onclick="viewTradeAgreementDetails()">
+                            <i class="fa fa-file-text-o mr-2"></i>查看协议详情
+                        </button>
+                    </div>
+                `
+            }
+        };
+
+        // 搜索功能
+        document.getElementById('search-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const searchQuery = document.getElementById('search-input').value.trim();
+            if (searchQuery) {
+                performSearch(searchQuery);
+            }
+        });
+
+        function performSearch(query) {
+            // 隐藏其他内容
+            document.querySelectorAll('main > div').forEach(div => {
+                if (!div.id || div.id !== 'search-results') {
+                    div.classList.add('hidden');
                 }
             });
             
-            // Example of accessibility focus management
-            const skipLink = document.querySelector('.skip-link');
-            const mainContent = document.getElementById('main-content');
+            // 显示搜索结果区域
+            const searchResults = document.getElementById('search-results');
+            searchResults.classList.remove('hidden');
             
-            skipLink.addEventListener('click', function(e) {
-                e.preventDefault();
-                mainContent.focus();
-            });
+            // 设置搜索查询
+            document.getElementById('search-query').textContent = `搜索关键词: "${query}"`;
             
-            // Add focus styles for keyboard navigation
-            const focusableElements = document.querySelectorAll('a, button, input, textarea');
+            // 模拟搜索结果
+            const resultsList = document.getElementById('search-results-list');
+            resultsList.innerHTML = '';
             
-            focusableElements.forEach(element => {
-                element.addEventListener('focus', function() {
-                    this.classList.add('focus-visible');
-                });
+            // 搜索服务
+            const serviceResults = Object.keys(serviceData).filter(key => 
+                serviceData[key].title.toLowerCase().includes(query.toLowerCase()) || 
+                serviceData[key].content.toLowerCase().includes(query.toLowerCase())
+            );
+            
+            // 搜索服务分类
+            const categoryResults = Object.keys(serviceCategories).filter(key => 
+                serviceCategories[key].title.toLowerCase().includes(query.toLowerCase()) || 
+                serviceCategories[key].content.toLowerCase().includes(query.toLowerCase())
+            );
+            
+            // 搜索新闻
+            const newsResults = Object.keys(newsData).filter(key => 
+                newsData[key].title.toLowerCase().includes(query.toLowerCase()) || 
+                newsData[key].content.toLowerCase().includes(query.toLowerCase())
+            );
+            
+            // 显示结果
+            if (serviceResults.length === 0 && categoryResults.length === 0 && newsResults.length === 0) {
+                resultsList.innerHTML = '<p class="text-gov-text-secondary">没有找到与您的搜索匹配的结果。请尝试其他关键词。</p>';
+            } else {
+                if (serviceResults.length > 0) {
+                    const serviceSection = document.createElement('div');
+                    serviceSection.innerHTML = `
+                        <h3 class="text-xl font-bold mb-4">服务</h3>
+                        <div class="space-y-4">
+                            ${serviceResults.map(key => `
+                                <div class="gov-card">
+                                    <h4 class="text-lg font-bold">${serviceData[key].title}</h4>
+                                    <p class="mt-2 text-gov-text-secondary">${serviceData[key].content.substring(0, 150)}...</p>
+                                    <a href="#" class="gov-link mt-2 inline-block" onclick="showServiceDetails('${key}')">查看详情</a>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    resultsList.appendChild(serviceSection);
+                }
                 
-                element.addEventListener('blur', function() {
-                    this.classList.remove('focus-visible');
-                });
+                if (categoryResults.length > 0) {
+                    const categorySection = document.createElement('div');
+                    categorySection.innerHTML = `
+                        <h3 class="text-xl font-bold mb-4 mt-8">服务分类</h3>
+                        <div class="space-y-4">
+                            ${categoryResults.map(key => `
+                                <div class="gov-card">
+                                    <h4 class="text-lg font-bold">${serviceCategories[key].title}</h4>
+                                    <p class="mt-2 text-gov-text-secondary">${serviceCategories[key].content.substring(0, 150)}...</p>
+                                    <a href="#" class="gov-link mt-2 inline-block" onclick="showServiceCategory('${key}')">查看详情</a>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    resultsList.appendChild(categorySection);
+                }
+                
+                if (newsResults.length > 0) {
+                    const newsSection = document.createElement('div');
+                    newsSection.innerHTML = `
+                        <h3 class="text-xl font-bold mb-4 mt-8">新闻</h3>
+                        <div class="space-y-4">
+                            ${newsResults.map(key => `
+                                <div class="gov-card">
+                                    <h4 class="text-lg font-bold">${newsData[key].title}</h4>
+                                    <p class="mt-2 text-gov-text-secondary">${newsData[key].content.substring(0, 150)}...</p>
+                                    <a href="#" class="gov-link mt-2 inline-block" onclick="showNewsDetails('${key}')">查看详情</a>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    resultsList.appendChild(newsSection);
+                }
+            }
+        }
+
+        function hideSearchResults() {
+            document.getElementById('search-results').classList.add('hidden');
+            document.querySelectorAll('main > div:not(#search-results)').forEach(div => {
+                div.classList.remove('hidden');
             });
-            
-            // Mobile menu toggle (if needed)
-            // This would be implemented if we had a hamburger menu for mobile
-            
-            // Service card interactions
-            const serviceCards = document.querySelectorAll('.service-card');
-            
-            serviceCards.forEach(card => {
-                card.addEventListener('click', function(e) {
-                    // If clicking a link inside the card, let it behave normally
-                    if (e.target.tagName === 'A' || e.target.parentElement.tagName === 'A') {
-                        return;
+        }
+
+        // 服务详情功能
+        function showServiceDetails(serviceId) {
+            if (serviceData[serviceId]) {
+                // 隐藏其他内容
+                document.querySelectorAll('main > div').forEach(div => {
+                    if (!div.id || div.id !== 'service-details') {
+                        div.classList.add('hidden');
                     }
-                    
-                    // Otherwise, click the first link in the card
-                    const link = this.querySelector('.service-link');
-                    if (link) {
-                        link.click();
+                });
+                
+                // 显示服务详情
+                const serviceDetails = document.getElementById('service-details');
+                serviceDetails.classList.remove('hidden');
+                
+                // 设置服务标题和内容
+                document.getElementById('service-title').textContent = serviceData[serviceId].title;
+                document.getElementById('service-content').innerHTML = serviceData[serviceId].content;
+            }
+        }
+
+        function hideServiceDetails() {
+            document.getElementById('service-details').classList.add('hidden');
+            document.querySelectorAll('main > div:not(#service-details)').forEach(div => {
+                div.classList.remove('hidden');
+            });
+        }
+
+        // 服务分类功能
+        function showServiceCategory(categoryId) {
+            if (serviceCategories[categoryId]) {
+                // 隐藏其他内容
+                document.querySelectorAll('main > div').forEach(div => {
+                    if (!div.id || div.id !== 'service-details') {
+                        div.classList.add('hidden');
                     }
                 });
                 
-                // Add hover effect
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-3px)';
-                    this.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
-                    this.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+                // 显示服务详情
+                const serviceDetails = document.getElementById('service-details');
+                serviceDetails.classList.remove('hidden');
+                
+                // 设置服务标题和内容
+                document.getElementById('service-title').textContent = serviceCategories[categoryId].title;
+                document.getElementById('service-content').innerHTML = serviceCategories[categoryId].content;
+            }
+        }
+
+        // 新闻详情功能
+        function showNewsDetails(newsId) {
+            if (newsData[newsId]) {
+                // 隐藏其他内容
+                document.querySelectorAll('main > div').forEach(div => {
+                    if (!div.id || div.id !== 'service-details') {
+                        div.classList.add('hidden');
+                    }
                 });
                 
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0)';
-                    this.style.boxShadow = 'none';
-                });
+                // 显示服务详情
+                const serviceDetails = document.getElementById('service-details');
+                serviceDetails.classList.remove('hidden');
+                
+                // 设置服务标题和内容
+                document.getElementById('service-title').textContent = newsData[newsId].title;
+                document.getElementById('service-content').innerHTML = newsData[newsId].content;
+            }
+        }
+
+        // 受害者救助表单功能
+        function showVictimForm() {
+            // 隐藏其他内容
+            document.querySelectorAll('main > div').forEach(div => {
+                if (!div.id || div.id !== 'victim-form') {
+                    div.classList.add('hidden');
+                }
             });
             
-            // 页脚链接点击事件
-            const footerLinks = document.querySelectorAll('footer a');
-            footerLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const linkText = this.textContent.trim();
-                    alert(`您点击了"${linkText}"链接。在实际网站中，这将导航到相应的页面。`);
-                });
+            // 显示表单
+            document.getElementById('victim-form').classList.remove('hidden');
+        }
+
+        function hideVictimForm() {
+            document.getElementById('victim-form').classList.add('hidden');
+            document.querySelectorAll('main > div:not(#victim-form)').forEach(div => {
+                div.classList.remove('hidden');
             });
+        }
+
+        // 表单提交处理
+        document.getElementById('victim-assistance-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 获取表单数据
+            const name = document.getElementById('victim-name').value;
+            const age = document.getElementById('victim-age').value;
+            const contact = document.getElementById('victim-contact').value;
+            const description = document.getElementById('victim-description').value;
+            
+            // 模拟表单提交
+            alert(`感谢您的提交，${name}！我们的工作人员将尽快与您联系。`);
+            
+            // 重置表单
+            this.reset();
+            
+            // 隐藏表单
+            hideVictimForm();
+        });
+
+        // 其他功能函数
+        function startOnlineApplication(serviceType) {
+            alert('在线申请功能即将开始，请准备好相关材料。');
+        }
+
+        function startTaxFiling() {
+            alert('税务申报系统即将打开，请准备好您的收入证明和相关文件。');
+        }
+
+        function findFamilyDoctor() {
+            alert('正在搜索您附近的家庭医生，请稍候...');
+        }
+
+        function searchSchools() {
+            alert('正在搜索小鼠学校，请稍候...');
+        }
+
+        function applyForHousing() {
+            alert('住房申请系统即将打开，请准备好您的个人信息和收入证明。');
+        }
+
+        function checkBenefitEligibility() {
+            alert('正在检查您的福利资格，请稍候...');
+        }
+
+        function applyForPassport() {
+            alert('护照申请系统即将打开，请准备好您的身份证和照片。');
+        }
+
+        function searchJobs() {
+            alert('正在搜索小鼠工作机会，请稍候...');
+        }
+
+        function reportCrime() {
+            alert('请拨打小鼠王国紧急电话：999，或前往最近的警察局报案。');
+        }
+
+        function registerForCompetition() {
+            alert('感谢您的兴趣！比赛报名系统即将打开。');
+        }
+
+        function viewTradeAgreementDetails() {
+            alert('贸易协议详情文档即将打开，请稍候...');
+        }
+
+        function showAboutSection(section) {
+            alert(`正在加载小鼠王国${section}信息，请稍候...`);
+        }
+
+        function showLegalSection(section) {
+            alert(`正在加载小鼠王国${section}信息，请稍候...`);
+        }
+
+        function showPrivacyPolicy() {
+            alert('正在加载隐私政策，请稍候...');
+        }
+
+        function showTermsOfService() {
+            alert('正在加载使用条款，请稍候...');
+        }
+
+        function showAccessibilityStatement() {
+            alert('正在加载无障碍声明，请稍候...');
+        }
+
+        // 页面加载完成后显示欢迎信息
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('welcome-message').classList.remove('hidden');
+            }, 1000);
         });
         
-        // 服务详情模态框功能
-        function showServiceDetails(serviceId) {
-            const service = serviceData[serviceId];
-            if (!service) {
-                alert('抱歉，该服务信息不存在。');
-                return;
+        // 显示首页
+        function showHomePage(event) {
+            if (event) {
+                event.preventDefault();
             }
             
-            document.getElementById('modal-title').textContent = service.title;
-            document.getElementById('modal-content').innerHTML = service.content;
+            // 隐藏所有内容
+            document.querySelectorAll('main > div').forEach(div => {
+                div.classList.add('hidden');
+            });
             
-            // 添加相关服务
-            const relatedServicesContainer = document.getElementById('modal-related');
-            relatedServicesContainer.innerHTML = '';
-            
-            if (service.related && service.related.length > 0) {
-                service.related.forEach(related => {
-                    const li = document.createElement('li');
-                    li.innerHTML = `<a href="#" class="service-link" onclick="showServiceDetails('${related.id}')">${related.title}</a>`;
-                    relatedServicesContainer.appendChild(li);
-                });
-            } else {
-                relatedServicesContainer.innerHTML = '<p>暂无相关服务</p>';
-            }
-            
-            // 显示模态框
-            document.getElementById('service-modal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; // 防止背景滚动
-        }
-        
-        function closeModal() {
-            document.getElementById('service-modal').classList.add('hidden');
-            document.body.style.overflow = ''; // 恢复背景滚动
-        }
-        
-        // 应用下载模态框功能
-        function showAppDownload(platform) {
-            const modalTitle = document.getElementById('app-modal-title');
-            const modalContent = document.getElementById('app-modal-content');
-            
-            if (platform === 'ios') {
-                modalTitle.textContent = '下载小鼠王国政府应用 (App Store)';
-                modalContent.innerHTML = `
-                    <div class="mb-4">
-                        <i class="fa fa-apple text-6xl text-gray-700"></i>
-                    </div>
-                    <p class="mb-4">小鼠王国政府应用可在 App Store 下载。</p>
-                    <p class="mb-4">需要 iOS 12.0 或更高版本。</p>
-                    <button class="btn-primary" onclick="simulateAppDownload('ios')">
-                        <i class="fa fa-download mr-2"></i> 下载应用
-                    </button>
-                `;
-            } else if (platform === 'android') {
-                modalTitle.textContent = '下载小鼠王国政府应用 (Google Play)';
-                modalContent.innerHTML = `
-                    <div class="mb-4">
-                        <i class="fa fa-android text-6xl text-green-600"></i>
-                    </div>
-                    <p class="mb-4">小鼠王国政府应用可在 Google Play 下载。</p>
-                    <p class="mb-4">需要 Android 8.0 或更高版本。</p>
-                    <button class="btn-primary" onclick="simulateAppDownload('android')">
-                        <i class="fa fa-download mr-2"></i> 下载应用
-                    </button>
-                `;
-            }
-            
-            document.getElementById('app-modal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function closeAppModal() {
-            document.getElementById('app-modal').classList.add('hidden');
-            document.body.style.overflow = '';
-        }
-        
-        // 页面反馈功能
-        function submitFeedback(type) {
-            const feedbackForm = document.getElementById('feedback-form');
-            const feedbackThanks = document.getElementById('feedback-thanks');
-            
-            if (type === 'yes') {
-                // 显示感谢信息
-                feedbackThanks.classList.remove('hidden');
-                // 隐藏反馈按钮
-                document.querySelector('.flex.space-x-4.mb-6').classList.add('hidden');
-                
-                // 模拟提交反馈
-                setTimeout(() => {
-                    alert('感谢您的积极反馈！');
-                }, 1000);
-            } else if (type === 'no') {
-                // 显示反馈表单
-                feedbackForm.classList.remove('hidden');
-            }
-        }
-        
-        function submitFeedbackDetails() {
-            const feedbackText = document.getElementById('feedback-text').value.trim();
-            const feedbackForm = document.getElementById('feedback-form');
-            const feedbackThanks = document.getElementById('feedback-thanks');
-            
-            if (feedbackText) {
-                // 隐藏表单，显示感谢信息
-                feedbackForm.classList.add('hidden');
-                feedbackThanks.classList.remove('hidden');
-                
-                // 模拟提交反馈
-                setTimeout(() => {
-                    alert('感谢您的反馈！我们会认真考虑您的建议。');
-                }, 1000);
-            } else {
-                alert('请输入您的反馈意见。');
-            }
-        }
-        
-        // 分类详情功能
-        function showCategoryDetails(categoryId) {
-            const category = categoryData[categoryId];
-            if (!category) {
-                alert('抱歉，该分类信息不存在。');
-                return;
-            }
-            
-            document.getElementById('modal-title').textContent = category.title;
-            document.getElementById('modal-content').innerHTML = `
-                <p class="mb-6">${category.description}</p>
-                <p class="mb-4">此分类包含以下服务：</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    ${getCategoryServices(categoryId)}
-                </div>
-            `;
-            
-            // 清空相关服务
-            document.getElementById('modal-related').innerHTML = '';
-            
-            // 显示模态框
-            document.getElementById('service-modal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        // 获取分类下的服务
-        function getCategoryServices(categoryId) {
-            // 这里简化处理，实际应用中应该有更复杂的分类逻辑
-            const services = {
-                'benefits': [
-                    { title: '福利资格', id: 'benefits-eligibility' },
-                    { title: '申诉', id: 'benefits-appeals' },
-                    { title: '税收抵免', id: 'tax-credits' },
-                    { title: '卢yu鼠案件专案组', id: 'luyu-case' }
-                ],
-                'births-deaths': [
-                    { title: '育儿', id: 'parenting' },
-                    { title: '民事伴侣关系', id: 'civil-partnerships' },
-                    { title: '离婚', id: 'divorce' },
-                    { title: '持久授权书', id: 'lasting-power' }
-                ],
-                'business': [
-                    { title: '商业工具', id: 'business-tools' },
-                    { title: '指导', id: 'business-guidance' },
-                    { title: '自雇', id: 'self-employed' },
-                    { title: '商业税务', id: 'business-tax' }
-                ],
-                'childcare': [
-                    { title: '分娩', id: 'giving-birth' },
-                    { title: '寄养', id: 'fostering' },
-                    { title: '收养', id: 'adopting' },
-                    { title: '儿童福利', id: 'child-benefits' }
-                ],
-                'citizenship': [
-                    { title: '投票', id: 'voting' },
-                    { title: '社区参与', id: 'community' },
-                    { title: '在小鼠王国生活', id: 'life-in-uk' },
-                    { title: '国际项目', id: 'international-projects' }
-                ],
-                'crime-justice': [
-                    { title: '法律程序', id: 'legal-processes' },
-                    { title: '法院', id: 'courts' },
-                    { title: '警察', id: 'police' }
-                ],
-                'disabled-people': [
-                    { title: '照顾者', id: 'carers' },
-                    { title: '权利', id: 'disability-rights' },
-                    { title: '福利', id: 'disability-benefits' },
-                    { title: '平等法案', id: 'equality-act' }
-                ],
-                'driving-transport': [
-                    { title: '车辆税', id: 'vehicle-tax' },
-                    { title: '车辆年检', id: 'mot' },
-                    { title: '驾驶执照', id: 'driving-licences' }
-                ],
-                'education': [
-                    { title: '学生贷款', id: 'student-loans' },
-                    { title: '入学', id: 'admissions' },
-                    { title: '学徒制', id: 'apprenticeships' }
-                ]
-            };
-            
-            const categoryServices = services[categoryId] || [];
-            
-            return categoryServices.map(service => `
-                <div class="border border-gray-200 p-4 rounded-lg">
-                    <h4 class="font-semibold mb-2">
-                        <a href="#" class="service-link" onclick="showServiceDetails('${service.id}')">${service.title}</a>
-                    </h4>
-                    <p class="text-sm text-text-secondary">点击查看详情</p>
-                </div>
-            `).join('');
-        }
-        
-        // 模拟登录功能
-        function simulateLogin(serviceType) {
-            // 显示登录表单
-            document.getElementById('modal-content').innerHTML = `
-                <h3 class="text-xl font-semibold mb-4">登录</h3>
-                <p class="mb-4">请使用您的小鼠王国政府网关账户登录。</p>
-                <div class="mb-4">
-                    <label for="username" class="block mb-2">用户名</label>
-                    <input type="text" id="username" class="border border-gray-300 p-2 w-full" placeholder="您的用户名">
-                </div>
-                <div class="mb-4">
-                    <label for="password" class="block mb-2">密码</label>
-                    <input type="password" id="password" class="border border-gray-300 p-2 w-full" placeholder="您的密码">
-                </div>
-                <div class="mb-6 flex justify-between">
-                    <div>
-                        <input type="checkbox" id="remember" class="mr-2">
-                        <label for="remember">记住我</label>
-                    </div>
-                    <a href="#" class="service-link">忘记密码？</a>
-                </div>
-                <div class="flex space-x-4">
-                    <button class="btn-primary" onclick="handleLogin('${serviceType}')">登录</button>
-                    <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400" onclick="showRegistrationForm('${serviceType}')">注册</button>
-                </div>
-            `;
-        }
-        
-        // 处理登录
-        function handleLogin(serviceType) {
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value.trim();
-            
-            if (!username || !password) {
-                alert('请输入用户名和密码。');
-                return;
-            }
-            
-            // 模拟登录成功
-            alert(`登录成功！正在为您加载${getServiceName(serviceType)}服务...`);
-            
-            // 关闭模态框
-            setTimeout(() => {
-                closeModal();
-            }, 1500);
-        }
-        
-        // 获取服务名称
-        function getServiceName(serviceType) {
-            const serviceNames = {
-                'tax': '小鼠税务局账户',
-                'visa': '电子签证',
-                'uc': '卢yu鼠案件专案组',
-                'personal-tax': '个人税务账户',
-                'childcare': '育儿账户',
-                'job': '找工作'
-            };
-            
-            return serviceNames[serviceType] || '服务';
-        }
-        
-        // 显示注册表单
-        function showRegistrationForm(serviceType) {
-            document.getElementById('modal-content').innerHTML = `
-                <h3 class="text-xl font-semibold mb-4">创建小鼠王国政府网关账户</h3>
-                <p class="mb-4">您需要创建一个政府网关账户才能使用此服务。</p>
-                <div class="mb-4">
-                    <label for="email" class="block mb-2">电子邮件地址</label>
-                    <input type="email" id="email" class="border border-gray-300 p-2 w-full" placeholder="您的电子邮件地址">
-                </div>
-                <div class="mb-4">
-                    <label for="phone" class="block mb-2">手机号码</label>
-                    <input type="tel" id="phone" class="border border-gray-300 p-2 w-full" placeholder="您的手机号码">
-                </div>
-                <div class="mb-6">
-                    <p class="mb-2">我们将发送验证码到您提供的电子邮件或手机上。</p>
-                    <p class="text-sm text-text-secondary">您需要能够访问此电子邮件或手机来完成注册。</p>
-                </div>
-                <div class="flex space-x-4">
-                    <button class="btn-primary" onclick="sendVerificationCode('${serviceType}')">继续</button>
-                    <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400" onclick="showServiceDetails('${serviceType}')">返回</button>
-                </div>
-            `;
-        }
-        
-        // 发送验证码
-        function sendVerificationCode(serviceType) {
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            
-            if (!email && !phone) {
-                alert('请输入电子邮件地址或手机号码。');
-                return;
-            }
-            
-            // 模拟发送验证码
-            alert('验证码已发送！请查收您的电子邮件或短信。');
-            
-            // 显示验证码输入表单
-            document.getElementById('modal-content').innerHTML = `
-                <h3 class="text-xl font-semibold mb-4">验证您的身份</h3>
-                <p class="mb-4">我们已向您的${email ? '电子邮件' : '手机'}发送了验证码。</p>
-                <div class="mb-4">
-                    <label for="verification-code" class="block mb-2">验证码</label>
-                    <input type="text" id="verification-code" class="border border-gray-300 p-2 w-full" placeholder="输入验证码">
-                </div>
-                <div class="mb-6">
-                    <p class="text-sm text-text-secondary">验证码将在15分钟后过期。</p>
-                    <a href="#" class="service-link mt-2 inline-block">重新发送验证码</a>
-                </div>
-                <div class="flex space-x-4">
-                    <button class="btn-primary" onclick="verifyCode('${serviceType}')">验证</button>
-                    <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400" onclick="showRegistrationForm('${serviceType}')">返回</button>
-                </div>
-            `;
-        }
-        
-        // 验证验证码
-        function verifyCode(serviceType) {
-            const code = document.getElementById('verification-code').value.trim();
-            
-            if (!code) {
-                alert('请输入验证码。');
-                return;
-            }
-            
-            // 模拟验证成功
-            alert('验证成功！正在完成您的注册...');
-            
-            // 显示注册成功消息
-            setTimeout(() => {
-                document.getElementById('modal-content').innerHTML = `
-                    <div class="text-center">
-                        <div class="mb-4">
-                            <i class="fa fa-check-circle text-6xl text-success"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-4">注册成功！</h3>
-                        <p class="mb-6">您的小鼠王国政府网关账户已创建。</p>
-                        <button class="btn-primary" onclick="simulateLogin('${serviceType}')">继续登录</button>
-                    </div>
-                `;
-            }, 1500);
-        }
-        
-
-        
-        // 显示养老金预测
-        function showPensionForecast() {
-            document.getElementById('modal-content').innerHTML = `
-                <h3 class="text-xl font-semibold mb-4">国家养老金预测</h3>
-                <p class="mb-4">要查看您的国家养老金预测，您需要登录您的个人税务账户。</p>
-                <div class="bg-secondary p-4 rounded-lg mb-6">
-                    <h4 class="font-semibold mb-2">需要的信息</h4>
-                    <p>您需要您的国民保险号码和个人税务账户登录信息。</p>
-                </div>
-                <div class="flex space-x-4">
-                    <button class="btn-primary" onclick="simulateLogin('personal-tax')">登录</button>
-                    <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400" onclick="showServiceDetails('state-pension')">返回</button>
-                </div>
-            `;
-        }
-        
-        // 搜索工作
-        function searchJobs() {
-            const searchTerm = document.getElementById('job-search').value.trim();
-            
-            if (!searchTerm) {
-                alert('请输入职位、关键词或公司名称。');
-                return;
-            }
-            
-            // 模拟搜索结果
-            alert(`搜索结果: 找到 ${Math.floor(Math.random() * 20) + 1} 个与 "${searchTerm}" 相关的职位`);
-            
-            // 显示搜索结果
-            showJobSearchResults();
-        }
-        
-        // 显示工作搜索结果
-        function showJobSearchResults() {
-            document.getElementById('modal-content').innerHTML = `
-                <h3 class="text-xl font-semibold mb-4">工作搜索结果</h3>
-                <div class="mb-6">
-                    <div class="flex justify-between items-center mb-4">
-                        <p>显示 1-10 个结果，共 24 个</p>
-                        <div class="flex space-x-2">
-                            <select class="border border-gray-300 p-2">
-                                <option>最新发布</option>
-                                <option>薪资最高</option>
-                                <option>距离最近</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <!-- 工作列表 -->
-                    <div class="space-y-4">
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold text-lg mb-2">软件工程师</h4>
-                            <p class="text-primary font-semibold mb-2">£35,000 - £45,000 每年</p>
-                            <p class="mb-2"><i class="fa fa-map-marker mr-2"></i> 小鼠王国，首都</p>
-                            <p class="mb-2"><i class="fa fa-building mr-2"></i> 小鼠科技有限公司</p>
-                            <p class="text-sm text-text-secondary mb-4"><i class="fa fa-clock-o mr-2"></i> 2小时前发布</p>
-                            <div class="flex space-x-4">
-                                <button class="btn-primary">申请</button>
-                                <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400">保存</button>
-                            </div>
-                        </div>
-                        
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold text-lg mb-2">市场营销专员</h4>
-                            <p class="text-primary font-semibold mb-2">£28,000 - £35,000 每年</p>
-                            <p class="mb-2"><i class="fa fa-map-marker mr-2"></i> 小鼠王国，东部地区</p>
-                            <p class="mb-2"><i class="fa fa-building mr-2"></i> 小鼠营销集团</p>
-                            <p class="text-sm text-text-secondary mb-4"><i class="fa fa-clock-o mr-2"></i> 昨天发布</p>
-                            <div class="flex space-x-4">
-                                <button class="btn-primary">申请</button>
-                                <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400">保存</button>
-                            </div>
-                        </div>
-                        
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold text-lg mb-2">财务分析师</h4>
-                            <p class="text-primary font-semibold mb-2">£32,000 - £40,000 每年</p>
-                            <p class="mb-2"><i class="fa fa-map-marker mr-2"></i> 小鼠王国，西部地区</p>
-                            <p class="mb-2"><i class="fa fa-building mr-2"></i> 小鼠财务服务</p>
-                            <p class="text-sm text-text-secondary mb-4"><i class="fa fa-clock-o mr-2"></i> 3天前发布</p>
-                            <div class="flex space-x-4">
-                                <button class="btn-primary">申请</button>
-                                <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400">保存</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 分页 -->
-                    <div class="flex justify-center mt-8">
-                        <nav class="inline-flex rounded-md shadow">
-                            <a href="#" class="py-2 px-4 bg-white border border-gray-300 rounded-l-md">上一页</a>
-                            <a href="#" class="py-2 px-4 bg-primary text-white border border-primary">1</a>
-                            <a href="#" class="py-2 px-4 bg-white border border-gray-300">2</a>
-                            <a href="#" class="py-2 px-4 bg-white border border-gray-300">3</a>
-                            <a href="#" class="py-2 px-4 bg-white border border-gray-300 rounded-r-md">下一页</a>
-                        </nav>
-                    </div>
-                </div>
-            `;
-        }
-        
-        // 显示国家保险记录
-        function showNIRecord() {
-            document.getElementById('modal-content').innerHTML = `
-                <h3 class="text-xl font-semibold mb-4">国家保险记录</h3>
-                <p class="mb-4">要查看您的国家保险记录，您需要登录您的个人税务账户。</p>
-                <div class="bg-secondary p-4 rounded-lg mb-6">
-                    <h4 class="font-semibold mb-2">需要的信息</h4>
-                    <p>您需要您的国民保险号码和个人税务账户登录信息。</p>
-                </div>
-                <div class="flex space-x-4">
-                    <button class="btn-primary" onclick="simulateLogin('personal-tax')">登录</button>
-                    <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400" onclick="showServiceDetails('national-insurance')">返回</button>
-                </div>
-            `;
-        }
-        
-        // 显示生活成本支持检查器
-        function showCostOfLivingSupportChecker() {
-            document.getElementById('modal-content').innerHTML = `
-                <h3 class="text-xl font-semibold mb-4">生活成本支持检查器</h3>
-                <p class="mb-4">使用此工具查看您可能有资格获得的生活成本支持。</p>
-                <p class="mb-6">此检查大约需要5分钟完成。您需要提供以下信息：</p>
-                <ul class="list-disc pl-6 mb-6 space-y-2">
-                    <li>您的年龄</li>
-                    <li>您的家庭情况</li>
-                    <li>您的收入和储蓄</li>
-                    <li>您的住房情况</li>
-                </ul>
-                <div class="flex space-x-4">
-                    <button class="btn-primary" onclick="startSupportChecker()">开始检查</button>
-                    <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400" onclick="showServiceDetails('cost-of-living')">返回</button>
-                </div>
-            `;
-        }
-        
-        // 开始生活成本支持检查
-        function startSupportChecker() {
-            // 模拟检查过程
-            alert('检查器已开始。在实际网站中，这将引导您完成多步骤检查。');
-            
-            // 关闭模态框
-            setTimeout(() => {
-                closeModal();
-            }, 1500);
-        }
-        
-        // 个人身份服务
-        function showPersonalIdentityServices() {
-            document.getElementById('modal-title').textContent = '个人身份';
-            document.getElementById('modal-content').innerHTML = `
-                <p class="mb-4">小鼠王国提供多种个人身份相关服务，帮助您管理和证明您的身份。</p>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div class="border border-gray-200 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold mb-2">国民保险号码</h3>
-                        <p class="mb-3">了解如何申请、找回或更换您的国民保险号码。</p>
-                        <a href="#" class="service-link" onclick="showServiceDetails('national-insurance')">了解更多</a>
-                    </div>
-                    
-                    <div class="border border-gray-200 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold mb-2">护照申请</h3>
-                        <p class="mb-3">申请或更新您的小鼠王国护照。</p>
-                        <a href="#" class="service-link" onclick="showServiceDetails('passport-application')">了解更多</a>
-                    </div>
-                    
-                    <div class="border border-gray-200 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold mb-2">身份证</h3>
-                        <p class="mb-3">申请小鼠王国身份证，作为官方身份证明。</p>
-                        <a href="#" class="service-link" onclick="showServiceDetails('identity-card')">了解更多</a>
-                    </div>
-                    
-                    <div class="border border-gray-200 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold mb-2">公民身份</h3>
-                        <p class="mb-3">了解如何申请小鼠王国公民身份。</p>
-                        <a href="#" class="service-link" onclick="showServiceDetails('citizenship')">了解更多</a>
-                    </div>
-                </div>
-                
-                <div class="bg-secondary p-4 rounded-lg">
-                    <h3 class="text-lg font-semibold mb-2">需要帮助？</h3>
-                    <p class="mb-2">如果您在处理个人身份事务时需要帮助，可以联系小鼠王国身份服务中心：</p>
-                    <p>电话：0800-111-2222</p>
-                    <p>电子邮件：identity@mousekingdom.gov.mk</p>
-                </div>
-            `;
-            
-            // 添加相关服务
-            const relatedServicesContainer = document.getElementById('modal-related');
-            relatedServicesContainer.innerHTML = `
-                <li><a href="#" class="service-link" onclick="showCategoryDetails('citizenship')">公民身份与居住</a></li>
-                <li><a href="#" class="service-link" onclick="showServiceDetails('personal-tax')">个人税务账户</a></li>
-                <li><a href="#" class="service-link" onclick="showServiceDetails('e-visa')">电子签证</a></li>
-            `;
-            
-            // 显示模态框
-            document.getElementById('service-modal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        // 住房与社区服务
-        function showHousingCommunityServices() {
-            document.getElementById('modal-title').textContent = '住房与社区';
-            document.getElementById('modal-content').innerHTML = `
-                <p class="mb-4">小鼠王国提供多种住房与社区相关服务，帮助您找到合适的住房并参与社区活动。</p>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div class="border border-gray-200 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold mb-2">住房福利</h3>
-                        <p class="mb-3">了解您是否有资格获得住房福利，以及如何申请。</p>
-                        <a href="#" class="service-link" onclick="showServiceDetails('housing-benefit')">了解更多</a>
-                    </div>
-                    
-                    <div class="border border-gray-200 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold mb-2">社会住房</h3>
-                        <p class="mb-3">申请小鼠王国的社会住房。</p>
-                        <a href="#" class="service-link" onclick="showServiceDetails('social-housing')">了解更多</a>
-                    </div>
-                    
-                    <div class="border border-gray-200 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold mb-2">社区参与</h3>
-                        <p class="mb-3">了解如何参与您所在社区的活动和决策。</p>
-                        <a href="#" class="service-link" onclick="showServiceDetails('community')">了解更多</a>
-                    </div>
-                    
-                    <div class="border border-gray-200 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold mb-2">邻里纠纷</h3>
-                        <p class="mb-3">获取解决邻里纠纷的建议和支持。</p>
-                        <a href="#" class="service-link" onclick="showServiceDetails('neighbor-disputes')">了解更多</a>
-                    </div>
-                </div>
-                
-                <div class="bg-secondary p-4 rounded-lg">
-                    <h3 class="text-lg font-semibold mb-2">需要帮助？</h3>
-                    <p class="mb-2">如果您在住房或社区事务方面需要帮助，可以联系小鼠王国住房与社区服务中心：</p>
-                    <p>电话：0800-333-4444</p>
-                    <p>电子邮件：housing@mousekingdom.gov.mk</p>
-                </div>
-            `;
-            
-            // 添加相关服务
-            const relatedServicesContainer = document.getElementById('modal-related');
-            relatedServicesContainer.innerHTML = `
-                <li><a href="#" class="service-link" onclick="showCategoryDetails('benefits')">福利</a></li>
-                <li><a href="#" class="service-link" onclick="showServiceDetails('cost-of-living')">生活成本支持</a></li>
-                <li><a href="#" class="service-link" onclick="showCategoryDetails('citizenship')">公民身份与居住</a></li>
-            `;
-            
-            // 显示模态框
-            document.getElementById('service-modal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        // 教育与学习服务
-        function showEducationLearningServices() {
-            document.getElementById('modal-title').textContent = '教育与学习';
-            document.getElementById('modal-content').innerHTML = `
-                <p class="mb-4">小鼠王国提供多种教育与学习相关服务，帮助您和您的家人获得优质教育。</p>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div class="border border-gray-200 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold mb-2">学校申请</h3>
-                        <p class="mb-3">为您的孩子申请小学或中学。</p>
-                        <a href="#" class="service-link" onclick="showServiceDetails('school-admissions')">了解更多</a>
-                    </div>
-                    
-                    <div class="border border-gray-200 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold mb-2">学生贷款</h3>
-                        <p class="mb-3">申请和管理高等教育学生贷款。</p>
-                        <a href="#" class="service-link" onclick="showServiceDetails('student-loans')">了解更多</a>
-                    </div>
-                    
-                    <div class="border border-gray-200 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold mb-2">学徒制</h3>
-                        <p class="mb-3">了解和申请学徒制机会。</p>
-                        <a href="#" class="service-link" onclick="showServiceDetails('apprenticeships')">了解更多</a>
-                    </div>
-                    
-                    <div class="border border-gray-200 p-4 rounded-lg">
-                        <h3 class="text-lg font-semibold mb-2">成人教育</h3>
-                        <p class="mb-3">获取成人教育和技能培训的信息。</p>
-                        <a href="#" class="service-link" onclick="showServiceDetails('adult-education')">了解更多</a>
-                    </div>
-                </div>
-                
-                <div class="bg-secondary p-4 rounded-lg">
-                    <h3 class="text-lg font-semibold mb-2">需要帮助？</h3>
-                    <p class="mb-2">如果您在教育或学习方面需要帮助，可以联系小鼠王国教育服务中心：</p>
-                    <p>电话：0800-555-6666</p>
-                    <p>电子邮件：education@mousekingdom.gov.mk</p>
-                </div>
-            `;
-            
-            // 添加相关服务
-            const relatedServicesContainer = document.getElementById('modal-related');
-            relatedServicesContainer.innerHTML = `
-                <li><a href="#" class="service-link" onclick="showCategoryDetails('education')">教育与学习</a></li>
-                <li><a href="#" class="service-link" onclick="showCategoryDetails('childcare')">育儿与养育</a></li>
-                <li><a href="#" class="service-link" onclick="showServiceDetails('find-job')">找工作</a></li>
-            `;
-            
-            // 显示模态框
-            document.getElementById('service-modal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        // 模拟应用下载
-        function simulateAppDownload(platform) {
-            alert(`正在${platform === 'ios' ? 'App Store' : 'Google Play'}下载小鼠王国政府应用...`);
-            
-            // 模拟下载完成
-            setTimeout(() => {
-                alert('应用下载完成！');
-                closeAppModal();
-            }, 2000);
-        }
-        
-        // 卢yu鼠案件相关函数
-        function showCaseUpdates() {
-            document.getElementById('modal-content').innerHTML = `
-                <h3 class="text-xl font-semibold mb-4">卢yu鼠案件进展</h3>
-                <p class="mb-4">以下是卢yu鼠案件的最新进展：</p>
-                
-                <div class="space-y-6">
-                    <div class="border-l-4 border-primary pl-4">
-                        <h4 class="font-semibold text-lg mb-2">2025年11月20日 - 案件最新进展</h4>
-                        <p class="mb-2">专案组成功锁定一名主要嫌疑人，目前正在进行进一步调查。</p>
-                        <p>已追回约30%的被盗财产，将尽快归还给受害者。</p>
-                    </div>
-                    
-                    <div class="border-l-4 border-gray-300 pl-4">
-                        <h4 class="font-semibold text-lg mb-2">2025年10月15日 - 扩大调查范围</h4>
-                        <p class="mb-2">专案组扩大调查范围，将另外5起案件纳入卢yu鼠系列案件调查。</p>
-                        <p>呼吁公众提供更多线索，特别是关于可疑活动的视频或照片证据。</p>
-                    </div>
-                    
-                    <div class="border-l-4 border-gray-300 pl-4">
-                        <h4 class="font-semibold text-lg mb-2">2025年9月5日 - 专案组成立</h4>
-                        <p class="mb-2">小鼠王国政府正式成立卢yu鼠案件专案组，由高级探长指挥。</p>
-                        <p>设立24小时举报热线，鼓励公众提供线索。</p>
-                    </div>
-                </div>
-                
-                <div class="mt-6 flex justify-end">
-                    <button class="btn-primary" onclick="showServiceDetails('universal-credit')">返回</button>
-                </div>
-            `;
-        }
-        
-        function submitTip() {
-            document.getElementById('modal-content').innerHTML = `
-                <h3 class="text-xl font-semibold mb-4">提交案件线索</h3>
-                <p class="mb-4">请填写以下表单提交您所知道的与卢yu鼠案件相关的线索：</p>
-                
-                <div class="space-y-4">
-                    <div>
-                        <label for="tip-type" class="block mb-2">线索类型</label>
-                        <select id="tip-type" class="border border-gray-300 p-2 w-full">
-                            <option value="">请选择线索类型</option>
-                            <option value="suspect">嫌疑人信息</option>
-                            <option value="location">作案地点</option>
-                            <option value="evidence">证据线索</option>
-                            <option value="other">其他信息</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label for="tip-details" class="block mb-2">线索详情</label>
-                        <textarea id="tip-details" class="border border-gray-300 p-2 w-full" rows="5" placeholder="请详细描述您所知道的线索..."></textarea>
-                    </div>
-                    
-                    <div>
-                        <label for="tip-contact" class="block mb-2">联系方式（可选）</label>
-                        <input type="text" id="tip-contact" class="border border-gray-300 p-2 w-full" placeholder="电话或电子邮件，以便我们进一步联系您">
-                    </div>
-                    
-                    <div class="flex items-center">
-                        <input type="checkbox" id="tip-anonymous" class="mr-2">
-                        <label for="tip-anonymous">匿名提交</label>
-                    </div>
-                </div>
-                
-                <div class="mt-6 flex space-x-4">
-                    <button class="btn-primary" onclick="submitTipForm()">提交线索</button>
-                    <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400" onclick="showServiceDetails('universal-credit')">取消</button>
-                </div>
-            `;
-        }
-        
-        function submitTipForm() {
-            const tipType = document.getElementById('tip-type').value;
-            const tipDetails = document.getElementById('tip-details').value.trim();
-            
-            if (!tipType || !tipDetails) {
-                alert('请选择线索类型并填写线索详情。');
-                return;
-            }
-            
-            // 模拟提交线索
-            alert('感谢您提交线索！专案组将尽快处理您提供的信息。');
-            
-            // 返回案件详情页面
-            setTimeout(() => {
-                showServiceDetails('universal-credit');
-            }, 1500);
-        }
-        
-        // 护照申请相关函数
-        function startPassportApplication() {
-            alert('护照申请流程已开始。在实际网站中，这将引导您完成多步骤申请。');
-            
-            // 关闭模态框
-            setTimeout(() => {
-                closeModal();
-            }, 1500);
-        }
-        
-        // 身份证申请相关函数
-        function startIdentityCardApplication() {
-            alert('身份证申请流程已开始。在实际网站中，这将引导您完成多步骤申请。');
-            
-            // 关闭模态框
-            setTimeout(() => {
-                closeModal();
-            }, 1500);
-        }
-        
-        // 公民身份资格检查相关函数
-        function checkCitizenshipEligibility() {
-            document.getElementById('modal-content').innerHTML = `
-                <h3 class="text-xl font-semibold mb-4">公民身份资格检查</h3>
-                <p class="mb-4">使用此工具检查您是否有资格申请小鼠王国公民身份。</p>
-                <p class="mb-6">此检查大约需要5分钟完成。您需要提供以下信息：</p>
-                <ul class="list-disc pl-6 mb-6 space-y-2">
-                    <li>您的年龄</li>
-                    <li>您在小鼠王国的居住情况</li>
-                    <li>您的移民身份</li>
-                    <li>您的语言能力</li>
-                </ul>
-                <div class="flex space-x-4">
-                    <button class="btn-primary" onclick="startEligibilityCheck()">开始检查</button>
-                    <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400" onclick="showServiceDetails('citizenship')">返回</button>
-                </div>
-            `;
-        }
-        
-        // 开始资格检查
-        function startEligibilityCheck() {
-            alert('资格检查已开始。在实际网站中，这将引导您完成多步骤检查。');
-            
-            // 关闭模态框
-            setTimeout(() => {
-                closeModal();
-            }, 1500);
-        }
-        
-        // 住房福利申请相关函数
-        function applyForHousingBenefit() {
-            document.getElementById('modal-content').innerHTML = `
-                <h3 class="text-xl font-semibold mb-4">申请住房福利</h3>
-                <p class="mb-4">您可以通过以下方式申请住房福利：</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div class="border border-gray-200 p-4 rounded-lg">
-                        <h4 class="font-semibold mb-2">在线申请</h4>
-                        <p class="mb-4">通过您当地议会的网站在线申请。</p>
-                        <button class="btn-primary w-full" onclick="startOnlineHousingBenefitApplication()">在线申请</button>
-                    </div>
-                    <div class="border border-gray-200 p-4 rounded-lg">
-                        <h4 class="font-semibold mb-2">电话申请</h4>
-                        <p class="mb-4">通过电话联系您当地议会申请。</p>
-                        <p class="mb-4">电话：0800-333-4444</p>
-                        <p class="text-sm text-text-secondary">周一至周五，9:00-17:00</p>
-                    </div>
-                </div>
-                <div class="flex space-x-4">
-                    <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400" onclick="showServiceDetails('housing-benefit')">返回</button>
-                </div>
-            `;
-        }
-        
-        // 开始在线住房福利申请
-        function startOnlineHousingBenefitApplication() {
-            alert('住房福利在线申请已开始。在实际网站中，这将引导您完成多步骤申请。');
-            
-            // 关闭模态框
-            setTimeout(() => {
-                closeModal();
-            }, 1500);
-        }
-        
-        // 社会住房申请相关函数
-        function applyForSocialHousing() {
-            document.getElementById('modal-content').innerHTML = `
-                <h3 class="text-xl font-semibold mb-4">申请社会住房</h3>
-                <p class="mb-4">您可以通过以下方式申请社会住房：</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div class="border border-gray-200 p-4 rounded-lg">
-                        <h4 class="font-semibold mb-2">在线申请</h4>
-                        <p class="mb-4">通过您当地议会的网站在线申请加入住房登记册。</p>
-                        <button class="btn-primary w-full" onclick="startOnlineSocialHousingApplication()">在线申请</button>
-                    </div>
-                    <div class="border border-gray-200 p-4 rounded-lg">
-                        <h4 class="font-semibold mb-2">亲自申请</h4>
-                        <p class="mb-4">前往您当地议会的住房服务中心申请。</p>
-                        <p class="mb-4">您需要预约并携带相关文件。</p>
-                        <button class="btn-primary w-full" onclick="bookAppointment()">预约</button>
-                    </div>
-                </div>
-                <div class="flex space-x-4">
-                    <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400" onclick="showServiceDetails('social-housing')">返回</button>
-                </div>
-            `;
-        }
-        
-        // 开始在线社会住房申请
-        function startOnlineSocialHousingApplication() {
-            alert('社会住房在线申请已开始。在实际网站中，这将引导您完成多步骤申请。');
-            
-            // 关闭模态框
-            setTimeout(() => {
-                closeModal();
-            }, 1500);
-        }
-        
-        // 预约相关函数
-        function bookAppointment() {
-            alert('预约系统已打开。在实际网站中，这将引导您选择预约时间和地点。');
-            
-            // 关闭模态框
-            setTimeout(() => {
-                closeModal();
-            }, 1500);
-        }
-        
-        // 寻找社区机会相关函数
-        function findCommunityOpportunities() {
-            document.getElementById('modal-content').innerHTML = `
-                <h3 class="text-xl font-semibold mb-4">寻找当地社区机会</h3>
-                <p class="mb-4">请输入您所在的地区，查找当地的社区参与机会。</p>
-                <div class="mb-6">
-                    <label for="location" class="block mb-2">您的位置</label>
-                    <input type="text" id="location" class="border border-gray-300 p-2 w-full" placeholder="输入您的城镇或邮政编码">
-                </div>
-                <div class="flex space-x-4">
-                    <button class="btn-primary" onclick="searchCommunityOpportunities()">搜索</button>
-                    <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400" onclick="showServiceDetails('community')">返回</button>
-                </div>
-            `;
-        }
-        
-        // 搜索社区机会
-        function searchCommunityOpportunities() {
-            const location = document.getElementById('location').value.trim();
-            
-            if (!location) {
-                alert('请输入您的位置。');
-                return;
-            }
-            
-            // 模拟搜索结果
-            alert(`已找到 ${Math.floor(Math.random() * 10) + 1} 个在 "${location}" 附近的社区参与机会。`);
-            
-            // 显示搜索结果
-            showCommunityResults(location);
-        }
-        
-        // 显示社区结果
-        function showCommunityResults(location) {
-            document.getElementById('modal-content').innerHTML = `
-                <h3 class="text-xl font-semibold mb-4">${location} 附近的社区机会</h3>
-                <div class="mb-6">
-                    <div class="flex justify-between items-center mb-4">
-                        <p>显示 1-5 个结果，共 8 个</p>
-                    </div>
-                    
-                    <!-- 社区机会列表 -->
-                    <div class="space-y-4">
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold text-lg mb-2">社区花园项目志愿者</h4>
-                            <p class="mb-2"><i class="fa fa-map-marker mr-2"></i> ${location} 社区中心</p>
-                            <p class="mb-2"><i class="fa fa-clock-o mr-2"></i> 每周六，10:00-12:00</p>
-                            <p class="mb-4">帮助维护当地社区花园，种植蔬菜和花卉。</p>
-                            <button class="btn-primary">了解更多</button>
-                        </div>
-                        
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold text-lg mb-2">老年人探访计划</h4>
-                            <p class="mb-2"><i class="fa fa-map-marker mr-2"></i> ${location} 老年人中心</p>
-                            <p class="mb-2"><i class="fa fa-clock-o mr-2"></i> 每周二和周四，14:00-16:00</p>
-                            <p class="mb-4">探访独居老人，提供陪伴和基本帮助。</p>
-                            <button class="btn-primary">了解更多</button>
-                        </div>
-                        
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold text-lg mb-2">当地议会社区咨询会议</h4>
-                            <p class="mb-2"><i class="fa fa-map-marker mr-2"></i> ${location} 市政厅</p>
-                            <p class="mb-2"><i class="fa fa-clock-o mr-2"></i> 下月5日，18:00-20:00</p>
-                            <p class="mb-4">参与当地议会关于社区发展的咨询会议。</p>
-                            <button class="btn-primary">了解更多</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex justify-end">
-                    <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400" onclick="showServiceDetails('community')">返回</button>
-                </div>
-            `;
-        }
-        
-        // 获取纠纷帮助相关函数
-        function getHelpWithDispute() {
-            document.getElementById('modal-content').innerHTML = `
-                <h3 class="text-xl font-semibold mb-4">获取邻里纠纷帮助</h3>
-                <p class="mb-4">请选择您需要的帮助类型：</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div class="border border-gray-200 p-4 rounded-lg">
-                        <h4 class="font-semibold mb-2">调解服务</h4>
-                        <p class="mb-4">专业调解员帮助您和邻居友好解决纠纷。</p>
-                        <button class="btn-primary w-full" onclick="requestMediation()">申请调解</button>
-                    </div>
-                    <div class="border border-gray-200 p-4 rounded-lg">
-                        <h4 class="font-semibold mb-2"> antisocial行为团队</h4>
-                        <p class="mb-4">联系当地议会的 antisocial行为团队处理严重问题。</p>
-                        <button class="btn-primary w-full" onclick="contactASBTeam()">联系团队</button>
-                    </div>
-                    <div class="border border-gray-200 p-4 rounded-lg">
-                        <h4 class="font-semibold mb-2">公民咨询</h4>
-                        <p class="mb-4">获取免费、保密的建议和信息。</p>
-                        <button class="btn-primary w-full" onclick="findCitizensAdvice()">查找当地办公室</button>
-                    </div>
-                    <div class="border border-gray-200 p-4 rounded-lg">
-                        <h4 class="font-semibold mb-2">紧急情况</h4>
-                        <p class="mb-4">如果您面临威胁或危险，请联系警方。</p>
-                        <p class="mb-4">紧急电话：999</p>
-                        <p class="text-sm text-text-secondary">非紧急情况：101</p>
-                    </div>
-                </div>
-                <div class="flex space-x-4">
-                    <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400" onclick="showServiceDetails('neighbor-disputes')">返回</button>
-                </div>
-            `;
-        }
-        
-        // 请求调解相关函数
-        function requestMediation() {
-            alert('调解服务申请已提交。在实际网站中，您将收到确认并被安排调解员。');
-            
-            // 关闭模态框
-            setTimeout(() => {
-                closeModal();
-            }, 1500);
-        }
-        
-        // 联系antisocial行为团队相关函数
-        function contactASBTeam() {
-            alert('已连接到antisocial行为团队。在实际网站中，您将填写联系表单或直接联系团队。');
-            
-            // 关闭模态框
-            setTimeout(() => {
-                closeModal();
-            }, 1500);
-        }
-        
-        // 查找公民咨询相关函数
-        function findCitizensAdvice() {
-            alert('正在查找您当地的公民咨询办公室。在实际网站中，这将显示附近的办公室位置和联系方式。');
-            
-            // 关闭模态框
-            setTimeout(() => {
-                closeModal();
-            }, 1500);
-        }
-        
-        // 学校申请相关函数
-        function applyForSchool() {
-            document.getElementById('modal-content').innerHTML = `
-                <h3 class="text-xl font-semibold mb-4">申请学校</h3>
-                <p class="mb-4">请选择您要申请的学校类型：</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div class="border border-gray-200 p-4 rounded-lg">
-                        <h4 class="font-semibold mb-2">小学申请</h4>
-                        <p class="mb-4">为4-11岁的儿童申请小学。</p>
-                        <button class="btn-primary w-full" onclick="applyForPrimarySchool()">申请小学</button>
-                    </div>
-                    <div class="border border-gray-200 p-4 rounded-lg">
-                        <h4 class="font-semibold mb-2">中学申请</h4>
-                        <p class="mb-4">为11-16岁的儿童申请中学。</p>
-                        <button class="btn-primary w-full" onclick="applyForSecondarySchool()">申请中学</button>
-                    </div>
-                </div>
-                <div class="bg-secondary p-4 rounded-lg mb-6">
-                    <h4 class="font-semibold mb-2">重要日期</h4>
-                    <p class="mb-2">小学申请截止日期：1月15日</p>
-                    <p class="mb-2">中学申请截止日期：10月31日</p>
-                    <p>如果您错过了截止日期，仍然可以申请，但可能会影响您获得首选学校的机会。</p>
-                </div>
-                <div class="flex space-x-4">
-                    <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400" onclick="showServiceDetails('school-admissions')">返回</button>
-                </div>
-            `;
-        }
-        
-        // 小学申请相关函数
-        function applyForPrimarySchool() {
-            alert('小学申请流程已开始。在实际网站中，这将引导您完成多步骤申请。');
-            
-            // 关闭模态框
-            setTimeout(() => {
-                closeModal();
-            }, 1500);
-        }
-        
-        // 中学申请相关函数
-        function applyForSecondarySchool() {
-            alert('中学申请流程已开始。在实际网站中，这将引导您完成多步骤申请。');
-            
-            // 关闭模态框
-            setTimeout(() => {
-                closeModal();
-            }, 1500);
-        }
-        
-        // 学生贷款申请相关函数
-        function applyForStudentLoan() {
-            document.getElementById('modal-content').innerHTML = `
-                <h3 class="text-xl font-semibold mb-4">申请学生贷款</h3>
-                <p class="mb-4">您可以申请以下类型的学生贷款：</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div class="border border-gray-200 p-4 rounded-lg">
-                        <h4 class="font-semibold mb-2">学费贷款</h4>
-                        <p class="mb-4">帮助支付您的学费，最高可达每年£9,250。</p>
-                        <button class="btn-primary w-full" onclick="applyForTuitionLoan()">申请学费贷款</button>
-                    </div>
-                    <div class="border border-gray-200 p-4 rounded-lg">
-                        <h4 class="font-semibold mb-2">维护贷款</h4>
-                        <p class="mb-4">帮助支付生活费用，金额取决于您的家庭收入和学习地点。</p>
-                        <button class="btn-primary w-full" onclick="applyForMaintenanceLoan()">申请维护贷款</button>
-                    </div>
-                </div>
-                <div class="bg-secondary p-4 rounded-lg mb-6">
-                    <h4 class="font-semibold mb-2">申请截止日期</h4>
-                    <p>为确保您的贷款在课程开始前准备就绪，请在以下日期前申请：</p>
-                    <p class="mb-2">9月开始的课程：6月30日</p>
-                    <p>如果您错过了截止日期，仍然可以申请，但资金可能需要更长时间才能到达。</p>
-                </div>
-                <div class="flex space-x-4">
-                    <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400" onclick="showServiceDetails('student-loans')">返回</button>
-                </div>
-            `;
-        }
-        
-        // 学费贷款申请相关函数
-        function applyForTuitionLoan() {
-            alert('学费贷款申请流程已开始。在实际网站中，这将引导您完成多步骤申请。');
-            
-            // 关闭模态框
-            setTimeout(() => {
-                closeModal();
-            }, 1500);
-        }
-        
-        // 维护贷款申请相关函数
-        function applyForMaintenanceLoan() {
-            alert('维护贷款申请流程已开始。在实际网站中，这将引导您完成多步骤申请。');
-            
-            // 关闭模态框
-            setTimeout(() => {
-                closeModal();
-            }, 1500);
-        }
-        
-        // 搜索学徒制相关函数
-        function searchApprenticeships() {
-            document.getElementById('modal-content').innerHTML = `
-                <h3 class="text-xl font-semibold mb-4">搜索学徒制机会</h3>
-                <p class="mb-4">请输入关键词或职位名称，搜索学徒制机会。</p>
-                <div class="mb-6">
-                    <label for="apprenticeship-search" class="block mb-2">搜索</label>
-                    <input type="text" id="apprenticeship-search" class="border border-gray-300 p-2 w-full" placeholder="输入关键词、职位或行业">
-                </div>
-                <div class="mb-6">
-                    <label for="apprenticeship-location" class="block mb-2">位置</label>
-                    <input type="text" id="apprenticeship-location" class="border border-gray-300 p-2 w-full" placeholder="输入城镇或邮政编码">
-                </div>
-                <div class="flex space-x-4">
-                    <button class="btn-primary" onclick="performApprenticeshipSearch()">搜索</button>
-                    <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400" onclick="showServiceDetails('apprenticeships')">返回</button>
-                </div>
-            `;
-        }
-        
-        // 执行学徒制搜索
-        function performApprenticeshipSearch() {
-            const searchTerm = document.getElementById('apprenticeship-search').value.trim();
-            const location = document.getElementById('apprenticeship-location').value.trim();
-            
-            if (!searchTerm && !location) {
-                alert('请输入搜索关键词或位置。');
-                return;
-            }
-            
-            // 模拟搜索结果
-            alert(`已找到 ${Math.floor(Math.random() * 15) + 1} 个学徒制机会。`);
-            
-            // 显示搜索结果
-            showApprenticeshipResults(searchTerm, location);
-        }
-        
-        // 显示学徒制搜索结果
-        function showApprenticeshipResults(searchTerm, location) {
-            document.getElementById('modal-content').innerHTML = `
-                <h3 class="text-xl font-semibold mb-4">学徒制搜索结果</h3>
-                <p class="mb-4">${searchTerm ? `"${searchTerm}" ` : ''}${location ? `在 ${location} 附近` : ''}</p>
-                <div class="mb-6">
-                    <div class="flex justify-between items-center mb-4">
-                        <p>显示 1-5 个结果，共 12 个</p>
-                        <div class="flex space-x-2">
-                            <select class="border border-gray-300 p-2">
-                                <option>最新发布</option>
-                                <option>距离最近</option>
-                                <option>薪资最高</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <!-- 学徒制列表 -->
-                    <div class="space-y-4">
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold text-lg mb-2">数字营销学徒</h4>
-                            <p class="text-primary font-semibold mb-2">£18,000 - £22,000 每年</p>
-                            <p class="mb-2"><i class="fa fa-map-marker mr-2"></i> ${location || '小鼠王国，首都'}</p>
-                            <p class="mb-2"><i class="fa fa-building mr-2"></i> 小鼠数字有限公司</p>
-                            <p class="mb-2"><i class="fa fa-graduation-cap mr-2"></i> Advanced 学徒制</p>
-                            <p class="text-sm text-text-secondary mb-4"><i class="fa fa-clock-o mr-2"></i> 3天前发布</p>
-                            <button class="btn-primary">申请</button>
-                        </div>
-                        
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold text-lg mb-2">软件开发学徒</h4>
-                            <p class="text-primary font-semibold mb-2">£20,000 - £25,000 每年</p>
-                            <p class="mb-2"><i class="fa fa-map-marker mr-2"></i> ${location || '小鼠王国，东部地区'}</p>
-                            <p class="mb-2"><i class="fa fa-building mr-2"></i> 小鼠科技集团</p>
-                            <p class="mb-2"><i class="fa fa-graduation-cap mr-2"></i> Higher 学徒制</p>
-                            <p class="text-sm text-text-secondary mb-4"><i class="fa fa-clock-o mr-2"></i> 1周前发布</p>
-                            <button class="btn-primary">申请</button>
-                        </div>
-                        
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold text-lg mb-2">会计学徒</h4>
-                            <p class="text-primary font-semibold mb-2">£17,000 - £20,000 每年</p>
-                            <p class="mb-2"><i class="fa fa-map-marker mr-2"></i> ${location || '小鼠王国，西部地区'}</p>
-                            <p class="mb-2"><i class="fa fa-building mr-2"></i> 小鼠财务服务</p>
-                            <p class="mb-2"><i class="fa fa-graduation-cap mr-2"></i> Advanced 学徒制</p>
-                            <p class="text-sm text-text-secondary mb-4"><i class="fa fa-clock-o mr-2"></i> 2周前发布</p>
-                            <button class="btn-primary">申请</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex justify-between">
-                    <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400" onclick="showServiceDetails('apprenticeships')">返回</button>
-                    <button class="btn-primary">查看更多结果</button>
-                </div>
-            `;
-        }
-        
-        // 搜索成人教育课程相关函数
-        function searchAdultEducationCourses() {
-            document.getElementById('modal-content').innerHTML = `
-                <h3 class="text-xl font-semibold mb-4">搜索成人教育课程</h3>
-                <p class="mb-4">请输入关键词或课程名称，搜索成人教育课程。</p>
-                <div class="mb-6">
-                    <label for="course-search" class="block mb-2">搜索</label>
-                    <input type="text" id="course-search" class="border border-gray-300 p-2 w-full" placeholder="输入关键词、课程或主题">
-                </div>
-                <div class="mb-6">
-                    <label for="course-location" class="block mb-2">位置</label>
-                    <input type="text" id="course-location" class="border border-gray-300 p-2 w-full" placeholder="输入城镇或邮政编码">
-                </div>
-                <div class="mb-6">
-                    <label class="block mb-2">课程类型</label>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-                        <div class="flex items-center">
-                            <input type="checkbox" id="course-type-1" class="mr-2">
-                            <label for="course-type-1">基础技能</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input type="checkbox" id="course-type-2" class="mr-2">
-                            <label for="course-type-2">职业资格</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input type="checkbox" id="course-type-3" class="mr-2">
-                            <label for="course-type-3">高等教育</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input type="checkbox" id="course-type-4" class="mr-2">
-                            <label for="course-type-4">兴趣课程</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex space-x-4">
-                    <button class="btn-primary" onclick="performCourseSearch()">搜索</button>
-                    <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400" onclick="showServiceDetails('adult-education')">返回</button>
-                </div>
-            `;
-        }
-        
-        // 执行课程搜索
-        function performCourseSearch() {
-            const searchTerm = document.getElementById('course-search').value.trim();
-            const location = document.getElementById('course-location').value.trim();
-            
-            if (!searchTerm && !location) {
-                alert('请输入搜索关键词或位置。');
-                return;
-            }
-            
-            // 模拟搜索结果
-            alert(`已找到 ${Math.floor(Math.random() * 20) + 1} 个成人教育课程。`);
-            
-            // 显示搜索结果
-            showCourseResults(searchTerm, location);
-        }
-        
-        // 显示课程搜索结果
-        function showCourseResults(searchTerm, location) {
-            document.getElementById('modal-content').innerHTML = `
-                <h3 class="text-xl font-semibold mb-4">成人教育课程搜索结果</h3>
-                <p class="mb-4">${searchTerm ? `"${searchTerm}" ` : ''}${location ? `在 ${location} 附近` : ''}</p>
-                <div class="mb-6">
-                    <div class="flex justify-between items-center mb-4">
-                        <p>显示 1-5 个结果，共 18 个</p>
-                        <div class="flex space-x-2">
-                            <select class="border border-gray-300 p-2">
-                                <option>相关性</option>
-                                <option>开始日期</option>
-                                <option>评分</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <!-- 课程列表 -->
-                    <div class="space-y-4">
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold text-lg mb-2">数字技能入门</h4>
-                            <p class="mb-2"><i class="fa fa-map-marker mr-2"></i> ${location || '小鼠王国，首都'} 成人教育中心</p>
-                            <p class="mb-2"><i class="fa fa-clock-o mr-2"></i> 每周二和周四，18:00-20:00，共8周</p>
-                            <p class="mb-2"><i class="fa fa-graduation-cap mr-2"></i> 基础技能</p>
-                            <p class="mb-2"><i class="fa fa-money mr-2"></i> £120</p>
-                            <p class="text-sm text-text-secondary mb-4"><i class="fa fa-calendar mr-2"></i> 下一个课程开始：6月15日</p>
-                            <button class="btn-primary">申请</button>
-                        </div>
-                        
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold text-lg mb-2">商务英语</h4>
-                            <p class="mb-2"><i class="fa fa-map-marker mr-2"></i> ${location || '小鼠王国，东部地区'} 语言学院</p>
-                            <p class="mb-2"><i class="fa fa-clock-o mr-2"></i> 每周一和周三，19:00-21:00，共10周</p>
-                            <p class="mb-2"><i class="fa fa-graduation-cap mr-2"></i> 职业资格</p>
-                            <p class="mb-2"><i class="fa fa-money mr-2"></i> £180</p>
-                            <p class="text-sm text-text-secondary mb-4"><i class="fa fa-calendar mr-2"></i> 下一个课程开始：7月3日</p>
-                            <button class="btn-primary">申请</button>
-                        </div>
-                        
-                        <div class="border border-gray-200 p-4 rounded-lg">
-                            <h4 class="font-semibold text-lg mb-2">网页设计与开发</h4>
-                            <p class="mb-2"><i class="fa fa-map-marker mr-2"></i> ${location || '小鼠王国，在线课程'}</p>
-                            <p class="mb-2"><i class="fa fa-clock-o mr-2"></i> 灵活学习，最多12周完成</p>
-                            <p class="mb-2"><i class="fa fa-graduation-cap mr-2"></i> Higher 教育</p>
-                            <p class="mb-2"><i class="fa fa-money mr-2"></i> £350</p>
-                            <p class="text-sm text-text-secondary mb-4"><i class="fa fa-calendar mr-2"></i> 随时可以开始</p>
-                            <button class="btn-primary">申请</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex justify-between">
-                    <button class="btn-primary bg-gray-300 text-text-primary hover:bg-gray-400" onclick="showServiceDetails('adult-education')">返回</button>
-                    <button class="btn-primary">查看更多结果</button>
-                </div>
-            `;
+            // 显示首页内容
+            document.getElementById('welcome-message').parentElement.classList.remove('hidden');
+            document.querySelector('main > div:nth-of-type(2)').classList.remove('hidden'); // 热门服务
+            document.querySelector('main > div:nth-of-type(3)').classList.remove('hidden'); // 卢yu鼠案件专案组
+            document.querySelector('main > div:nth-of-type(4)').classList.remove('hidden'); // 服务与信息和特色服务
+            document.querySelector('main > div:nth-of-type(5)').classList.remove('hidden'); // 新闻与公告
         }
     </script>
-
-
-</body></html>
+</body>
+</html>

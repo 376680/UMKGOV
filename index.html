@@ -263,31 +263,9 @@
                 <div class="transform transition-all duration-300 hover:scale-105">
                     <a href="#" class="gov-link text-xl font-bold block py-2 border-b border-gray-200" onclick="showServiceDetails('mouse-housing')">小鼠住房服务</a>
                 </div>
-            </div>
-        </div>
-
-        <!-- 卢yu鼠案件专案组 -->
-        <div class="mb-10 bg-gov-background-secondary p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 slide-up" style="animation-delay: 0.1s;">
-            <div class="flex items-center mb-4">
-                <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/8cddceaacd3d4789a5e36957c84e10ba~tplv-a9rns2rl98-image.image?rcl=20251126222601E94E8A3608395904DE76&rk3s=8e244e95&rrcfp=f06b921b&x-expires=1766759191&x-signature=HKPdrEW0kOk1cuXy%2FuBxQj82P5A%3D" alt="卢yu鼠案件专案组" class="h-16 mr-4 rounded-full">
-                <h2 class="text-2xl font-bold">卢yu鼠案件专案组</h2>
-            </div>
-            <p class="mb-4">卢yu鼠用黑板擦擦掉了数百只小鼠，有的被它残忍改成它自以为好看的样子。专案组负责调查此案并提供受害者救助。</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <h3 class="text-xl font-bold mb-2">案件最新进展</h3>
-                    <ul class="list-disc pl-5 mb-4">
-                        <li>专案组已确认卢yu鼠身份并展开追捕</li>
-                        <li>已救助237只受害小鼠，其中189只已恢复原貌</li>
-                        <li>设立小鼠受害者救助热线：123-456-7890</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold mb-2">受害者救助</h3>
-                    <p class="mb-4">如果您或您认识的小鼠是卢yu鼠案件的受害者，请立即联系我们：</p>
-                    <button class="gov-button" onclick="showVictimForm()">
-                        <i class="fa fa-life-ring mr-2"></i>申请救助
-                    </button>
+                <!-- MOST WANTED 链接 -->
+                <div class="transform transition-all duration-300 hover:scale-105">
+                    <a href="#" class="gov-link text-xl font-bold block py-2 border-b border-gray-200" onclick="showServiceDetails('most-wanted')">MOST WANTED</a>
                 </div>
             </div>
         </div>
@@ -432,6 +410,8 @@
             </div>
         </div>
 
+
+
         <!-- 服务详情区域 -->
         <div id="service-details" class="hidden mb-10 bg-gov-background-secondary p-6">
             <h2 id="service-title" class="text-2xl font-bold mb-4"></h2>
@@ -532,6 +512,33 @@
     <script>
         // 模拟数据
         const serviceData = {
+            'most-wanted': {
+                title: 'MOST WANTED',
+                content: `
+                    <div class="flex items-center mb-4">
+                        <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/8cddceaacd3d4789a5e36957c84e10ba~tplv-a9rns2rl98-image.image?rcl=20251126222601E94E8A3608395904DE76&rk3s=8e244e95&rrcfp=f06b921b&x-expires=1766759191&x-signature=HKPdrEW0kOk1cuXy%2FuBxQj82P5A%3D" alt="卢yu鼠案件专案组" class="h-16 mr-4 rounded-full">
+                        <h3 class="text-xl font-bold">卢yu鼠案件专案组</h3>
+                    </div>
+                    <p class="mb-4">卢yu鼠用黑板擦擦掉了数百只小鼠，有的被它残忍改成它自以为好看的样子。专案组负责调查此案并提供受害者救助。</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="text-lg font-bold mb-2">案件最新进展</h4>
+                            <ul class="list-disc pl-5 mb-4">
+                                <li>专案组已确认卢yu鼠身份并展开追捕</li>
+                                <li>已救助237只受害小鼠，其中189只已恢复原貌</li>
+                                <li>设立小鼠受害者救助热线：123-456-7890</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold mb-2">受害者救助</h4>
+                            <p class="mb-4">如果您或您认识的小鼠是卢yu鼠案件的受害者，请立即联系我们：</p>
+                            <button class="gov-button" onclick="showVictimForm()">
+                                <i class="fa fa-life-ring mr-2"></i>申请救助
+                            </button>
+                        </div>
+                    </div>
+                `
+            },
             'mouse-id': {
                 title: '小鼠身份证办理',
                 content: `

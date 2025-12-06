@@ -153,6 +153,14 @@
                     <p class="text-sm">中央人民政府门户网站</p>
                 </div>
                 <div class="flex items-center space-x-4 mt-2 sm:mt-0">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm">国歌播放：</span>
+                        <audio controls class="bg-white rounded text-gov-text">
+                            <source src="file:///Users/zhangzhifeng/Downloads/United_States_Navy_Band_-_God_Save_the_Queen.oga" type="audio/ogg">
+                            您的浏览器不支持音频播放。
+                        </audio>
+                    </div>
+                    <span class="text-white">|</span>
                     <a href="#" class="text-white hover:text-gray-200 text-sm">联系我们</a>
                     <span class="text-white">|</span>
                     <a href="#" class="text-white hover:text-gray-200 text-sm">常见问题</a>
@@ -1163,8 +1171,8 @@
             });
             
             // 搜索按钮交互
-            const searchForm = document.querySelector('form');
-            searchForm.addEventListener('submit', function(e) {
+            const searchButton = document.querySelector('button[type="submit"]');
+            searchButton.addEventListener('click', function(e) {
                 e.preventDefault();
                 const searchInput = document.querySelector('#search-input');
                 const query = searchInput.value.trim();

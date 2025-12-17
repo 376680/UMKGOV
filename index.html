@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>小鼠帝国政府网_帝国政府门户网站</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -110,6 +110,7 @@
     </style>
 </head>
 <body class="bg-gov-background text-gov-text font-sans">
+    <a href="#main" class="sr-only focus:not-sr-only">跳到主要内容</a>
     <!-- 顶部导航栏 -->
     <header class="bg-white border-b border-gov-border">
         <div class="gov-container">
@@ -155,7 +156,7 @@
                 <div class="flex items-center space-x-4 mt-2 sm:mt-0">
                     <div class="flex items-center space-x-2">
                         <span class="text-sm">国歌播放：</span>
-                        <audio controls class="bg-white rounded text-gov-text">
+                        <audio controls preload="none" class="bg-white rounded text-gov-text">
                             <source src="33418710760-1-30280 (1).mp3" type="audio/mpeg">
                             您的浏览器不支持音频播放。
                         </audio>
@@ -189,7 +190,7 @@
     </section>
     
     <!-- 主要内容区 -->
-    <main class="gov-container">
+    <main id="main" class="gov-container">
         <!-- 内容展示区域 -->
         <div id="content-display" class="gov-section hidden">
             <div class="flex items-center justify-between mb-6">
@@ -1081,128 +1082,180 @@
             }
         };
         
-        // 简单的交互效果
-        document.addEventListener('DOMContentLoaded', function() {
-            // 欢迎信息显示
-            const welcomeMessage = document.createElement('div');
-            welcomeMessage.className = 'fixed top-0 left-0 right-0 bg-green-500 text-white py-2 text-center text-sm';
-            welcomeMessage.innerHTML = '<i class="fa fa-check-circle mr-1"></i>欢迎访问小鼠帝国政府网！';
-            document.body.appendChild(welcomeMessage);
-            
-            // 3秒后自动隐藏
-            setTimeout(() => {
-                welcomeMessage.style.opacity = '0';
-                setTimeout(() => {
-                    welcomeMessage.remove();
-                }, 500);
-            }, 3000);
-            
-            // 获取DOM元素
-            const contentDisplay = document.getElementById('content-display');
-            const homeContent = document.getElementById('home-content');
-            const contentTitle = document.getElementById('content-title');
-            const contentBody = document.getElementById('content-body');
-            const backButton = document.getElementById('back-button');
-            
-            // 导航栏链接交互
-            const navLinks = document.querySelectorAll('.gov-nav-item');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const nav = this.dataset.nav;
-                    
-                    if (nav === 'home') {
-                        // 显示首页内容
-                        contentDisplay.classList.add('hidden');
-                        homeContent.classList.remove('hidden');
-                    } else if (navContent[nav]) {
-                        // 显示内容展示区域
-                        contentDisplay.classList.remove('hidden');
-                        homeContent.classList.add('hidden');
-                        
-                        // 设置内容
-                        contentTitle.textContent = navContent[nav].title;
-                        contentBody.innerHTML = navContent[nav].content;
-                    }
-                });
-            });
-            
-            // 服务卡片点击事件
-            const serviceCards = document.querySelectorAll('.gov-card');
-            serviceCards.forEach(card => {
-                card.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const service = this.dataset.service;
-                    if (service && serviceContent[service]) {
-                        // 显示内容展示区域
-                        contentDisplay.classList.remove('hidden');
-                        homeContent.classList.add('hidden');
-                        
-                        // 设置内容
-                        contentTitle.textContent = serviceContent[service].title;
-                        contentBody.innerHTML = serviceContent[service].content;
-                    }
-                });
-            });
-            
-            // 服务链接点击事件
-            const serviceLinks = document.querySelectorAll('[data-service]');
-            serviceLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const service = this.dataset.service;
-                    if (service && serviceContent[service]) {
-                        // 显示内容展示区域
-                        contentDisplay.classList.remove('hidden');
-                        homeContent.classList.add('hidden');
-                        
-                        // 设置内容
-                        contentTitle.textContent = serviceContent[service].title;
-                        contentBody.innerHTML = serviceContent[service].content;
-                    }
-                });
-            });
-            
-            // 返回按钮点击事件
-            backButton.addEventListener('click', function() {
-                // 隐藏内容展示区域，显示首页内容
-                contentDisplay.classList.add('hidden');
-                homeContent.classList.remove('hidden');
-            });
-            
-            // 搜索按钮交互
-            const searchButton = document.querySelector('button[type="submit"]');
-            searchButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                const searchInput = document.querySelector('#search-input');
-                const query = searchInput.value.trim();
-                if (query) {
-                    alert(`正在搜索：${query}`);
-                } else {
-                    alert('请输入搜索关键词');
-                }
-            });
-            
-            // 页脚链接交互
-            const footerLinks = document.querySelectorAll('footer a');
-            footerLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const text = this.textContent.trim();
-                    alert(`正在跳转到${text}页面...`);
-                });
-            });
-            
-            // 语言切换交互
-            const langLinks = document.querySelectorAll('.gov-header a');
-            langLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const lang = this.textContent.trim();
-                    alert(`正在切换到${lang}版本...`);
-                });
-            });
+        // ===== 统一 DOM 获取 ======
+        const $ = (sel, root = document) => root.querySelector (sel);
+        const $$ = (sel, root = document) => Array.from(root.querySelectorAll (sel));
+
+        const elHome = $("#home-content" );
+        const elDetail = $("#content-display" );
+        const elTitle = $("#content-title" );
+        const elBody = $("#content-body" );
+        const elBack = $("#back-button" );
+        const elSearch = $("#search-input" );
+
+        // ====== 视图切换 ======
+        function showHome( ) {
+          elDetail.classList.add("hidden" );
+          elHome.classList.remove("hidden" );
+          // 导航高亮回首页（可选）
+          setActiveNav("home" );
+          window.scrollTo({ top: 0, behavior: "smooth"  });
+        }
+
+        function showDetail(title, html ) {
+          elTitle.textContent  = title;
+          // 你这里的内容都是你自己写死的字符串，不含用户输入，innerHTML 风险可控
+          // 但如果未来要展示用户提交的留言，就必须改成安全渲染（见下方第4部分）
+          elBody.innerHTML  = html;
+
+          elHome.classList.add("hidden" );
+          elDetail.classList.remove("hidden" );
+          window.scrollTo({ top: 0, behavior: "smooth"  });
+        }
+
+        // ====== 导航高亮 ======
+        function setActiveNav(key ) {
+          $$("[data-nav]").forEach(a  => {
+            const isActive = a.dataset.nav  === key;
+            a.classList.toggle("text-gov-blue" , isActive);
+            a.classList.toggle("border-b-2" , isActive);
+            a.classList.toggle("border-gov-blue" , isActive);
+
+            // 你的 nav-item 里还混了 gov-nav-item + 其它 class，这里不强行改动其余样式
+            if  (!isActive) {
+              a.classList.remove("font-medium" );
+            } else  {
+              a.classList.add("font-medium" );
+            }
+          });
+        }
+
+        // ====== 数据检索（用于搜索） ======
+        function searchAll(keyword ) {
+          const q = keyword.trim().toLowerCase ();
+          if (!q) return  [];
+
+          const  results = [];
+
+          for (const [k, v] of Object.entries (serviceContent)) {
+            const hay = (v.title + " " + v.content).toLowerCase ();
+            if (hay.includes(q)) results.push({ type: "service", key: k, title: v.title, content: v.content  });
+          }
+
+          for (const [k, v] of Object.entries (navContent)) {
+            const hay = (v.title + " " + v.content).toLowerCase ();
+            if (hay.includes(q)) results.push({ type: "nav", key: k, title: v.title, content: v.content  });
+          }
+
+          return results.slice(0, 10 );
+        }
+
+        function renderSearchResults(results, keyword ) {
+          const title = `搜索结果：${keyword}（${results.length} ）`;
+
+          if (results.length === 0 ) {
+            showDetail(title, `<p class="text-gov-text-secondary">没有找到相关内容。</p>` );
+            return ;
+          }
+
+          const list = results.map(r => `
+            <div class="border-b pb-3 mb-3">
+              <div class="font-bold mb-1">${r.title} </div>
+              <button class="text-sm text-gov-blue hover:underline" data-open="${r.type}:${r.key} ">
+                查看详情 <i class="fa fa-angle-right"></i>
+              </button>
+            </div>
+          `).join("");
+
+          showDetail(title, `<div>${list} </div>`);
+        }
+
+        function openByToken(token ) {
+          const [type, key] = token.split(":");
+          if (type === "service"  && serviceContent[key]) {
+            showDetail(serviceContent[key].title, serviceContent[key].content );
+            return ;
+          }
+          if (type === "nav"  && navContent[key]) {
+            showDetail(navContent[key].title, navContent[key].content );
+            setActiveNav (key);
+            return ;
+          }
+        }
+
+        // ====== 全站点击事件委托 ======
+        document.addEventListener("click", (e ) => {
+          const nav = e.target.closest("[data-nav]" );
+          if  (nav) {
+            e.preventDefault ();
+            const key = nav.dataset.nav ;
+            if (key === "home" ) {
+              showHome ();
+              return ;
+            }
+            const  entry = navContent[key];
+            if  (entry) {
+              setActiveNav (key);
+              showDetail(entry.title, entry.content );
+            }
+            return ;
+          }
+
+          const service = e.target.closest("[data-service]" );
+          if  (service) {
+            e.preventDefault ();
+            const key = service.dataset.service ;
+            const  entry = serviceContent[key];
+            if (entry) showDetail(entry.title, entry.content );
+            return ;
+          }
+
+          const open = e.target.closest("[data-open]" );
+          if  (open) {
+            e.preventDefault ();
+            openByToken(open.dataset.open );
+            return ;
+          }
         });
+
+        // 返回按钮
+        elBack.addEventListener("click" , showHome);
+
+        // 搜索：按 Enter 或点击按钮（你的按钮是 type="submit" 但不在 form 里）
+        const searchButton = elSearch?.parentElement?.querySelector('button[type="submit"]' );
+        function doSearch( ) {
+          const kw = elSearch.value || "";
+          const results = searchAll (kw);
+          renderSearchResults(results, kw.trim ());
+        }
+
+        elSearch?.addEventListener("keydown", (e ) => {
+          if (e.key === "Enter" ) {
+            e.preventDefault ();
+            doSearch ();
+          }
+        });
+        searchButton?.addEventListener("click", (e ) => {
+          e.preventDefault ();
+          doSearch ();
+        });
+
+        // 初始状态
+        showHome ();
+        
+        // 欢迎信息显示
+        const welcomeMessage = document.createElement('div');
+        welcomeMessage.className = 'fixed top-0 left-0 right-0 bg-green-500 text-white py-2 text-center text-sm';
+        welcomeMessage.innerHTML = '<i class="fa fa-check-circle mr-1"></i>欢迎访问小鼠帝国政府网！';
+        document.body.appendChild(welcomeMessage);
+        
+        // 3秒后自动隐藏
+        setTimeout(() => {
+            welcomeMessage.style.opacity = '0';
+            setTimeout(() => {
+                welcomeMessage.remove();
+            }, 500);
+        }, 3000);
     </script>
 </body>
 </html>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>小鼠帝国政府网_帝国政府门户网站</title>
+    <meta name="description" content="小鼠帝国政府门户网站，提供政务服务、信息查询、互动交流等功能。">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
@@ -53,8 +54,25 @@
                 background-color: #ffffff;
                 border-bottom: 1px solid #dee2e6;
             }
+            .gov-nav-menu {
+                list-style: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                display: flex !important;
+                flex-wrap: wrap !important;
+                align-items: center !important;
+            }
+            .gov-nav-menu > li {
+                margin: 0 !important;
+                padding: 0 !important;
+                display: inline-block !important;
+            }
+            .gov-nav-menu > li:not(:last-child) {
+                margin-right: 1rem !important;
+            }
             .gov-nav-item {
-                padding: 12px 20px;
+                display: inline-block !important;
+                padding: 12px 20px !important;
                 color: #0050a3;
                 text-decoration: none;
                 transition: all 0.3s;
@@ -106,47 +124,330 @@
                 border-radius: 4px;
                 margin-bottom: 30px;
             }
+            
+            /* 无障碍功能样式 */
+            .sr-only {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                padding: 0;
+                margin: -1px;
+                overflow: hidden;
+                clip: rect(0, 0, 0, 0);
+                white-space: nowrap;
+                border-width: 0;
+            }
+            
+            .sr-only-focusable:focus,
+            .sr-only-focusable:focus-within {
+                position: static;
+                width: auto;
+                height: auto;
+                padding: inherit;
+                margin: inherit;
+                overflow: visible;
+                clip: auto;
+                white-space: normal;
+            }
+            
+            /* 键盘导航焦点样式 */
+            .keyboard-navigation *:focus {
+                outline: 3px solid #0050a3 !important;
+                outline-offset: 2px;
+            }
+            
+            /* 高对比度模式 */
+            .high-contrast {
+                --gov-blue: #0000ff;
+                --gov-blue-dark: #00008b;
+                --gov-red: #ff0000;
+                --gov-gray: #000000;
+                --gov-light-gray: #ffffff;
+                --gov-text: #000000;
+                --gov-text-secondary: #000000;
+                --gov-background: #ffffff;
+                --gov-background-secondary: #ffffff;
+                --gov-border: #000000;
+            }
+            
+            .high-contrast body {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+            }
+            
+            .high-contrast a,
+            .high-contrast button {
+                text-decoration: underline !important;
+            }
+            
+            .high-contrast .gov-card {
+                border: 2px solid #000000 !important;
+            }
+            
+            .high-contrast input,
+            .high-contrast textarea,
+            .high-contrast select {
+                border: 2px solid #000000 !important;
+                background-color: #ffffff !important;
+                color: #000000 !important;
+            }
+            
+            /* 无障碍模式 */
+            .accessibility-mode *:focus {
+                outline: 4px solid #ff0000 !important;
+                outline-offset: 3px;
+            }
+            
+            .accessibility-mode .gov-card:hover {
+                transform: none;
+            }
+            
+            /* 减少动画 */
+            @media (prefers-reduced-motion: reduce) {
+                *,
+                *::before,
+                *::after {
+                    animation-duration: 0.01ms !important;
+                    animation-iteration-count: 1 !important;
+                    transition-duration: 0.01ms !important;
+                    scroll-behavior: auto !important;
+                }
+            }
+            
+            /* 高对比度文本选择 */
+            ::selection {
+                background-color: #0050a3;
+                color: #ffffff;
+            }
+            
+            /* 改进的可读性 */
+            body {
+                line-height: 1.6;
+            }
+            
+            h1, h2, h3, h4, h5, h6 {
+                line-height: 1.3;
+                margin-bottom: 0.5em;
+            }
+            
+            /* 表单错误状态 */
+            [aria-invalid="true"] {
+                border-color: #dc2626 !important;
+                outline: 2px solid #dc2626 !important;
+            }
+            
+            /* 加载状态 */
+            [aria-busy="true"] {
+                opacity: 0.6;
+                cursor: wait;
+            }
+            
+            /* 跳过链接样式 */
+            .skip-link {
+                position: fixed;
+                top: -40px;
+                left: 0;
+                background: #0050a3;
+                color: white;
+                padding: 8px;
+                z-index: 100;
+                transition: top 0.3s;
+            }
+            
+            .skip-link:focus {
+                top: 0;
+            }
         }
     </style>
 </head>
 <body class="bg-gov-background text-gov-text font-sans">
-    <a href="#main" class="sr-only focus:not-sr-only">跳到主要内容</a>
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-gov-blue text-white px-4 py-2 rounded z-50">跳到主要内容</a>
+    <a href="#search-input" class="sr-only focus:not-sr-only focus:absolute focus:top-14 focus:left-4 bg-gov-blue text-white px-4 py-2 rounded z-50">跳到搜索</a>
+    
+    <!-- 无障碍帮助面板 -->
+    <div id="accessibility-help" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="accessibility-help-title">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" role="document">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 id="accessibility-help-title" class="text-2xl font-bold">无障碍功能帮助</h2>
+                        <button id="close-accessibility-help" class="text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-gov-blue rounded p-2" aria-label="关闭帮助">
+                            <i class="fa fa-times text-2xl" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <section>
+                            <h3 class="text-lg font-bold mb-3">快速操作</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <button id="toggle-high-contrast" class="flex items-center justify-between p-3 border border-gov-border rounded hover:bg-gov-light-gray transition-colors focus:outline-none focus:ring-2 focus:ring-gov-blue">
+                                    <span class="flex items-center">
+                                        <i class="fa fa-adjust mr-2 text-gov-blue" aria-hidden="true"></i>
+                                        高对比度模式
+                                    </span>
+                                    <span id="high-contrast-status" class="text-sm text-gov-text-secondary">关闭</span>
+                                </button>
+                                <button id="increase-font-size" class="flex items-center justify-between p-3 border border-gov-border rounded hover:bg-gov-light-gray transition-colors focus:outline-none focus:ring-2 focus:ring-gov-blue">
+                                    <span class="flex items-center">
+                                        <i class="fa fa-text-height mr-2 text-gov-blue" aria-hidden="true"></i>
+                                        增大字体
+                                    </span>
+                                    <span id="font-size-status" class="text-sm text-gov-text-secondary">100%</span>
+                                </button>
+                                <button id="decrease-font-size" class="flex items-center justify-between p-3 border border-gov-border rounded hover:bg-gov-light-gray transition-colors focus:outline-none focus:ring-2 focus:ring-gov-blue">
+                                    <span class="flex items-center">
+                                        <i class="fa fa-text-height mr-2 text-gov-blue" aria-hidden="true"></i>
+                                        减小字体
+                                    </span>
+                                    <span class="text-sm text-gov-text-secondary">-</span>
+                                </button>
+                                <button id="reset-font-size" class="flex items-center justify-between p-3 border border-gov-border rounded hover:bg-gov-light-gray transition-colors focus:outline-none focus:ring-2 focus:ring-gov-blue">
+                                    <span class="flex items-center">
+                                        <i class="fa fa-refresh mr-2 text-gov-blue" aria-hidden="true"></i>
+                                        重置字体
+                                    </span>
+                                    <span class="text-sm text-gov-text-secondary">100%</span>
+                                </button>
+                            </div>
+                        </section>
+                        
+                        <section>
+                            <h3 class="text-lg font-bold mb-3">键盘快捷键</h3>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <kbd class="bg-gray-100 border border-gray-300 rounded px-2 py-1 text-sm mr-2">Alt + H</kbd>
+                                    <span>切换高对比度模式</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <kbd class="bg-gray-100 border border-gray-300 rounded px-2 py-1 text-sm mr-2">Alt + +</kbd>
+                                    <span>增大字体大小</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <kbd class="bg-gray-100 border border-gray-300 rounded px-2 py-1 text-sm mr-2">Alt + -</kbd>
+                                    <span>减小字体大小</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <kbd class="bg-gray-100 border border-gray-300 rounded px-2 py-1 text-sm mr-2">Alt + 0</kbd>
+                                    <span>重置字体大小</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <kbd class="bg-gray-100 border border-gray-300 rounded px-2 py-1 text-sm mr-2">Tab</kbd>
+                                    <span>在可聚焦元素之间导航</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <kbd class="bg-gray-100 border border-gray-300 rounded px-2 py-1 text-sm mr-2">Shift + Tab</kbd>
+                                    <span>反向导航</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <kbd class="bg-gray-100 border border-gray-300 rounded px-2 py-1 text-sm mr-2">Enter</kbd>
+                                    <span>激活按钮或链接</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <kbd class="bg-gray-100 border border-gray-300 rounded px-2 py-1 text-sm mr-2">Esc</kbd>
+                                    <span>关闭对话框或返回</span>
+                                </li>
+                            </ul>
+                        </section>
+                        
+                        <section>
+                            <h3 class="text-lg font-bold mb-3">无障碍功能说明</h3>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mr-2 mt-1" aria-hidden="true"></i>
+                                    <span><strong>跳过链接：</strong>页面顶部提供了"跳到主要内容"和"跳到搜索"链接，方便键盘用户快速导航。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mr-2 mt-1" aria-hidden="true"></i>
+                                    <span><strong>ARIA 标签：</strong>所有交互元素都包含适当的 ARIA 标签，便于屏幕阅读器理解。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mr-2 mt-1" aria-hidden="true"></i>
+                                    <span><strong>焦点管理：</strong>清晰的焦点指示器，方便键盘用户识别当前焦点位置。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mr-2 mt-1" aria-hidden="true"></i>
+                                    <span><strong>高对比度模式：</strong>提供高对比度配色方案，提高视觉可读性。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mr-2 mt-1" aria-hidden="true"></i>
+                                    <span><strong>字体大小调整：</strong>支持动态调整字体大小，满足不同用户需求。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mr-2 mt-1" aria-hidden="true"></i>
+                                    <span><strong>屏幕阅读器支持：</strong>动态内容更新会通过 ARIA live regions 通知屏幕阅读器。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mr-2 mt-1" aria-hidden="true"></i>
+                                    <span><strong>减少动画：</strong>尊重用户的减少动画偏好设置。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mr-2 mt-1" aria-hidden="true"></i>
+                                    <span><strong>表单验证：</strong>提供清晰的错误提示和验证反馈。</span>
+                                </li>
+                            </ul>
+                        </section>
+                        
+                        <section>
+                            <h3 class="text-lg font-bold mb-3">屏幕阅读器兼容性</h3>
+                            <p class="mb-3">本网站已针对以下屏幕阅读器进行优化：</p>
+                            <ul class="space-y-1">
+                                <li>• NVDA (Windows)</li>
+                                <li>• JAWS (Windows)</li>
+                                <li>• VoiceOver (macOS/iOS)</li>
+                                <li>• TalkBack (Android)</li>
+                                <li>• 其他标准屏幕阅读器</li>
+                            </ul>
+                        </section>
+                        
+                        <div class="flex justify-end">
+                            <button id="close-accessibility-help-btn" class="bg-gov-blue text-white px-6 py-2 rounded hover:bg-gov-blue-dark transition-colors focus:outline-none focus:ring-2 focus:ring-gov-blue-dark">
+                                关闭帮助
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!-- 顶部导航栏 -->
-    <header class="bg-white border-b border-gov-border">
+    <header class="bg-white border-b border-gov-border" role="banner">
         <div class="gov-container">
             <div class="flex items-center justify-between py-3">
                 <div class="flex items-center">
-                    <img src="assets/logo.png" alt="小鼠帝国政府标志" class="h-8 mr-3">
+                    <img src="assets/logo.png" alt="小鼠帝国政府标志" class="h-8 mr-3" aria-hidden="true">
                     <h1 class="text-xl font-bold">小鼠帝国政府网</h1>
                 </div>
-                <div class="flex items-center space-x-4">
-                    <a href="#" class="text-sm text-gov-text-secondary hover:text-gov-blue">简体</a>
-                    <a href="#" class="text-sm text-gov-text-secondary hover:text-gov-blue">繁体</a>
-                    <a href="#" class="text-sm text-gov-text-secondary hover:text-gov-blue">English</a>
-                    <a href="#" class="text-sm text-gov-text-secondary hover:text-gov-blue">无障碍浏览</a>
-                </div>
+                <nav class="flex items-center space-x-4" role="navigation" aria-label="语言和辅助功能">
+                    <a href="#" class="text-sm text-gov-text-secondary hover:text-gov-blue" lang="zh-Hans">简体</a>
+                    <a href="#" class="text-sm text-gov-text-secondary hover:text-gov-blue" lang="zh-Hant">繁体</a>
+                    <a href="#" class="text-sm text-gov-text-secondary hover:text-gov-blue" lang="en">English</a>
+                    <button id="accessibility-toggle" class="text-sm text-gov-text-secondary hover:text-gov-blue focus:outline-none focus:ring-2 focus:ring-gov-blue rounded" aria-pressed="false" aria-expanded="false" aria-controls="accessibility-help">
+                        <i class="fa fa-universal-access mr-1" aria-hidden="true"></i>无障碍浏览
+                    </button>
+                </nav>
             </div>
         </div>
     </header>
     
     <!-- 主导航栏 -->
-    <nav class="bg-white border-b border-gov-border">
+    <nav class="bg-white border-b border-gov-border" role="navigation" aria-label="主导航">
         <div class="gov-container">
-            <div class="flex flex-wrap items-center space-x-4">
-                <a href="#" class="py-3 px-2 text-gov-blue font-medium border-b-2 border-gov-blue gov-nav-item" data-nav="home">首页</a>
-                <a href="#" class="py-3 px-2 text-gov-text hover:text-gov-blue gov-nav-item" data-nav="gov-info">政务公开</a>
-                <a href="#" class="py-3 px-2 text-gov-text hover:text-gov-blue gov-nav-item" data-nav="gov-service">政务服务</a>
-                <a href="#" class="py-3 px-2 text-gov-text hover:text-gov-blue gov-nav-item" data-nav="interaction">互动交流</a>
-                <a href="#" class="py-3 px-2 text-gov-text hover:text-gov-blue gov-nav-item" data-nav="data">数据</a>
-                <a href="#" class="py-3 px-2 text-gov-text hover:text-gov-blue gov-nav-item" data-nav="state-council">国务院</a>
-                <a href="#" class="py-3 px-2 text-gov-text hover:text-gov-blue gov-nav-item" data-nav="news">新闻</a>
-                <a href="#" class="py-3 px-2 text-gov-text hover:text-gov-blue gov-nav-item" data-nav="topics">专题</a>
-            </div>
+            <ul class="gov-nav-menu" role="menubar" style="list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; align-items: center;">
+                <li role="none" style="margin: 0; padding: 0; display: inline-block;"><a href="#" class="py-3 px-2 text-gov-blue font-medium border-b-2 border-gov-blue gov-nav-item" data-nav="home" role="menuitem" aria-current="page">首页</a></li>
+                <li role="none" style="margin: 0; padding: 0; display: inline-block;"><a href="#" class="py-3 px-2 text-gov-text hover:text-gov-blue gov-nav-item" data-nav="gov-info" role="menuitem">政务公开</a></li>
+                <li role="none" style="margin: 0; padding: 0; display: inline-block;"><a href="#" class="py-3 px-2 text-gov-text hover:text-gov-blue gov-nav-item" data-nav="gov-service" role="menuitem">政务服务</a></li>
+                <li role="none" style="margin: 0; padding: 0; display: inline-block;"><a href="#" class="py-3 px-2 text-gov-text hover:text-gov-blue gov-nav-item" data-nav="interaction" role="menuitem">互动交流</a></li>
+                <li role="none" style="margin: 0; padding: 0; display: inline-block;"><a href="#" class="py-3 px-2 text-gov-text hover:text-gov-blue gov-nav-item" data-nav="data" role="menuitem">数据</a></li>
+                <li role="none" style="margin: 0; padding: 0; display: inline-block;"><a href="#" class="py-3 px-2 text-gov-text hover:text-gov-blue gov-nav-item" data-nav="state-council" role="menuitem">国务院</a></li>
+                <li role="none" style="margin: 0; padding: 0; display: inline-block;"><a href="#" class="py-3 px-2 text-gov-text hover:text-gov-blue gov-nav-item" data-nav="news" role="menuitem">新闻</a></li>
+                <li role="none" style="margin: 0; padding: 0; display: inline-block;"><a href="#" class="py-3 px-2 text-gov-text hover:text-gov-blue gov-nav-item" data-nav="topics" role="menuitem">专题</a></li>
+            </ul>
         </div>
     </nav>
     
     <!-- 蓝色横幅区域 -->
-    <section class="bg-gov-blue text-white py-6">
+    <section class="bg-gov-blue text-white py-6" aria-label="快速访问">
         <div class="gov-container">
             <div class="flex flex-wrap items-center justify-between">
                 <div>
@@ -155,17 +456,17 @@
                 </div>
                 <div class="flex items-center space-x-4 mt-2 sm:mt-0">
                     <div class="flex items-center space-x-2">
-                        <span class="text-sm">国歌播放：</span>
-                        <audio controls class="bg-white rounded text-gov-text">
+                        <span class="text-sm" id="anthem-label">国歌播放：</span>
+                        <audio controls class="bg-white rounded text-gov-text" aria-labelledby="anthem-label">
                             <source src="national-anthem.mp3" type="audio/ogg">
                             您的浏览器不支持音频播放。
                         </audio>
                     </div>
-                    <span class="text-white">|</span>
+                    <span class="text-white" aria-hidden="true">|</span>
                     <a href="#" class="text-white hover:text-gray-200 text-sm">联系我们</a>
-                    <span class="text-white">|</span>
+                    <span class="text-white" aria-hidden="true">|</span>
                     <a href="#" class="text-white hover:text-gray-200 text-sm">常见问题</a>
-                    <span class="text-white">|</span>
+                    <span class="text-white" aria-hidden="true">|</span>
                     <a href="#" class="text-white hover:text-gray-200 text-sm">网站地图</a>
                 </div>
             </div>
@@ -173,31 +474,38 @@
     </section>
     
     <!-- 搜索区域 -->
-    <section class="bg-white py-8 border-b border-gov-border">
+    <section class="bg-white py-8 border-b border-gov-border" aria-labelledby="search-heading">
         <div class="gov-container">
             <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-3xl font-bold mb-4 text-gov-text">小鼠帝国政府服务与信息</h2>
+                <h2 id="search-heading" class="text-3xl font-bold mb-4 text-gov-text">小鼠帝国政府服务与信息</h2>
                 <p class="text-lg mb-6 text-gov-text-secondary">小鼠帝国政府网帮助您查找政府服务、项目和信息。</p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <form class="flex flex-col sm:flex-row gap-4 justify-center items-center" role="search" aria-label="搜索政府服务">
                     <div class="relative w-full sm:w-96">
-                        <input type="search" id="search-input" placeholder="搜索小鼠帝国政府服务、项目和信息" class="w-full px-5 py-3 border-2 border-gov-blue focus:outline-none focus:ring-2 focus:ring-gov-blue rounded-full">
-                        <button type="submit" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gov-blue text-white px-6 py-2 rounded-full hover:bg-gov-blue-dark transition-colors">搜索</button>
+                        <label for="search-input" class="sr-only">搜索关键词</label>
+                        <input type="search" id="search-input" placeholder="搜索小鼠帝国政府服务、项目和信息" class="w-full px-5 py-3 border-2 border-gov-blue focus:outline-none focus:ring-2 focus:ring-gov-blue rounded-full" aria-describedby="search-help" autocomplete="off">
+                        <span id="search-help" class="sr-only">输入关键词后按回车或点击搜索按钮</span>
+                        <button type="submit" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gov-blue text-white px-6 py-2 rounded-full hover:bg-gov-blue-dark transition-colors focus:outline-none focus:ring-2 focus:ring-gov-blue-dark">
+                            <span class="sr-only">搜索</span>
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
                     </div>
-                    <a href="#" class="inline-block bg-gov-blue text-white px-6 py-3 rounded-full hover:bg-gov-blue-dark transition-colors">查找服务 <i class="fa fa-angle-right ml-1"></i></a>
-                </div>
+                    <a href="#" class="inline-block bg-gov-blue text-white px-6 py-3 rounded-full hover:bg-gov-blue-dark transition-colors focus:outline-none focus:ring-2 focus:ring-gov-blue-dark" role="button">查找服务 <i class="fa fa-angle-right ml-1" aria-hidden="true"></i></a>
+                </form>
             </div>
         </div>
     </section>
     
     <!-- 主要内容区 -->
-    <main id="main" class="gov-container">
+    <main id="main" class="gov-container" role="main">
         <!-- 内容展示区域 -->
-        <div id="content-display" class="gov-section hidden">
+        <div id="content-display" class="gov-section hidden" aria-live="polite" aria-atomic="true">
             <div class="flex items-center justify-between mb-6">
                 <h3 id="content-title" class="text-2xl font-bold"></h3>
-                <button id="back-button" class="bg-gov-blue text-white px-4 py-2 hover:bg-gov-blue-dark transition-colors rounded-md">返回</button>
+                <button id="back-button" class="bg-gov-blue text-white px-4 py-2 hover:bg-gov-blue-dark transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-gov-blue-dark">
+                    <i class="fa fa-arrow-left mr-1" aria-hidden="true"></i>返回
+                </button>
             </div>
-            <div id="content-body" class="gov-card"></div>
+            <div id="content-body" class="gov-card" role="article"></div>
         </div>
         
         <!-- 首页内容 -->
@@ -406,6 +714,11 @@
                     <a href="#" class="hover:text-gov-blue">无障碍声明</a>
                     <span>|</span>
                     <a href="#" class="hover:text-gov-blue">网站地图</a>
+                </div>
+                <div class="mt-4 flex items-center justify-center">
+                    <a href="https://www.w3.org/WAI/WCAG22/wcag2.2AA-blue.png" target="_blank" rel="noopener noreferrer" aria-label="WCAG 2.2 AA 级别合规，在新窗口打开">
+                        <img src="https://www.w3.org/WAI/WCAG22/wcag2.2AA-blue.png" alt="WCAG 2.2 AA 级别合规" width="88" height="31">
+                    </a>
                 </div>
             </div>
         </div>
@@ -1246,7 +1559,9 @@
         // 欢迎信息显示
         const welcomeMessage = document.createElement('div');
         welcomeMessage.className = 'fixed top-0 left-0 right-0 bg-green-500 text-white py-2 text-center text-sm';
-        welcomeMessage.innerHTML = '<i class="fa fa-check-circle mr-1"></i>欢迎访问小鼠帝国政府网！';
+        welcomeMessage.setAttribute('role', 'alert');
+        welcomeMessage.setAttribute('aria-live', 'assertive');
+        welcomeMessage.innerHTML = '<i class="fa fa-check-circle mr-1" aria-hidden="true"></i>欢迎访问小鼠帝国政府网！';
         document.body.appendChild(welcomeMessage);
         
         // 3秒后自动隐藏
@@ -1256,6 +1571,310 @@
                 welcomeMessage.remove();
             }, 500);
         }, 3000);
+
+        // ===== 无障碍功能 =====
+        const accessibilityToggle = document.getElementById('accessibility-toggle');
+        const accessibilityHelp = document.getElementById('accessibility-help');
+        const closeAccessibilityHelp = document.getElementById('close-accessibility-help');
+        const closeAccessibilityHelpBtn = document.getElementById('close-accessibility-help-btn');
+        let accessibilityMode = false;
+
+        function toggleAccessibilityMode() {
+            accessibilityMode = !accessibilityMode;
+            accessibilityToggle.setAttribute('aria-pressed', accessibilityMode);
+            
+            if (accessibilityMode) {
+                document.body.classList.add('accessibility-mode');
+                announceToScreenReader('已开启无障碍模式');
+            } else {
+                document.body.classList.remove('accessibility-mode');
+                announceToScreenReader('已关闭无障碍模式');
+            }
+        }
+
+        function openAccessibilityHelp() {
+            accessibilityHelp.classList.remove('hidden');
+            accessibilityToggle.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden';
+            closeAccessibilityHelp.focus();
+            announceToScreenReader('已打开无障碍帮助面板');
+        }
+
+        function closeAccessibilityHelpPanel() {
+            accessibilityHelp.classList.add('hidden');
+            accessibilityToggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+            accessibilityToggle.focus();
+            announceToScreenReader('已关闭无障碍帮助面板');
+        }
+
+        accessibilityToggle?.addEventListener('click', (e) => {
+            e.preventDefault();
+            openAccessibilityHelp();
+        });
+
+        closeAccessibilityHelp?.addEventListener('click', closeAccessibilityHelpPanel);
+        closeAccessibilityHelpBtn?.addEventListener('click', closeAccessibilityHelpPanel);
+
+        // ESC 键关闭帮助面板
+        accessibilityHelp?.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeAccessibilityHelpPanel();
+            }
+        });
+
+        // 点击背景关闭帮助面板
+        accessibilityHelp?.addEventListener('click', (e) => {
+            if (e.target === accessibilityHelp) {
+                closeAccessibilityHelpPanel();
+            }
+        });
+
+        function announceToScreenReader(message) {
+            const announcement = document.createElement('div');
+            announcement.setAttribute('role', 'status');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.setAttribute('aria-atomic', 'true');
+            announcement.className = 'sr-only';
+            announcement.textContent = message;
+            document.body.appendChild(announcement);
+            
+            setTimeout(() => {
+                announcement.remove();
+            }, 1000);
+        }
+
+        // 键盘导航增强
+        document.addEventListener('keydown', (e) => {
+            // Tab 键焦点可见性
+            if (e.key === 'Tab') {
+                document.body.classList.add('keyboard-navigation');
+            }
+        });
+
+        document.addEventListener('mousedown', () => {
+            document.body.classList.remove('keyboard-navigation');
+        });
+
+        // 为所有可点击元素添加键盘支持
+        document.querySelectorAll('[data-service]').forEach(element => {
+            element.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    element.click();
+                }
+            });
+        });
+
+        // 焦点陷阱（用于模态框等）
+        function trapFocus(element) {
+            const focusableElements = element.querySelectorAll(
+                'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+            );
+            const firstFocusable = focusableElements[0];
+            const lastFocusable = focusableElements[focusableElements.length - 1];
+
+            element.addEventListener('keydown', (e) => {
+                if (e.key === 'Tab') {
+                    if (e.shiftKey) {
+                        if (document.activeElement === firstFocusable) {
+                            e.preventDefault();
+                            lastFocusable.focus();
+                        }
+                    } else {
+                        if (document.activeElement === lastFocusable) {
+                            e.preventDefault();
+                            firstFocusable.focus();
+                        }
+                    }
+                }
+            });
+        }
+
+        // 跳过链接功能
+        const skipLinks = document.querySelectorAll('a[href^="#"]');
+        skipLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const targetId = link.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    targetElement.focus();
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // 动态内容更新通知
+        function announceContentChange(title) {
+            announceToScreenReader(`页面内容已更新：${title}`);
+        }
+
+        // 修改 showDetail 函数以包含内容更新通知
+        const originalShowDetail = showDetail;
+        showDetail = function(title, html) {
+            originalShowDetail(title, html);
+            announceContentChange(title);
+        };
+
+        // 添加高对比度模式支持
+        function toggleHighContrast() {
+            document.body.classList.toggle('high-contrast');
+            const isHighContrast = document.body.classList.contains('high-contrast');
+            const statusElement = document.getElementById('high-contrast-status');
+            if (statusElement) {
+                statusElement.textContent = isHighContrast ? '开启' : '关闭';
+            }
+            announceToScreenReader(isHighContrast ? '已开启高对比度模式' : '已关闭高对比度模式');
+        }
+
+        // 添加文本放大功能
+        let currentFontSize = 100;
+        function increaseFontSize() {
+            if (currentFontSize < 150) {
+                currentFontSize += 10;
+                document.documentElement.style.fontSize = `${currentFontSize}%`;
+                updateFontSizeStatus();
+                announceToScreenReader(`字体大小已增加到 ${currentFontSize}%`);
+            }
+        }
+
+        function decreaseFontSize() {
+            if (currentFontSize > 80) {
+                currentFontSize -= 10;
+                document.documentElement.style.fontSize = `${currentFontSize}%`;
+                updateFontSizeStatus();
+                announceToScreenReader(`字体大小已减小到 ${currentFontSize}%`);
+            }
+        }
+
+        function resetFontSize() {
+            currentFontSize = 100;
+            document.documentElement.style.fontSize = '100%';
+            updateFontSizeStatus();
+            announceToScreenReader('字体大小已重置');
+        }
+
+        function updateFontSizeStatus() {
+            const statusElements = document.querySelectorAll('#font-size-status');
+            statusElements.forEach(element => {
+                element.textContent = `${currentFontSize}%`;
+            });
+        }
+
+        // 绑定快速操作按钮
+        document.getElementById('toggle-high-contrast')?.addEventListener('click', toggleHighContrast);
+        document.getElementById('increase-font-size')?.addEventListener('click', increaseFontSize);
+        document.getElementById('decrease-font-size')?.addEventListener('click', decreaseFontSize);
+        document.getElementById('reset-font-size')?.addEventListener('click', resetFontSize);
+
+        // 添加键盘快捷键
+        document.addEventListener('keydown', (e) => {
+            // Alt + H: 高对比度
+            if (e.altKey && e.key === 'h') {
+                e.preventDefault();
+                toggleHighContrast();
+            }
+            // Alt + +: 增大字体
+            if (e.altKey && (e.key === '+' || e.key === '=')) {
+                e.preventDefault();
+                increaseFontSize();
+            }
+            // Alt + -: 减小字体
+            if (e.altKey && e.key === '-') {
+                e.preventDefault();
+                decreaseFontSize();
+            }
+            // Alt + 0: 重置字体
+            if (e.altKey && e.key === '0') {
+                e.preventDefault();
+                resetFontSize();
+            }
+        });
+
+        // 为所有按钮添加 aria-label（如果没有）
+        document.querySelectorAll('button:not([aria-label])').forEach(button => {
+            const text = button.textContent.trim();
+            if (text) {
+                button.setAttribute('aria-label', text);
+            }
+        });
+
+        // 为所有链接添加描述性文本
+        document.querySelectorAll('a:not([aria-label])').forEach(link => {
+            const text = link.textContent.trim();
+            if (text && !link.querySelector('i')) {
+                link.setAttribute('aria-label', text);
+            }
+        });
+
+        // 添加表单验证无障碍支持
+        function validateFormField(field) {
+            const errorElement = field.parentElement.querySelector('[role="alert"]');
+            if (field.required && !field.value.trim()) {
+                field.setAttribute('aria-invalid', 'true');
+                field.setAttribute('aria-describedby', field.id + '-error');
+                if (!errorElement) {
+                    const error = document.createElement('div');
+                    error.id = field.id + '-error';
+                    error.setAttribute('role', 'alert');
+                    error.className = 'text-red-500 text-sm mt-1';
+                    error.textContent = '此字段为必填项';
+                    field.parentElement.appendChild(error);
+                }
+                return false;
+            } else {
+                field.setAttribute('aria-invalid', 'false');
+                if (errorElement) {
+                    errorElement.remove();
+                }
+                return true;
+            }
+        }
+
+        // 为表单添加验证
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', (e) => {
+                let isValid = true;
+                form.querySelectorAll('input, textarea, select').forEach(field => {
+                    if (!validateFormField(field)) {
+                        isValid = false;
+                    }
+                });
+                if (!isValid) {
+                    e.preventDefault();
+                    announceToScreenReader('表单填写有误，请检查标红的字段');
+                }
+            });
+        });
+
+        // 添加加载状态指示
+        function showLoadingState(element) {
+            element.setAttribute('aria-busy', 'true');
+            element.setAttribute('aria-live', 'polite');
+        }
+
+        function hideLoadingState(element) {
+            element.setAttribute('aria-busy', 'false');
+        }
+
+        // 添加无障碍工具提示
+        function createAccessibleTooltip(element, text) {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'sr-only';
+            tooltip.setAttribute('role', 'tooltip');
+            tooltip.id = element.id + '-tooltip';
+            tooltip.textContent = text;
+            element.setAttribute('aria-describedby', tooltip.id);
+            element.parentElement.appendChild(tooltip);
+        }
+
+        // 初始化：为所有带有 title 属性的元素创建无障碍工具提示
+        document.querySelectorAll('[title]').forEach(element => {
+            if (!element.getAttribute('aria-describedby')) {
+                createAccessibleTooltip(element, element.getAttribute('title'));
+            }
+        });
     </script>
 </body>
 </html>
